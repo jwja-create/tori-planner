@@ -29,7 +29,6 @@
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; min-height: 100vh; }
   .app { display: flex; min-height: 100vh; }
 
-  /* SIDEBAR */
   .sidebar { width: 220px; background: var(--text); display: flex; flex-direction: column; flex-shrink: 0; position: fixed; top: 0; left: 0; bottom: 0; z-index: 50; }
   .sidebar-brand { padding: 24px 20px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); }
   .brand-name { font-family: 'Playfair Display', serif; font-size: 17px; color: #fff; letter-spacing: 0.01em; line-height: 1.2; }
@@ -50,7 +49,6 @@
   .sign-out-btn { background: none; border: none; color: rgba(255,255,255,0.3); cursor: pointer; font-size: 14px; padding: 2px; }
   .sign-out-btn:hover { color: rgba(255,255,255,0.7); }
 
-  /* MAIN */
   .main { margin-left: 220px; flex: 1; display: flex; flex-direction: column; min-height: 100vh; }
   .topbar { background: var(--surface); border-bottom: 1px solid var(--border); padding: 0 28px; height: 56px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 40; }
   .page-title { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400; }
@@ -58,17 +56,17 @@
   .sync-dot { width: 6px; height: 6px; border-radius: 50%; background: #639922; }
   .sync-dot.syncing { background: var(--gold); animation: pulse 1s infinite; }
   .sync-dot.error { background: #E24B4A; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  @keyframes pulse { 0%,100%{opacity:1}50%{opacity:0.4} }
   .content { padding: 24px 28px; flex: 1; }
   .section { display: none; }
   .section.active { display: block; }
 
-  /* AUTH SCREEN */
+  /* AUTH */
   .auth-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: var(--bg); }
   .auth-card { background: var(--surface); border-radius: 16px; padding: 48px; text-align: center; max-width: 400px; width: 90%; box-shadow: 0 4px 40px rgba(0,0,0,0.08); }
   .auth-logo { font-family: 'Playfair Display', serif; font-size: 28px; margin-bottom: 8px; }
   .auth-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
-  .auth-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: var(--text); color: #fff; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; transition: opacity 0.15s; }
+  .auth-btn { display: inline-flex; align-items: center; gap: 10px; padding: 12px 24px; background: var(--text); color: #fff; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; transition: opacity 0.15s; width: 100%; justify-content: center; }
   .auth-btn:hover { opacity: 0.85; }
   .auth-btn img { width: 18px; height: 18px; }
 
@@ -209,16 +207,12 @@
   .prio-toggle.sel-high { background: #FDDDD5; color: #8B2500; border-color: #FDDDD5; font-weight: 500; }
   .prio-toggle.sel-med { background: #FFF3D5; color: #7A5000; border-color: #FFF3D5; font-weight: 500; }
   .prio-toggle.sel-low { background: #D5F5E3; color: #0A5E2A; border-color: #D5F5E3; font-weight: 500; }
-
-  /* BUTTONS */
   .btn-primary { padding: 9px 20px; background: var(--gold); color: var(--text); border: none; border-radius: 7px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
   .btn-primary:hover { background: var(--gold-dark); color: #fff; }
   .btn-ghost { padding: 9px 16px; background: none; color: var(--text-muted); border: 1px solid var(--border); border-radius: 7px; font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; transition: all 0.15s; }
   .btn-ghost:hover { border-color: var(--border-strong); color: var(--text); }
   .btn-danger { padding: 9px 14px; background: none; color: #E24B4A; border: 1px solid rgba(226,75,74,0.2); border-radius: 7px; font-family: 'DM Sans', sans-serif; font-size: 13px; cursor: pointer; transition: all 0.15s; }
   .btn-danger:hover { background: #FDDDD5; }
-
-  /* MODAL */
   .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 300; align-items: center; justify-content: center; }
   .modal-overlay.open { display: flex; }
   .modal { background: var(--surface); border-radius: 14px; width: 540px; max-width: 95vw; max-height: 88vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
@@ -236,15 +230,12 @@
   .form-select { width: 100%; padding: 9px 28px 9px 12px; border: 1px solid var(--border); border-radius: 7px; font-size: 13px; font-family: 'DM Sans', sans-serif; background: var(--surface); color: var(--text); cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6560' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; }
   .form-section-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; display: block; }
   .dates-form-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; display: block; border-top: 1px solid var(--border); padding-top: 12px; }
-
-  /* TOAST */
   .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--text); color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 13px; z-index: 999; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; white-space: nowrap; }
   .toast.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- AUTH SCREEN -->
 <div class="auth-screen" id="auth-screen">
   <div class="auth-card">
     <div class="auth-logo">Tori Darke</div>
@@ -256,13 +247,11 @@
   </div>
 </div>
 
-<!-- LOADING -->
 <div class="loading-overlay" id="loading-overlay" style="display:none;">
   <div class="loading-spinner"></div>
   <div class="loading-text" id="loading-text">Loading planner...</div>
 </div>
 
-<!-- APP -->
 <div class="app" id="app" style="display:none;">
   <nav class="sidebar">
     <div class="sidebar-brand">
@@ -288,14 +277,10 @@
   <div class="main">
     <div class="topbar">
       <div class="page-title" id="page-title">Calendar</div>
-      <div class="sync-status">
-        <div class="sync-dot" id="sync-dot"></div>
-        <span id="sync-label">Connected</span>
-      </div>
+      <div class="sync-status"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">Connected</span></div>
     </div>
     <div class="content">
 
-      <!-- CALENDAR -->
       <div id="sec-calendar" class="section active">
         <div class="cal-controls">
           <div class="cal-nav-group">
@@ -319,32 +304,25 @@
         </div>
       </div>
 
-      <!-- PIPELINE -->
       <div id="sec-pipeline" class="section">
         <div class="stats-row" id="pipeline-stats"></div>
         <div class="kanban-wrap" id="kanban-board"></div>
       </div>
 
-      <!-- SHOOT PLANNER -->
       <div id="sec-shoot" class="section">
         <div id="shoot-container"></div>
       </div>
 
-      <!-- IDEAS -->
       <div id="sec-ideas" class="section">
         <div class="ideas-toolbar">
           <select class="filter-select" id="idea-pf-filter" onchange="renderIdeas()">
             <option value="all">All platforms</option>
-            <option value="Instagram">Instagram</option>
-            <option value="TikTok">TikTok</option>
-            <option value="YouTube">YouTube</option>
-            <option value="Facebook">Facebook</option>
+            <option value="Instagram">Instagram</option><option value="TikTok">TikTok</option>
+            <option value="YouTube">YouTube</option><option value="Facebook">Facebook</option>
           </select>
           <select class="filter-select" id="idea-pr-filter" onchange="renderIdeas()">
             <option value="all">All priorities</option>
-            <option value="high">High priority</option>
-            <option value="med">Medium priority</option>
-            <option value="low">Low priority</option>
+            <option value="high">High priority</option><option value="med">Medium priority</option><option value="low">Low priority</option>
           </select>
           <button class="btn-primary" style="margin-left:auto;" onclick="openIdeaModal()"><i class="ti ti-plus"></i> Add idea</button>
         </div>
@@ -355,10 +333,7 @@
   </div>
 </div>
 
-<!-- PANEL OVERLAY -->
 <div class="panel-overlay" id="panel-overlay" onclick="closePanel()"></div>
-
-<!-- DETAIL PANEL -->
 <div class="detail-panel" id="detail-panel">
   <div class="panel-hdr">
     <div class="panel-hdr-text">
@@ -372,9 +347,7 @@
     <div class="panel-field"><span class="panel-label">Title</span><input class="panel-input" id="panel-title-input" type="text" /></div>
     <div class="panel-field"><span class="panel-label">Platforms</span><div class="platform-chips-row" id="panel-platforms"></div></div>
     <div class="panel-field"><span class="panel-label">Content type</span>
-      <select class="panel-input" id="panel-type">
-        <option>Reel / Short</option><option>Static post</option><option>Story</option><option>Carousel</option><option>YouTube video</option>
-      </select>
+      <select class="panel-input" id="panel-type"><option>Reel / Short</option><option>Static post</option><option>Story</option><option>Carousel</option><option>YouTube video</option></select>
     </div>
     <div class="panel-field"><span class="panel-label">Priority</span><div class="prio-toggles" id="panel-priority"></div></div>
     <div style="margin-bottom:16px;">
@@ -397,7 +370,6 @@
   </div>
 </div>
 
-<!-- NEW CONTENT MODAL -->
 <div class="modal-overlay" id="new-modal">
   <div class="modal">
     <div class="modal-hdr"><div class="modal-title">New content item</div><button class="modal-close" onclick="closeNewModal()"><i class="ti ti-x"></i></button></div>
@@ -445,7 +417,6 @@
   </div>
 </div>
 
-<!-- IDEA MODAL -->
 <div class="modal-overlay" id="idea-modal">
   <div class="modal">
     <div class="modal-hdr"><div class="modal-title">New idea</div><button class="modal-close" onclick="closeIdeaModal()"><i class="ti ti-x"></i></button></div>
@@ -476,23 +447,17 @@
 
 <div class="toast" id="toast"></div>
 
-<!-- Google Identity Services -->
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
-// ============================================================
-// CONFIGURATION — paste your values here
-// ============================================================
 const CONFIG = {
   CLIENT_ID: '520857299754-k334d5eq7fo7m9276dsbbp6ikj4qem0n.apps.googleusercontent.com',
   SHEET_ID:  '1yfvDg-qWKAJX9BhjUoOQgld1x-xflUFADwE116Ciosc',
   CONTENT_RANGE: 'Content!A:K',
   IDEAS_RANGE:   'Ideas!A:E',
-  SCOPES: 'https://www.googleapis.com/auth/spreadsheets',
+  SCOPES: 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/userinfo.profile',
+  STORAGE_KEY: 'td_planner_token',
 };
 
-// ============================================================
-// CONSTANTS
-// ============================================================
 const STAGES = ['Idea','Scripted','Scheduled shoot','Shot','In edit','Scheduled'];
 const PLATFORMS = ['Instagram','TikTok','YouTube','Facebook'];
 const platClass = { Instagram:'ig', TikTok:'tk', YouTube:'yt', Facebook:'fb' };
@@ -512,47 +477,93 @@ const STAGE_CAL = {
   'Scheduled':       { field:'postDate',        cat:'post' },
 };
 
-// ============================================================
-// STATE
-// ============================================================
 let accessToken = null;
-let items = [];
-let ideas = [];
-let calYear = new Date().getFullYear();
-let calMonth = new Date().getMonth();
+let tokenExpiry = 0;
+let items = [], ideas = [];
+let calYear = new Date().getFullYear(), calMonth = new Date().getMonth();
 let openItemId = null;
-let nextLocalId = 9000;
+let tokenClient = null;
 
-// ============================================================
-// AUTH
-// ============================================================
-function signIn() {
-  const client = google.accounts.oauth2.initTokenClient({
+// ── PERSISTENT AUTH ──────────────────────────────────────────
+function saveToken(token, expiresIn) {
+  const expiry = Date.now() + (expiresIn * 1000) - 60000; // 1 min buffer
+  localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({ token, expiry }));
+  accessToken = token;
+  tokenExpiry = expiry;
+}
+
+function loadStoredToken() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY));
+    if (stored && stored.expiry > Date.now()) {
+      accessToken = stored.token;
+      tokenExpiry = stored.expiry;
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+function clearStoredToken() {
+  localStorage.removeItem(CONFIG.STORAGE_KEY);
+  accessToken = null;
+  tokenExpiry = 0;
+}
+
+async function ensureToken() {
+  if (accessToken && tokenExpiry > Date.now()) return true;
+  // Token expired — request silently via prompt:none
+  return new Promise((resolve) => {
+    tokenClient.requestAccessToken({ prompt: '' });
+    // Callback will resolve via the tokenClient callback set in initAuth
+    window._tokenResolve = resolve;
+  });
+}
+
+function initAuth() {
+  tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: CONFIG.CLIENT_ID,
     scope: CONFIG.SCOPES,
     callback: async (resp) => {
-      if (resp.error) { showToast('Sign-in failed: ' + resp.error); return; }
-      accessToken = resp.access_token;
-      // Get user profile
-      try {
-        const profile = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-          headers: { Authorization: 'Bearer ' + accessToken }
-        }).then(r => r.json());
-        document.getElementById('user-name').textContent = profile.given_name || profile.email;
-        if (profile.picture) {
-          document.getElementById('user-avatar').innerHTML = `<img src="${profile.picture}" alt="avatar">`;
-        }
-      } catch(e) {}
+      if (resp.error) {
+        if (window._tokenResolve) { window._tokenResolve(false); window._tokenResolve = null; }
+        return;
+      }
+      saveToken(resp.access_token, resp.expires_in || 3600);
+      if (window._tokenResolve) { window._tokenResolve(true); window._tokenResolve = null; return; }
+      // First sign-in: load profile and data
+      await loadUserProfile();
       showApp();
       await loadAllData();
     },
   });
-  client.requestAccessToken();
+
+  // Auto sign-in if we have a stored token
+  if (loadStoredToken()) {
+    loadUserProfile().then(() => {
+      showApp();
+      loadAllData();
+    });
+  }
+}
+
+async function loadUserProfile() {
+  try {
+    const profile = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+      headers: { Authorization: 'Bearer ' + accessToken }
+    }).then(r => r.json());
+    document.getElementById('user-name').textContent = profile.given_name || profile.email;
+    if (profile.picture) document.getElementById('user-avatar').innerHTML = `<img src="${profile.picture}" alt="">`;
+  } catch(e) {}
+}
+
+function signIn() {
+  tokenClient.requestAccessToken({ prompt: 'consent' });
 }
 
 function signOut() {
   if (accessToken) google.accounts.oauth2.revoke(accessToken);
-  accessToken = null;
+  clearStoredToken();
   items = []; ideas = [];
   document.getElementById('app').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'flex';
@@ -563,69 +574,82 @@ function showApp() {
   document.getElementById('app').style.display = 'flex';
 }
 
-// ============================================================
-// SHEETS API
-// ============================================================
+window.addEventListener('load', () => {
+  // Wait for GSI to load then init
+  const check = setInterval(() => {
+    if (window.google && google.accounts) { clearInterval(check); initAuth(); }
+  }, 100);
+});
+
+// ── SHEETS API ───────────────────────────────────────────────
 async function sheetsGet(range) {
+  await ensureToken();
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values/${encodeURIComponent(range)}`;
   const r = await fetch(url, { headers: { Authorization: 'Bearer ' + accessToken } });
-  if (!r.ok) throw new Error('Sheets GET failed: ' + r.status);
+  if (!r.ok) throw new Error('GET failed: ' + r.status);
   return r.json();
 }
 
 async function sheetsAppend(range, values) {
+  await ensureToken();
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values/${encodeURIComponent(range)}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`;
   const r = await fetch(url, {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
     body: JSON.stringify({ values })
   });
-  if (!r.ok) throw new Error('Sheets APPEND failed: ' + r.status);
+  if (!r.ok) throw new Error('APPEND failed: ' + r.status);
   return r.json();
 }
 
 async function sheetsBatchUpdate(data) {
+  await ensureToken();
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values:batchUpdate`;
   const r = await fetch(url, {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
     body: JSON.stringify({ valueInputOption: 'RAW', data })
   });
-  if (!r.ok) throw new Error('Sheets BATCH UPDATE failed: ' + r.status);
+  if (!r.ok) throw new Error('BATCH UPDATE failed: ' + r.status);
   return r.json();
 }
 
 async function sheetsDeleteRow(sheetName, rowIndex) {
-  // rowIndex is 0-based sheet row (0 = header)
+  await ensureToken();
   const metaUrl = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}?fields=sheets.properties`;
   const meta = await fetch(metaUrl, { headers: { Authorization: 'Bearer ' + accessToken } }).then(r => r.json());
   const sheet = meta.sheets.find(s => s.properties.title === sheetName);
-  if (!sheet) throw new Error('Sheet tab not found: ' + sheetName);
+  if (!sheet) throw new Error('Tab not found: ' + sheetName);
   const sheetId = sheet.properties.sheetId;
-
   const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}:batchUpdate`;
-  const r = await fetch(url, {
+  await fetch(url, {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
     body: JSON.stringify({ requests: [{ deleteDimension: { range: { sheetId, dimension: 'ROWS', startIndex: rowIndex, endIndex: rowIndex + 1 } } }] })
   });
-  if (!r.ok) throw new Error('Delete row failed: ' + r.status);
 }
 
-// ============================================================
-// DATA LOADING
-// ============================================================
+// ── DATA ─────────────────────────────────────────────────────
+function setSyncStatus(state, label) {
+  const dot = document.getElementById('sync-dot');
+  dot.className = 'sync-dot' + (state==='syncing'?' syncing':state==='error'?' error':'');
+  document.getElementById('sync-label').textContent = label;
+}
+
+function showLoading(msg) { document.getElementById('loading-text').textContent = msg||'Loading...'; document.getElementById('loading-overlay').style.display='flex'; }
+function hideLoading() { document.getElementById('loading-overlay').style.display='none'; }
+function generateId() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+
 async function loadAllData() {
-  setSyncStatus('syncing', 'Loading...');
+  setSyncStatus('syncing','Loading...');
   showLoading('Loading your content...');
   try {
     await Promise.all([loadItems(), loadIdeas()]);
-    setSyncStatus('ok', 'Connected');
-    renderCalendar();
-    renderKanban();
+    setSyncStatus('ok','Connected');
+    renderCalendar(); renderKanban();
   } catch(e) {
-    setSyncStatus('error', 'Error loading');
-    showToast('Error loading data. Check your Sheet ID and permissions.');
+    setSyncStatus('error','Error loading');
+    showToast('Error loading data — check Sheet ID and permissions');
     console.error(e);
   }
   hideLoading();
@@ -633,543 +657,316 @@ async function loadAllData() {
 
 async function loadItems() {
   const data = await sheetsGet(CONFIG.CONTENT_RANGE);
-  const rows = data.values || [];
-  items = rows.slice(1).filter(r => r[0]).map((r, i) => ({
-    id: r[0] || String(i),
-    _rowIndex: i + 2, // 1-based sheet row (row 1 = header)
-    title: r[1] || '',
-    platforms: r[2] ? r[2].split(',').map(s => s.trim()) : [],
-    type: r[3] || 'Reel / Short',
-    stage: r[4] || 'Idea',
-    priority: r[5] || 'med',
-    brainstormDate: r[6] || '',
-    shootDate: r[7] || '',
-    editDate: r[8] || '',
-    postDate: r[9] || '',
-    notes: r[10] || '',
+  items = (data.values||[]).slice(1).filter(r=>r[0]).map((r,i)=>({
+    id:r[0], _rowIndex:i+2,
+    title:r[1]||'', platforms:r[2]?r[2].split(',').map(s=>s.trim()):[],
+    type:r[3]||'Reel / Short', stage:r[4]||'Idea', priority:r[5]||'med',
+    brainstormDate:r[6]||'', shootDate:r[7]||'', editDate:r[8]||'', postDate:r[9]||'', notes:r[10]||'',
   }));
 }
 
 async function loadIdeas() {
   const data = await sheetsGet(CONFIG.IDEAS_RANGE);
-  const rows = data.values || [];
-  ideas = rows.slice(1).filter(r => r[0]).map((r, i) => ({
-    id: r[0] || String(i),
-    _rowIndex: i + 2,
-    title: r[1] || '',
-    desc: r[2] || '',
-    platforms: r[3] ? r[3].split(',').map(s => s.trim()) : [],
-    priority: r[4] || 'med',
+  ideas = (data.values||[]).slice(1).filter(r=>r[0]).map((r,i)=>({
+    id:r[0], _rowIndex:i+2,
+    title:r[1]||'', desc:r[2]||'',
+    platforms:r[3]?r[3].split(',').map(s=>s.trim()):[],
+    priority:r[4]||'med',
   }));
 }
 
-// ============================================================
-// SYNC HELPERS
-// ============================================================
-function setSyncStatus(state, label) {
-  const dot = document.getElementById('sync-dot');
-  dot.className = 'sync-dot' + (state === 'syncing' ? ' syncing' : state === 'error' ? ' error' : '');
-  document.getElementById('sync-label').textContent = label;
-}
-
-function showLoading(msg) {
-  document.getElementById('loading-text').textContent = msg || 'Loading...';
-  document.getElementById('loading-overlay').style.display = 'flex';
-}
-
-function hideLoading() {
-  document.getElementById('loading-overlay').style.display = 'none';
-}
-
-function generateId() {
-  return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-}
-
 function itemToRow(item) {
-  return [
-    item.id,
-    item.title,
-    item.platforms.join(', '),
-    item.type,
-    item.stage,
-    item.priority,
-    item.brainstormDate || '',
-    item.shootDate || '',
-    item.editDate || '',
-    item.postDate || '',
-    item.notes || '',
-  ];
-}
-
-function ideaToRow(idea) {
-  return [
-    idea.id,
-    idea.title,
-    idea.desc || '',
-    idea.platforms.join(', '),
-    idea.priority,
-  ];
+  return [item.id,item.title,item.platforms.join(', '),item.type,item.stage,item.priority,
+    item.brainstormDate||'',item.shootDate||'',item.editDate||'',item.postDate||'',item.notes||''];
 }
 
 async function saveItemToSheet(item, isNew) {
-  setSyncStatus('syncing', 'Saving...');
+  setSyncStatus('syncing','Saving...');
   try {
-    if (isNew) {
-      await sheetsAppend(CONFIG.CONTENT_RANGE, [itemToRow(item)]);
-      // Reload to get correct row index
-      await loadItems();
-    } else {
-      const row = item._rowIndex;
-      await sheetsBatchUpdate([{ range: `Content!A${row}:K${row}`, values: [itemToRow(item)] }]);
-    }
-    setSyncStatus('ok', 'Saved');
-  } catch(e) {
-    setSyncStatus('error', 'Save failed');
-    showToast('Save failed — check your connection');
-    console.error(e);
-  }
+    if (isNew) { await sheetsAppend(CONFIG.CONTENT_RANGE,[itemToRow(item)]); await loadItems(); }
+    else { await sheetsBatchUpdate([{range:`Content!A${item._rowIndex}:K${item._rowIndex}`,values:[itemToRow(item)]}]); }
+    setSyncStatus('ok','Saved');
+  } catch(e) { setSyncStatus('error','Save failed'); showToast('Save failed'); console.error(e); }
 }
 
 async function deleteItemFromSheet(item) {
-  setSyncStatus('syncing', 'Deleting...');
-  try {
-    await sheetsDeleteRow('Content', item._rowIndex - 1); // convert to 0-based
-    setSyncStatus('ok', 'Deleted');
-  } catch(e) {
-    setSyncStatus('error', 'Delete failed');
-    showToast('Delete failed — check your connection');
-    console.error(e);
-  }
+  setSyncStatus('syncing','Deleting...');
+  try { await sheetsDeleteRow('Content', item._rowIndex-1); setSyncStatus('ok','Deleted'); }
+  catch(e) { setSyncStatus('error','Delete failed'); console.error(e); }
 }
 
 async function saveIdeaToSheet(idea, isNew) {
-  setSyncStatus('syncing', 'Saving...');
+  setSyncStatus('syncing','Saving...');
   try {
-    if (isNew) {
-      await sheetsAppend(CONFIG.IDEAS_RANGE, [ideaToRow(idea)]);
-      await loadIdeas();
-    } else {
-      const row = idea._rowIndex;
-      await sheetsBatchUpdate([{ range: `Ideas!A${row}:E${row}`, values: [ideaToRow(idea)] }]);
-    }
-    setSyncStatus('ok', 'Saved');
-  } catch(e) {
-    setSyncStatus('error', 'Save failed');
-    console.error(e);
-  }
+    if (isNew) { await sheetsAppend(CONFIG.IDEAS_RANGE,[[idea.id,idea.title,idea.desc||'',idea.platforms.join(', '),idea.priority]]); await loadIdeas(); }
+    else { await sheetsBatchUpdate([{range:`Ideas!A${idea._rowIndex}:E${idea._rowIndex}`,values:[[idea.id,idea.title,idea.desc||'',idea.platforms.join(', '),idea.priority]]}]); }
+    setSyncStatus('ok','Saved');
+  } catch(e) { setSyncStatus('error','Save failed'); console.error(e); }
 }
 
 async function deleteIdeaFromSheet(idea) {
-  setSyncStatus('syncing', 'Deleting...');
-  try {
-    await sheetsDeleteRow('Ideas', idea._rowIndex - 1);
-    setSyncStatus('ok', 'Deleted');
-  } catch(e) {
-    setSyncStatus('error', 'Delete failed');
-    console.error(e);
-  }
+  try { await sheetsDeleteRow('Ideas', idea._rowIndex-1); }
+  catch(e) { console.error(e); }
 }
 
-// ============================================================
-// SECTION SWITCHING
-// ============================================================
+// ── SECTIONS ──────────────────────────────────────────────────
 function switchSection(name, btn) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  document.getElementById('sec-' + name).classList.add('active');
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+name).classList.add('active');
   btn.classList.add('active');
-  const titles = { calendar:'Calendar', pipeline:'Pipeline', shoot:'Shoot planner', ideas:'Idea bank' };
-  document.getElementById('page-title').textContent = titles[name];
-  if (name === 'pipeline') renderKanban();
-  if (name === 'shoot') renderShoot();
-  if (name === 'ideas') renderIdeas();
+  ({calendar:'Calendar',pipeline:'Pipeline',shoot:'Shoot planner',ideas:'Idea bank'})[name] && (document.getElementById('page-title').textContent = ({calendar:'Calendar',pipeline:'Pipeline',shoot:'Shoot planner',ideas:'Idea bank'})[name]);
+  if(name==='pipeline') renderKanban();
+  if(name==='shoot') renderShoot();
+  if(name==='ideas') renderIdeas();
 }
 
-// ============================================================
-// CALENDAR
-// ============================================================
+// ── CALENDAR ──────────────────────────────────────────────────
 function buildEventMap() {
   const map = {};
   items.forEach(item => {
-    const cal = STAGE_CAL[item.stage];
-    if (!cal) return;
-    const date = item[cal.field];
-    if (!date) return;
-    if (!map[date]) map[date] = [];
-    map[date].push({ title: item.title, cat: cal.cat, itemId: item.id });
+    const cal = STAGE_CAL[item.stage]; if(!cal) return;
+    const date = item[cal.field]; if(!date) return;
+    if(!map[date]) map[date]=[];
+    map[date].push({title:item.title, cat:cal.cat, itemId:item.id});
   });
   return map;
 }
 
 function renderCalendar() {
-  const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  document.getElementById('cal-month-label').textContent = months[calMonth] + ' ' + calYear;
-  const grid = document.getElementById('cal-grid');
-  grid.innerHTML = '';
-  const firstDow = (new Date(calYear, calMonth, 1).getDay() + 6) % 7;
-  const daysInMo = new Date(calYear, calMonth + 1, 0).getDate();
-  const daysInPrev = new Date(calYear, calMonth, 0).getDate();
-  const today = new Date();
-  const totalCells = Math.ceil((firstDow + daysInMo) / 7) * 7;
-  const evtMap = buildEventMap();
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('cal-month-label').textContent = months[calMonth]+' '+calYear;
+  const grid = document.getElementById('cal-grid'); grid.innerHTML='';
+  const firstDow=(new Date(calYear,calMonth,1).getDay()+6)%7;
+  const daysInMo=new Date(calYear,calMonth+1,0).getDate();
+  const daysInPrev=new Date(calYear,calMonth,0).getDate();
+  const today=new Date();
+  const totalCells=Math.ceil((firstDow+daysInMo)/7)*7;
+  const evtMap=buildEventMap();
 
-  for (let i = 0; i < totalCells; i++) {
-    let day, mo = calMonth, yr = calYear, other = false;
-    if (i < firstDow) { day = daysInPrev - firstDow + i + 1; mo = calMonth - 1; other = true; if(mo<0){mo=11;yr--;} }
-    else if (i >= firstDow + daysInMo) { day = i - firstDow - daysInMo + 1; mo = calMonth + 1; other = true; if(mo>11){mo=0;yr++;} }
-    else { day = i - firstDow + 1; }
-    const dateStr = yr + '-' + String(mo+1).padStart(2,'0') + '-' + String(day).padStart(2,'0');
-    const isToday = !other && today.getFullYear()===calYear && today.getMonth()===calMonth && today.getDate()===day;
-    const cell = document.createElement('div');
-    cell.className = 'cal-cell' + (other?' other-month':'') + (isToday?' today':'');
-    const dateNumEl = document.createElement('div');
-    dateNumEl.className = 'cal-date-num';
-    dateNumEl.textContent = day;
-    cell.appendChild(dateNumEl);
-    cell.addEventListener('click', e => { if (!other && !e.target.closest('.cal-evt')) openNewModalOnDate(dateStr); });
-    (evtMap[dateStr] || []).forEach(e => {
-      const evtEl = document.createElement('div');
-      evtEl.className = 'cal-evt ' + e.cat;
-      evtEl.title = e.title;
-      evtEl.innerHTML = `<span class="cal-evt-dot"></span><span class="cal-evt-label">${e.title}</span>`;
-      evtEl.addEventListener('click', ev => { ev.stopPropagation(); openPanel(e.itemId); });
-      cell.appendChild(evtEl);
+  for(let i=0;i<totalCells;i++){
+    let day,mo=calMonth,yr=calYear,other=false;
+    if(i<firstDow){day=daysInPrev-firstDow+i+1;mo=calMonth-1;other=true;if(mo<0){mo=11;yr--;}}
+    else if(i>=firstDow+daysInMo){day=i-firstDow-daysInMo+1;mo=calMonth+1;other=true;if(mo>11){mo=0;yr++;}}
+    else{day=i-firstDow+1;}
+    const dateStr=yr+'-'+String(mo+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+    const isToday=!other&&today.getFullYear()===calYear&&today.getMonth()===calMonth&&today.getDate()===day;
+    const cell=document.createElement('div');
+    cell.className='cal-cell'+(other?' other-month':'')+(isToday?' today':'');
+    const num=document.createElement('div'); num.className='cal-date-num'; num.textContent=day; cell.appendChild(num);
+    cell.addEventListener('click',e=>{if(!other&&!e.target.closest('.cal-evt'))openNewModalOnDate(dateStr);});
+    (evtMap[dateStr]||[]).forEach(e=>{
+      const el=document.createElement('div');
+      el.className='cal-evt '+e.cat; el.title=e.title;
+      el.innerHTML=`<span class="cal-evt-dot"></span><span class="cal-evt-label">${e.title}</span>`;
+      el.addEventListener('click',ev=>{ev.stopPropagation();openPanel(e.itemId);});
+      cell.appendChild(el);
     });
     grid.appendChild(cell);
   }
 }
 
-function changeMonth(dir) {
-  calMonth += dir;
-  if (calMonth > 11) { calMonth = 0; calYear++; }
-  if (calMonth < 0) { calMonth = 11; calYear--; }
-  renderCalendar();
-}
+function changeMonth(dir){calMonth+=dir;if(calMonth>11){calMonth=0;calYear++;}if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
 
-// ============================================================
-// KANBAN
-// ============================================================
+// ── KANBAN ────────────────────────────────────────────────────
 function renderKanban() {
-  const stats = document.getElementById('pipeline-stats');
-  const total = items.length;
-  const inProd = items.filter(i => ['Scripted','Scheduled shoot','Shot','In edit'].includes(i.stage)).length;
-  const scheduled = items.filter(i => i.stage === 'Scheduled').length;
-  const highPrio = items.filter(i => i.priority === 'high').length;
-  stats.innerHTML = [
-    { label:'Total items', value:total, sub:'across all stages' },
-    { label:'In production', value:inProd, sub:'scripted to edit' },
-    { label:'Scheduled', value:scheduled, sub:'ready to post' },
-    { label:'High priority', value:highPrio, sub:'need attention' },
-  ].map(s => `<div class="stat-card"><div class="stat-label">${s.label}</div><div class="stat-value">${s.value}</div><div class="stat-sub">${s.sub}</div></div>`).join('');
-
-  const board = document.getElementById('kanban-board');
-  board.innerHTML = '';
-  [STAGES.slice(0,3), STAGES.slice(3,6)].forEach(rowStages => {
-    const rowEl = document.createElement('div');
-    rowEl.className = 'kanban-row';
-    rowStages.forEach(stage => {
-      const stageNum = STAGES.indexOf(stage) + 1;
-      const stageItems = items.filter(i => i.stage === stage);
-      const col = document.createElement('div');
-      col.className = 'k-col';
-      col.innerHTML = `<div class="k-col-header"><span class="k-col-title"><span class="k-col-num">${stageNum}</span>${stage}</span><span class="k-col-count">${stageItems.length}</span></div>`;
-      stageItems.forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'k-card';
-        const platChips = item.platforms.map(p => `<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
-        const postD = item.postDate ? new Date(item.postDate+'T00:00:00').toLocaleDateString('en-AU',{day:'numeric',month:'short'}) : '';
-        const shootD = item.shootDate ? new Date(item.shootDate+'T00:00:00').toLocaleDateString('en-AU',{day:'numeric',month:'short'}) : '';
-        const dueLabel = postD ? 'Post ' + postD : shootD ? 'Shoot ' + shootD : 'No date set';
-        const stageIdx = STAGES.indexOf(stage);
-        const canAdvance = stageIdx < STAGES.length - 1;
-        card.innerHTML = `
-          <div class="prio-bar ${item.priority}"></div>
-          <div class="k-card-top">
-            <div class="k-card-title">${item.title}</div>
-            ${canAdvance ? `<button class="k-card-advance" title="Move to ${STAGES[stageIdx+1]}" onclick="advanceItem(event,'${item.id}')"><i class="ti ti-arrow-right"></i></button>` : ''}
-          </div>
+  const s=document.getElementById('pipeline-stats');
+  const total=items.length,inProd=items.filter(i=>['Scripted','Scheduled shoot','Shot','In edit'].includes(i.stage)).length;
+  const sched=items.filter(i=>i.stage==='Scheduled').length,hi=items.filter(i=>i.priority==='high').length;
+  s.innerHTML=[{label:'Total items',value:total,sub:'across all stages'},{label:'In production',value:inProd,sub:'scripted to edit'},{label:'Scheduled',value:sched,sub:'ready to post'},{label:'High priority',value:hi,sub:'need attention'}]
+    .map(x=>`<div class="stat-card"><div class="stat-label">${x.label}</div><div class="stat-value">${x.value}</div><div class="stat-sub">${x.sub}</div></div>`).join('');
+  const board=document.getElementById('kanban-board'); board.innerHTML='';
+  [STAGES.slice(0,3),STAGES.slice(3,6)].forEach(rowStages=>{
+    const row=document.createElement('div'); row.className='kanban-row';
+    rowStages.forEach(stage=>{
+      const stageNum=STAGES.indexOf(stage)+1;
+      const stageItems=items.filter(i=>i.stage===stage);
+      const col=document.createElement('div'); col.className='k-col';
+      col.innerHTML=`<div class="k-col-header"><span class="k-col-title"><span class="k-col-num">${stageNum}</span>${stage}</span><span class="k-col-count">${stageItems.length}</span></div>`;
+      stageItems.forEach(item=>{
+        const card=document.createElement('div'); card.className='k-card';
+        const platChips=item.platforms.map(p=>`<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
+        const postD=item.postDate?new Date(item.postDate+'T00:00:00').toLocaleDateString('en-AU',{day:'numeric',month:'short'}):'';
+        const shootD=item.shootDate?new Date(item.shootDate+'T00:00:00').toLocaleDateString('en-AU',{day:'numeric',month:'short'}):'';
+        const due=postD?'Post '+postD:shootD?'Shoot '+shootD:'No date set';
+        const idx=STAGES.indexOf(stage);
+        card.innerHTML=`<div class="prio-bar ${item.priority}"></div>
+          <div class="k-card-top"><div class="k-card-title">${item.title}</div>
+          ${idx<STAGES.length-1?`<button class="k-card-advance" title="Move to ${STAGES[idx+1]}" onclick="advanceItem(event,'${item.id}')"><i class="ti ti-arrow-right"></i></button>`:''}</div>
           <div class="k-card-chips">${platChips}<span class="chip type">${item.type}</span></div>
-          <div class="k-card-due"><i class="ti ti-clock" style="font-size:11px"></i> ${dueLabel}</div>`;
-        card.addEventListener('click', e => { if (!e.target.closest('.k-card-advance')) openPanel(item.id); });
+          <div class="k-card-due"><i class="ti ti-clock" style="font-size:11px"></i> ${due}</div>`;
+        card.addEventListener('click',e=>{if(!e.target.closest('.k-card-advance'))openPanel(item.id);});
         col.appendChild(card);
       });
-      const addBtn = document.createElement('button');
-      addBtn.className = 'k-add-btn';
-      addBtn.textContent = '+ Add item';
-      addBtn.onclick = () => { document.getElementById('nc-stage').value = stage; openNewModal(); };
-      col.appendChild(addBtn);
-      rowEl.appendChild(col);
+      const add=document.createElement('button'); add.className='k-add-btn'; add.textContent='+ Add item';
+      add.onclick=()=>{document.getElementById('nc-stage').value=stage;openNewModal();};
+      col.appendChild(add); row.appendChild(col);
     });
-    board.appendChild(rowEl);
+    board.appendChild(row);
   });
 }
 
-async function advanceItem(e, id) {
+async function advanceItem(e,id){
   e.stopPropagation();
-  const item = items.find(i => i.id === id);
-  if (!item) return;
-  const idx = STAGES.indexOf(item.stage);
-  if (idx < STAGES.length - 1) {
-    item.stage = STAGES[idx + 1];
-    renderKanban();
-    renderCalendar();
-    showToast('"' + item.title + '" moved to ' + item.stage);
-    await saveItemToSheet(item, false);
-  }
+  const item=items.find(i=>i.id===id); if(!item) return;
+  const idx=STAGES.indexOf(item.stage);
+  if(idx<STAGES.length-1){item.stage=STAGES[idx+1];renderKanban();renderCalendar();showToast('"'+item.title+'" moved to '+item.stage);await saveItemToSheet(item,false);}
 }
 
-// ============================================================
-// SHOOT PLANNER
-// ============================================================
-function renderShoot() {
-  const container = document.getElementById('shoot-container');
-  const shootItems = items.filter(i => i.shootDate);
-  if (!shootItems.length) {
-    container.innerHTML = '<div class="shoot-empty"><i class="ti ti-camera" style="font-size:32px;display:block;margin-bottom:12px;opacity:0.3;"></i>No shoot days scheduled yet.<br>Add shoot dates to content items to see them here.</div>';
-    return;
-  }
-  const grouped = {};
-  shootItems.forEach(item => {
-    if (!grouped[item.shootDate]) grouped[item.shootDate] = [];
-    grouped[item.shootDate].push(item);
-  });
-  container.innerHTML = '';
-  Object.keys(grouped).sort().forEach(date => {
-    const dayItems = grouped[date];
-    const dateLabel = new Date(date+'T00:00:00').toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'long'});
-    const itemsHTML = dayItems.map(item => {
-      const ti = typeIcon[item.type] || typeIcon['Reel / Short'];
-      const platChips = item.platforms.map(p => `<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
+// ── SHOOT PLANNER ─────────────────────────────────────────────
+function renderShoot(){
+  const c=document.getElementById('shoot-container');
+  const si=items.filter(i=>i.shootDate);
+  if(!si.length){c.innerHTML='<div class="shoot-empty"><i class="ti ti-camera" style="font-size:32px;display:block;margin-bottom:12px;opacity:0.3;"></i>No shoot days scheduled yet.</div>';return;}
+  const grouped={};
+  si.forEach(item=>{if(!grouped[item.shootDate])grouped[item.shootDate]=[];grouped[item.shootDate].push(item);});
+  c.innerHTML='';
+  Object.keys(grouped).sort().forEach(date=>{
+    const dayItems=grouped[date];
+    const dateLabel=new Date(date+'T00:00:00').toLocaleDateString('en-AU',{weekday:'short',day:'numeric',month:'long'});
+    const html=dayItems.map(item=>{
+      const ti=typeIcon[item.type]||typeIcon['Reel / Short'];
+      const chips=item.platforms.map(p=>`<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
       return `<div class="shoot-item" onclick="openPanel('${item.id}')">
         <div class="shoot-item-icon ${ti.cls}"><i class="ti ti-${ti.icon}"></i></div>
-        <div class="shoot-item-body">
-          <div class="shoot-item-title">${item.title}</div>
-          <div class="shoot-item-desc">${item.notes || 'No brief added yet.'}</div>
-          <div class="shoot-item-tags">${platChips}<span class="chip type">${item.type}</span></div>
-        </div>
-      </div>`;
+        <div class="shoot-item-body"><div class="shoot-item-title">${item.title}</div>
+        <div class="shoot-item-desc">${item.notes||'No brief yet.'}</div>
+        <div class="shoot-item-tags">${chips}<span class="chip type">${item.type}</span></div></div></div>`;
     }).join('');
-    container.innerHTML += `<div class="shoot-day">
-      <div class="shoot-day-hdr">
-        <div class="shoot-date-badge">${dateLabel}</div>
-        <div class="shoot-day-name">Shoot day</div>
-        <div class="shoot-item-ct">${dayItems.length} item${dayItems.length!==1?'s':''}</div>
-      </div>
-      <div class="shoot-items-list">${itemsHTML}</div>
-    </div>`;
+    c.innerHTML+=`<div class="shoot-day"><div class="shoot-day-hdr"><div class="shoot-date-badge">${dateLabel}</div><div class="shoot-day-name">Shoot day</div><div class="shoot-item-ct">${dayItems.length} item${dayItems.length!==1?'s':''}</div></div><div class="shoot-items-list">${html}</div></div>`;
   });
 }
 
-// ============================================================
-// IDEAS
-// ============================================================
-function renderIdeas() {
-  const pfFilter = document.getElementById('idea-pf-filter').value;
-  const prFilter = document.getElementById('idea-pr-filter').value;
-  const grid = document.getElementById('ideas-grid');
-  const filtered = ideas.filter(i =>
-    (pfFilter === 'all' || i.platforms.includes(pfFilter)) &&
-    (prFilter === 'all' || i.priority === prFilter)
-  );
-  if (!filtered.length) {
-    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;color:var(--text-faint);padding:48px;font-size:13px;">No ideas match the current filters.</div>';
-    return;
-  }
-  grid.innerHTML = filtered.map(idea => {
-    const platChips = idea.platforms.map(p => `<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
-    return `<div class="idea-card">
-      <div class="idea-card-top"><div class="idea-title">${idea.title}</div><div class="prio-dot ${idea.priority}"></div></div>
+// ── IDEAS ─────────────────────────────────────────────────────
+function renderIdeas(){
+  const pf=document.getElementById('idea-pf-filter').value;
+  const pr=document.getElementById('idea-pr-filter').value;
+  const grid=document.getElementById('ideas-grid');
+  const filtered=ideas.filter(i=>(pf==='all'||i.platforms.includes(pf))&&(pr==='all'||i.priority===pr));
+  if(!filtered.length){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:var(--text-faint);padding:48px;font-size:13px;">No ideas match the current filters.</div>';return;}
+  grid.innerHTML=filtered.map(idea=>{
+    const chips=idea.platforms.map(p=>`<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
+    return `<div class="idea-card"><div class="idea-card-top"><div class="idea-title">${idea.title}</div><div class="prio-dot ${idea.priority}"></div></div>
       <div class="idea-desc">${idea.desc}</div>
-      <div class="idea-footer"><div class="idea-chips">${platChips}</div><button class="idea-promote" onclick="promoteIdea('${idea.id}')">→ Pipeline</button></div>
-    </div>`;
+      <div class="idea-footer"><div class="idea-chips">${chips}</div><button class="idea-promote" onclick="promoteIdea('${idea.id}')">→ Pipeline</button></div></div>`;
   }).join('');
 }
 
-async function promoteIdea(id) {
-  const idea = ideas.find(i => i.id === id);
-  if (!idea) return;
-  const newItem = { id: generateId(), title: idea.title, platforms: [...idea.platforms], type: 'Reel / Short', stage: 'Idea', priority: idea.priority, brainstormDate:'', shootDate:'', editDate:'', postDate:'', notes: idea.desc };
+async function promoteIdea(id){
+  const idea=ideas.find(i=>i.id===id); if(!idea) return;
+  const newItem={id:generateId(),title:idea.title,platforms:[...idea.platforms],type:'Reel / Short',stage:'Idea',priority:idea.priority,brainstormDate:'',shootDate:'',editDate:'',postDate:'',notes:idea.desc};
   items.push(newItem);
   await deleteIdeaFromSheet(idea);
-  ideas = ideas.filter(i => i.id !== id);
-  await saveItemToSheet(newItem, true);
-  renderIdeas();
-  renderKanban();
-  showToast('"' + idea.title + '" added to pipeline');
+  ideas=ideas.filter(i=>i.id!==id);
+  await saveItemToSheet(newItem,true);
+  renderIdeas(); renderKanban();
+  showToast('"'+idea.title+'" added to pipeline');
 }
 
-// ============================================================
-// DETAIL PANEL
-// ============================================================
-function openPanel(id) {
-  const item = items.find(i => i.id === id);
-  if (!item) return;
-  openItemId = id;
-  document.getElementById('panel-title').textContent = item.title;
-  document.getElementById('panel-subtitle').textContent = item.type + ' · ' + item.stage;
-  document.getElementById('panel-title-input').value = item.title;
-  document.getElementById('panel-type').value = item.type;
-  document.getElementById('panel-brainstorm-date').value = item.brainstormDate || '';
-  document.getElementById('panel-shoot-date').value = item.shootDate || '';
-  document.getElementById('panel-edit-date').value = item.editDate || '';
-  document.getElementById('panel-post-date').value = item.postDate || '';
-  document.getElementById('panel-notes').value = item.notes || '';
-  document.getElementById('stage-stepper').innerHTML = STAGES.map((s, idx) =>
-    `<div class="stage-step ${s===item.stage?'active':''}" data-stage="${s}" onclick="setStage(this)">
-      <span class="stage-step-num">${idx+1}</span>${s}
-    </div>`
+// ── DETAIL PANEL ──────────────────────────────────────────────
+function openPanel(id){
+  const item=items.find(i=>i.id===id); if(!item) return;
+  openItemId=id;
+  document.getElementById('panel-title').textContent=item.title;
+  document.getElementById('panel-subtitle').textContent=item.type+' · '+item.stage;
+  document.getElementById('panel-title-input').value=item.title;
+  document.getElementById('panel-type').value=item.type;
+  document.getElementById('panel-brainstorm-date').value=item.brainstormDate||'';
+  document.getElementById('panel-shoot-date').value=item.shootDate||'';
+  document.getElementById('panel-edit-date').value=item.editDate||'';
+  document.getElementById('panel-post-date').value=item.postDate||'';
+  document.getElementById('panel-notes').value=item.notes||'';
+  document.getElementById('stage-stepper').innerHTML=STAGES.map((s,idx)=>
+    `<div class="stage-step ${s===item.stage?'active':''}" data-stage="${s}" onclick="setStage(this)"><span class="stage-step-num">${idx+1}</span>${s}</div>`
   ).join('');
-  document.getElementById('panel-platforms').innerHTML = PLATFORMS.map(p => {
-    const sel = item.platforms.includes(p);
+  document.getElementById('panel-platforms').innerHTML=PLATFORMS.map(p=>{
+    const sel=item.platforms.includes(p);
     return `<button type="button" class="plat-toggle ${sel?'sel-'+platClass[p]:''}" data-plat="${p}" onclick="togglePlatChip(this)">${p}</button>`;
   }).join('');
-  document.getElementById('panel-priority').innerHTML = ['high','med','low'].map(pr =>
+  document.getElementById('panel-priority').innerHTML=['high','med','low'].map(pr=>
     `<button type="button" class="prio-toggle ${pr===item.priority?'sel-'+pr:''}" data-prio="${pr}" onclick="selectPrio(this,'panel-priority')">${pr.charAt(0).toUpperCase()+pr.slice(1)}</button>`
   ).join('');
   document.getElementById('panel-overlay').classList.add('open');
   document.getElementById('detail-panel').classList.add('open');
 }
 
-function setStage(el) {
-  document.querySelectorAll('.stage-step').forEach(s => s.classList.remove('active'));
-  el.classList.add('active');
+function setStage(el){document.querySelectorAll('.stage-step').forEach(s=>s.classList.remove('active'));el.classList.add('active');}
+function closePanel(){document.getElementById('panel-overlay').classList.remove('open');document.getElementById('detail-panel').classList.remove('open');openItemId=null;}
+
+async function savePanel(){
+  const item=items.find(i=>i.id===openItemId); if(!item) return;
+  const activeStage=document.querySelector('.stage-step.active');
+  if(activeStage) item.stage=activeStage.dataset.stage;
+  item.title=document.getElementById('panel-title-input').value.trim()||item.title;
+  item.type=document.getElementById('panel-type').value;
+  item.brainstormDate=document.getElementById('panel-brainstorm-date').value;
+  item.shootDate=document.getElementById('panel-shoot-date').value;
+  item.editDate=document.getElementById('panel-edit-date').value;
+  item.postDate=document.getElementById('panel-post-date').value;
+  item.notes=document.getElementById('panel-notes').value;
+  const selPlats=[...document.querySelectorAll('#panel-platforms .plat-toggle')].filter(b=>b.className.includes('sel-')).map(b=>b.dataset.plat);
+  if(selPlats.length) item.platforms=selPlats;
+  const selPrio=document.querySelector('#panel-priority .prio-toggle[class*="sel-"]');
+  if(selPrio) item.priority=selPrio.dataset.prio;
+  closePanel(); renderKanban(); renderCalendar();
+  showToast('Saving...'); await saveItemToSheet(item,false); showToast('Changes saved');
 }
 
-function closePanel() {
-  document.getElementById('panel-overlay').classList.remove('open');
-  document.getElementById('detail-panel').classList.remove('open');
-  openItemId = null;
+async function deleteItem(){
+  if(!confirm('Delete this content item?')) return;
+  const item=items.find(i=>i.id===openItemId); if(!item) return;
+  items=items.filter(i=>i.id!==openItemId);
+  closePanel(); renderKanban(); renderCalendar();
+  showToast('Deleting...'); await deleteItemFromSheet(item); showToast('Item deleted');
 }
 
-async function savePanel() {
-  const item = items.find(i => i.id === openItemId);
-  if (!item) return;
-  const activeStage = document.querySelector('.stage-step.active');
-  if (activeStage) item.stage = activeStage.dataset.stage;
-  item.title = document.getElementById('panel-title-input').value.trim() || item.title;
-  item.type = document.getElementById('panel-type').value;
-  item.brainstormDate = document.getElementById('panel-brainstorm-date').value;
-  item.shootDate = document.getElementById('panel-shoot-date').value;
-  item.editDate = document.getElementById('panel-edit-date').value;
-  item.postDate = document.getElementById('panel-post-date').value;
-  item.notes = document.getElementById('panel-notes').value;
-  const selPlats = [...document.querySelectorAll('#panel-platforms .plat-toggle')].filter(b => b.className.includes('sel-')).map(b => b.dataset.plat);
-  if (selPlats.length) item.platforms = selPlats;
-  const selPrio = document.querySelector('#panel-priority .prio-toggle[class*="sel-"]');
-  if (selPrio) item.priority = selPrio.dataset.prio;
-  closePanel();
-  renderKanban();
-  renderCalendar();
-  showToast('Saving...');
-  await saveItemToSheet(item, false);
-  showToast('Changes saved');
-}
-
-async function deleteItem() {
-  if (!confirm('Delete this content item?')) return;
-  const item = items.find(i => i.id === openItemId);
-  if (!item) return;
-  items = items.filter(i => i.id !== openItemId);
-  closePanel();
-  renderKanban();
-  renderCalendar();
-  showToast('Deleting...');
-  await deleteItemFromSheet(item);
-  showToast('Item deleted');
-}
-
-// ============================================================
-// NEW CONTENT MODAL
-// ============================================================
-function openNewModal(preStage) {
-  document.getElementById('nc-title').value = '';
-  document.getElementById('nc-notes').value = '';
-  ['nc-brainstorm-date','nc-shoot-date','nc-edit-date','nc-post-date'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('nc-stage').value = preStage || 'Idea';
-  document.querySelectorAll('#nc-platforms .plat-toggle').forEach(b => b.className = 'plat-toggle');
-  document.querySelectorAll('#nc-prio-toggles .prio-toggle').forEach(b => {
-    b.className = 'prio-toggle' + (b.dataset.prio === 'med' ? ' sel-med' : '');
-  });
+// ── NEW CONTENT MODAL ─────────────────────────────────────────
+function openNewModal(preStage){
+  document.getElementById('nc-title').value=''; document.getElementById('nc-notes').value='';
+  ['nc-brainstorm-date','nc-shoot-date','nc-edit-date','nc-post-date'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('nc-stage').value=preStage||'Idea';
+  document.querySelectorAll('#nc-platforms .plat-toggle').forEach(b=>b.className='plat-toggle');
+  document.querySelectorAll('#nc-prio-toggles .prio-toggle').forEach(b=>{b.className='prio-toggle'+(b.dataset.prio==='med'?' sel-med':'');});
   document.getElementById('new-modal').classList.add('open');
 }
+function openNewModalOnDate(d){openNewModal();document.getElementById('nc-post-date').value=d;}
+function closeNewModal(){document.getElementById('new-modal').classList.remove('open');}
 
-function openNewModalOnDate(dateStr) { openNewModal(); document.getElementById('nc-post-date').value = dateStr; }
-function closeNewModal() { document.getElementById('new-modal').classList.remove('open'); }
-
-async function saveNewContent() {
-  const title = document.getElementById('nc-title').value.trim();
-  if (!title) { showToast('Please add a title'); return; }
-  const selPlats = [...document.querySelectorAll('#nc-platforms .plat-toggle')].filter(b => b.className.includes('sel-')).map(b => b.dataset.plat);
-  const selPrio = document.querySelector('#nc-prio-toggles .prio-toggle[class*="sel-"]');
-  const newItem = {
-    id: generateId(),
-    title, platforms: selPlats,
-    type: document.getElementById('nc-type').value,
-    stage: document.getElementById('nc-stage').value,
-    priority: selPrio ? selPrio.dataset.prio : 'med',
-    brainstormDate: document.getElementById('nc-brainstorm-date').value,
-    shootDate: document.getElementById('nc-shoot-date').value,
-    editDate: document.getElementById('nc-edit-date').value,
-    postDate: document.getElementById('nc-post-date').value,
-    notes: document.getElementById('nc-notes').value,
-  };
-  items.push(newItem);
-  closeNewModal();
-  renderKanban();
-  renderCalendar();
-  showToast('Adding to pipeline...');
-  await saveItemToSheet(newItem, true);
-  showToast('"' + title + '" added');
+async function saveNewContent(){
+  const title=document.getElementById('nc-title').value.trim(); if(!title){showToast('Please add a title');return;}
+  const selPlats=[...document.querySelectorAll('#nc-platforms .plat-toggle')].filter(b=>b.className.includes('sel-')).map(b=>b.dataset.plat);
+  const selPrio=document.querySelector('#nc-prio-toggles .prio-toggle[class*="sel-"]');
+  const newItem={id:generateId(),title,platforms:selPlats,type:document.getElementById('nc-type').value,
+    stage:document.getElementById('nc-stage').value,priority:selPrio?selPrio.dataset.prio:'med',
+    brainstormDate:document.getElementById('nc-brainstorm-date').value,shootDate:document.getElementById('nc-shoot-date').value,
+    editDate:document.getElementById('nc-edit-date').value,postDate:document.getElementById('nc-post-date').value,
+    notes:document.getElementById('nc-notes').value};
+  items.push(newItem); closeNewModal(); renderKanban(); renderCalendar();
+  showToast('Adding...'); await saveItemToSheet(newItem,true); showToast('"'+title+'" added');
 }
 
-// ============================================================
-// IDEA MODAL
-// ============================================================
-function openIdeaModal() {
-  document.getElementById('idea-title-input').value = '';
-  document.getElementById('idea-desc-input').value = '';
-  document.querySelectorAll('#idea-platforms .plat-toggle').forEach(b => b.className = 'plat-toggle');
-  document.querySelectorAll('#idea-prio-toggles .prio-toggle').forEach(b => {
-    b.className = 'prio-toggle' + (b.dataset.prio === 'med' ? ' sel-med' : '');
-  });
+// ── IDEA MODAL ────────────────────────────────────────────────
+function openIdeaModal(){
+  document.getElementById('idea-title-input').value=''; document.getElementById('idea-desc-input').value='';
+  document.querySelectorAll('#idea-platforms .plat-toggle').forEach(b=>b.className='plat-toggle');
+  document.querySelectorAll('#idea-prio-toggles .prio-toggle').forEach(b=>{b.className='prio-toggle'+(b.dataset.prio==='med'?' sel-med':'');});
   document.getElementById('idea-modal').classList.add('open');
 }
+function closeIdeaModal(){document.getElementById('idea-modal').classList.remove('open');}
 
-function closeIdeaModal() { document.getElementById('idea-modal').classList.remove('open'); }
-
-async function saveIdea() {
-  const title = document.getElementById('idea-title-input').value.trim();
-  if (!title) { showToast('Please add a title'); return; }
-  const selPlats = [...document.querySelectorAll('#idea-platforms .plat-toggle')].filter(b => b.className.includes('sel-')).map(b => b.dataset.plat);
-  const selPrio = document.querySelector('#idea-prio-toggles .prio-toggle[class*="sel-"]');
-  const newIdea = { id: generateId(), title, desc: document.getElementById('idea-desc-input').value.trim(), platforms: selPlats, priority: selPrio ? selPrio.dataset.prio : 'med' };
-  ideas.push(newIdea);
-  closeIdeaModal();
-  renderIdeas();
-  showToast('Saving idea...');
-  await saveIdeaToSheet(newIdea, true);
-  showToast('Idea saved');
+async function saveIdea(){
+  const title=document.getElementById('idea-title-input').value.trim(); if(!title){showToast('Please add a title');return;}
+  const selPlats=[...document.querySelectorAll('#idea-platforms .plat-toggle')].filter(b=>b.className.includes('sel-')).map(b=>b.dataset.plat);
+  const selPrio=document.querySelector('#idea-prio-toggles .prio-toggle[class*="sel-"]');
+  const newIdea={id:generateId(),title,desc:document.getElementById('idea-desc-input').value.trim(),platforms:selPlats,priority:selPrio?selPrio.dataset.prio:'med'};
+  ideas.push(newIdea); closeIdeaModal(); renderIdeas();
+  showToast('Saving...'); await saveIdeaToSheet(newIdea,true); showToast('Idea saved');
 }
 
-// ============================================================
-// HELPERS
-// ============================================================
-function togglePlatChip(btn) {
-  const cls = platClass[btn.dataset.plat];
-  btn.className = btn.className.includes('sel-') ? 'plat-toggle' : 'plat-toggle sel-' + cls;
-}
-
-function selectPrio(btn, groupId) {
-  document.querySelectorAll('#' + groupId + ' .prio-toggle').forEach(b => b.className = 'prio-toggle');
-  btn.className = 'prio-toggle sel-' + btn.dataset.prio;
-}
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
-}
+// ── HELPERS ───────────────────────────────────────────────────
+function togglePlatChip(btn){const cls=platClass[btn.dataset.plat];btn.className=btn.className.includes('sel-')?'plat-toggle':'plat-toggle sel-'+cls;}
+function selectPrio(btn,groupId){document.querySelectorAll('#'+groupId+' .prio-toggle').forEach(b=>b.className='prio-toggle');btn.className='prio-toggle sel-'+btn.dataset.prio;}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2500);}
 </script>
 </body>
 </html>

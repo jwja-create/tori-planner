@@ -21,11 +21,9 @@
     --safe-top: env(safe-area-inset-top, 0px);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
   body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.5; min-height: 100vh; }
 
-  /* AUTH */
   .auth-screen { display: flex; align-items: center; justify-content: center; min-height: 100vh; background: var(--text); padding: 24px; }
   .auth-card { text-align: center; max-width: 340px; width: 100%; }
   .auth-logo { font-family: 'Playfair Display', serif; font-size: 32px; color: #fff; margin-bottom: 6px; }
@@ -33,50 +31,36 @@
   .auth-btn { display: inline-flex; align-items: center; gap: 10px; padding: 14px 28px; background: var(--gold); color: var(--text); border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; width: 100%; justify-content: center; }
   .auth-btn img { width: 20px; height: 20px; }
 
-  /* LOADING */
   .loading-overlay { position: fixed; inset: 0; background: var(--bg); display: flex; align-items: center; justify-content: center; z-index: 1000; flex-direction: column; gap: 16px; }
   .loading-spinner { width: 32px; height: 32px; border: 2px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.7s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .loading-text { font-size: 13px; color: var(--text-muted); }
 
-  /* APP SHELL */
   .app { display: flex; flex-direction: column; min-height: 100vh; }
 
-  /* HEADER */
-  .header {
-    background: var(--text);
-    padding: calc(16px + var(--safe-top)) 20px 16px;
-    position: sticky; top: 0; z-index: 40;
-  }
+  .header { background: var(--text); padding: calc(16px + var(--safe-top)) 20px 16px; position: sticky; top: 0; z-index: 40; }
   .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
   .header-name { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; }
   .header-date { font-size: 12px; color: rgba(255,255,255,0.4); }
   .sign-out-btn { background: none; border: none; color: rgba(255,255,255,0.3); cursor: pointer; font-size: 20px; padding: 4px; }
 
-  /* TAB BAR */
   .tab-bar { display: flex; gap: 4px; }
   .tab-btn { flex: 1; padding: 8px 6px; background: rgba(255,255,255,0.08); border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.15s; text-align: center; }
   .tab-btn.active { background: var(--gold); color: var(--text); }
 
-  /* CONTENT AREA */
   .content-area { flex: 1; padding: 20px 16px; padding-bottom: calc(20px + var(--safe-bottom)); }
   .tab-section { display: none; }
   .tab-section.active { display: block; }
 
-  /* SECTION HEADERS */
   .section-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
   .section-title { font-family: 'Playfair Display', serif; font-size: 20px; }
   .section-sub { font-size: 12px; color: var(--text-muted); }
 
-  /* SHOOT CARDS */
   .shoot-day-group { margin-bottom: 24px; }
   .shoot-day-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
   .shoot-day-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  .shoot-card {
-    background: var(--surface); border-radius: 14px; border: 1px solid var(--border);
-    padding: 16px; margin-bottom: 10px; transition: all 0.15s;
-  }
+  .shoot-card { background: var(--surface); border-radius: 14px; border: 1px solid var(--border); padding: 16px; margin-bottom: 10px; transition: all 0.15s; }
   .shoot-card.done { opacity: 0.5; }
   .shoot-card-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
   .shoot-card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
@@ -89,6 +73,7 @@
   .shoot-card-title { font-size: 15px; font-weight: 500; line-height: 1.3; margin-bottom: 4px; }
   .shoot-card-brief { font-size: 13px; color: var(--text-muted); line-height: 1.45; }
   .shoot-card-chips { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
+
   .chip { font-size: 11px; padding: 3px 8px; border-radius: 20px; font-weight: 500; }
   .chip.ig { background: var(--ig); color: var(--ig-text); }
   .chip.tk { background: var(--tk); color: var(--tk-text); }
@@ -96,11 +81,7 @@
   .chip.fb { background: var(--fb); color: var(--fb-text); }
   .chip.type { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
 
-  .shot-btn {
-    width: 100%; padding: 12px; background: var(--surface2); border: 1.5px solid var(--border);
-    border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
-    color: var(--text-muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
-  }
+  .shot-btn { width: 100%; padding: 12px; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
   .shot-btn:active { transform: scale(0.97); }
   .shot-btn.marked { background: #D5F5E3; border-color: #D5F5E3; color: #0A5E2A; }
 
@@ -108,7 +89,6 @@
   .empty-state i { font-size: 40px; display: block; margin-bottom: 14px; opacity: 0.3; }
   .empty-state p { font-size: 14px; line-height: 1.6; }
 
-  /* UPCOMING POSTS */
   .post-item { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 14px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 14px; }
   .post-date-badge { background: var(--text); color: var(--gold); border-radius: 8px; padding: 6px 10px; text-align: center; flex-shrink: 0; min-width: 48px; }
   .post-date-day { font-family: 'Playfair Display', serif; font-size: 20px; line-height: 1; }
@@ -116,9 +96,7 @@
   .post-item-body { flex: 1; min-width: 0; }
   .post-item-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .post-item-chips { display: flex; gap: 4px; flex-wrap: wrap; }
-  .post-overdue { border-left: 3px solid #E24B4A; }
 
-  /* IDEA CAPTURE */
   .idea-form { background: var(--surface); border-radius: 14px; border: 1px solid var(--border); padding: 16px; margin-bottom: 16px; }
   .idea-form-title { font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
   .idea-input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 15px; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); margin-bottom: 10px; }
@@ -135,7 +113,7 @@
   .prio-toggle.sel-high { background: #FDDDD5; color: #8B2500; border-color: #FDDDD5; font-weight: 500; }
   .prio-toggle.sel-med { background: #FFF3D5; color: #7A5000; border-color: #FFF3D5; font-weight: 500; }
   .prio-toggle.sel-low { background: #D5F5E3; color: #0A5E2A; border-color: #D5F5E3; font-weight: 500; }
-  .save-idea-btn { width: 100%; padding: 14px; background: var(--gold); color: var(--text); border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; transition: background 0.15s; }
+  .save-idea-btn { width: 100%; padding: 14px; background: var(--gold); color: var(--text); border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; }
   .save-idea-btn:active { background: var(--gold-dark); color: #fff; }
 
   .saved-ideas { display: flex; flex-direction: column; gap: 8px; }
@@ -143,14 +121,12 @@
   .saved-idea-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
   .saved-idea-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
 
-  /* TOAST */
   .toast { position: fixed; bottom: calc(24px + var(--safe-bottom)); left: 50%; transform: translateX(-50%) translateY(80px); background: var(--text); color: #fff; padding: 12px 24px; border-radius: 10px; font-size: 14px; z-index: 999; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; white-space: nowrap; }
   .toast.show { transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- AUTH -->
 <div class="auth-screen" id="auth-screen">
   <div class="auth-card">
     <div class="auth-logo">Tori Darke</div>
@@ -162,15 +138,12 @@
   </div>
 </div>
 
-<!-- LOADING -->
 <div class="loading-overlay" id="loading-overlay" style="display:none;">
   <div class="loading-spinner"></div>
   <div class="loading-text" id="loading-text">Loading...</div>
 </div>
 
-<!-- APP -->
 <div class="app" id="app" style="display:none;">
-
   <div class="header">
     <div class="header-top">
       <div>
@@ -180,15 +153,13 @@
       <button class="sign-out-btn" onclick="signOut()"><i class="ti ti-logout"></i></button>
     </div>
     <div class="tab-bar">
-      <button class="tab-btn active" onclick="switchTab('shoot', this)">This week</button>
-      <button class="tab-btn" onclick="switchTab('upcoming', this)">Upcoming</button>
-      <button class="tab-btn" onclick="switchTab('ideas', this)">Ideas</button>
+      <button class="tab-btn active" onclick="switchTab('shoot',this)">This week</button>
+      <button class="tab-btn" onclick="switchTab('upcoming',this)">Upcoming</button>
+      <button class="tab-btn" onclick="switchTab('ideas',this)">Ideas</button>
     </div>
   </div>
 
   <div class="content-area">
-
-    <!-- SHOOT TAB -->
     <div id="tab-shoot" class="tab-section active">
       <div class="section-hdr">
         <div class="section-title">Shoot list</div>
@@ -197,7 +168,6 @@
       <div id="shoot-list"></div>
     </div>
 
-    <!-- UPCOMING TAB -->
     <div id="tab-upcoming" class="tab-section">
       <div class="section-hdr">
         <div class="section-title">Posting soon</div>
@@ -206,7 +176,6 @@
       <div id="upcoming-list"></div>
     </div>
 
-    <!-- IDEAS TAB -->
     <div id="tab-ideas" class="tab-section">
       <div class="idea-form">
         <div class="idea-form-title">Capture an idea</div>
@@ -227,7 +196,6 @@
       </div>
       <div class="saved-ideas" id="saved-ideas"></div>
     </div>
-
   </div>
 </div>
 
@@ -235,15 +203,13 @@
 
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
-// ============================================================
-// CONFIGURATION — paste your values here (same as planner.html)
-// ============================================================
 const CONFIG = {
   CLIENT_ID: '520857299754-k334d5eq7fo7m9276dsbbp6ikj4qem0n.apps.googleusercontent.com',
   SHEET_ID:  '1yfvDg-qWKAJX9BhjUoOQgld1x-xflUFADwE116Ciosc',
   CONTENT_RANGE: 'Content!A:K',
   IDEAS_RANGE:   'Ideas!A:E',
   SCOPES: 'https://www.googleapis.com/auth/spreadsheets',
+  STORAGE_KEY: 'td_tori_token',
 };
 
 const platClass = { Instagram:'ig', TikTok:'tk', YouTube:'yt', Facebook:'fb' };
@@ -257,29 +223,73 @@ const typeIcon = {
 const STAGES = ['Idea','Scripted','Scheduled shoot','Shot','In edit','Scheduled'];
 
 let accessToken = null;
-let items = [];
-let ideas = [];
+let tokenExpiry = 0;
+let items = [], ideas = [];
+let tokenClient = null;
 
-// ============================================================
-// AUTH
-// ============================================================
-function signIn() {
-  const client = google.accounts.oauth2.initTokenClient({
+// ── PERSISTENT AUTH ──────────────────────────────────────────
+function saveToken(token, expiresIn) {
+  const expiry = Date.now() + (expiresIn * 1000) - 60000;
+  localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({ token, expiry }));
+  accessToken = token;
+  tokenExpiry = expiry;
+}
+
+function loadStoredToken() {
+  try {
+    const stored = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY));
+    if (stored && stored.expiry > Date.now()) {
+      accessToken = stored.token;
+      tokenExpiry = stored.expiry;
+      return true;
+    }
+  } catch(e) {}
+  return false;
+}
+
+function clearStoredToken() {
+  localStorage.removeItem(CONFIG.STORAGE_KEY);
+  accessToken = null;
+  tokenExpiry = 0;
+}
+
+function initAuth() {
+  tokenClient = google.accounts.oauth2.initTokenClient({
     client_id: CONFIG.CLIENT_ID,
     scope: CONFIG.SCOPES,
     callback: async (resp) => {
-      if (resp.error) { showToast('Sign-in failed'); return; }
-      accessToken = resp.access_token;
+      if (resp.error) {
+        if (window._tokenResolve) { window._tokenResolve(false); window._tokenResolve = null; }
+        return;
+      }
+      saveToken(resp.access_token, resp.expires_in || 3600);
+      if (window._tokenResolve) { window._tokenResolve(true); window._tokenResolve = null; return; }
       showApp();
       await loadAllData();
     },
   });
-  client.requestAccessToken();
+
+  if (loadStoredToken()) {
+    showApp();
+    loadAllData();
+  }
+}
+
+async function ensureToken() {
+  if (accessToken && tokenExpiry > Date.now()) return true;
+  return new Promise((resolve) => {
+    window._tokenResolve = resolve;
+    tokenClient.requestAccessToken({ prompt: '' });
+  });
+}
+
+function signIn() {
+  tokenClient.requestAccessToken({ prompt: 'consent' });
 }
 
 function signOut() {
   if (accessToken) google.accounts.oauth2.revoke(accessToken);
-  accessToken = null;
+  clearStoredToken();
   items = []; ideas = [];
   document.getElementById('app').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'flex';
@@ -288,46 +298,52 @@ function signOut() {
 function showApp() {
   document.getElementById('auth-screen').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
-  // Set date
   const now = new Date();
   document.getElementById('header-date').textContent = now.toLocaleDateString('en-AU', { weekday:'long', day:'numeric', month:'long' });
 }
 
-// ============================================================
-// SHEETS API
-// ============================================================
+window.addEventListener('load', () => {
+  const check = setInterval(() => {
+    if (window.google && google.accounts) { clearInterval(check); initAuth(); }
+  }, 100);
+});
+
+// ── SHEETS API ───────────────────────────────────────────────
 async function sheetsGet(range) {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values/${encodeURIComponent(range)}`;
-  const r = await fetch(url, { headers: { Authorization: 'Bearer ' + accessToken } });
-  if (!r.ok) throw new Error('Sheets GET failed');
+  await ensureToken();
+  const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values/${encodeURIComponent(range)}`,
+    { headers: { Authorization: 'Bearer ' + accessToken } });
+  if (!r.ok) throw new Error('GET failed');
   return r.json();
 }
 
 async function sheetsAppend(range, values) {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values/${encodeURIComponent(range)}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`;
-  const r = await fetch(url, {
+  await ensureToken();
+  const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values/${encodeURIComponent(range)}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`, {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
     body: JSON.stringify({ values })
   });
-  if (!r.ok) throw new Error('Sheets APPEND failed');
+  if (!r.ok) throw new Error('APPEND failed');
   return r.json();
 }
 
 async function sheetsBatchUpdate(data) {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values:batchUpdate`;
-  const r = await fetch(url, {
+  await ensureToken();
+  const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values:batchUpdate`, {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
     body: JSON.stringify({ valueInputOption: 'RAW', data })
   });
-  if (!r.ok) throw new Error('Sheets BATCH UPDATE failed');
+  if (!r.ok) throw new Error('BATCH UPDATE failed');
   return r.json();
 }
 
-// ============================================================
-// DATA
-// ============================================================
+// ── DATA ─────────────────────────────────────────────────────
+function showLoading(msg) { document.getElementById('loading-text').textContent = msg; document.getElementById('loading-overlay').style.display = 'flex'; }
+function hideLoading() { document.getElementById('loading-overlay').style.display = 'none'; }
+function generateId() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
+
 async function loadAllData() {
   showLoading('Loading your content...');
   try {
@@ -344,65 +360,36 @@ async function loadAllData() {
 
 async function loadItems() {
   const data = await sheetsGet(CONFIG.CONTENT_RANGE);
-  const rows = data.values || [];
-  items = rows.slice(1).filter(r => r[0]).map((r, i) => ({
-    id: r[0],
-    _rowIndex: i + 2,
-    title: r[1] || '',
-    platforms: r[2] ? r[2].split(',').map(s => s.trim()) : [],
-    type: r[3] || 'Reel / Short',
-    stage: r[4] || 'Idea',
-    priority: r[5] || 'med',
-    brainstormDate: r[6] || '',
-    shootDate: r[7] || '',
-    editDate: r[8] || '',
-    postDate: r[9] || '',
-    notes: r[10] || '',
+  items = (data.values||[]).slice(1).filter(r=>r[0]).map((r,i) => ({
+    id:r[0], _rowIndex:i+2,
+    title:r[1]||'', platforms:r[2]?r[2].split(',').map(s=>s.trim()):[],
+    type:r[3]||'Reel / Short', stage:r[4]||'Idea', priority:r[5]||'med',
+    brainstormDate:r[6]||'', shootDate:r[7]||'', editDate:r[8]||'', postDate:r[9]||'', notes:r[10]||'',
   }));
 }
 
 async function loadIdeas() {
   const data = await sheetsGet(CONFIG.IDEAS_RANGE);
-  const rows = data.values || [];
-  ideas = rows.slice(1).filter(r => r[0]).map((r, i) => ({
-    id: r[0],
-    _rowIndex: i + 2,
-    title: r[1] || '',
-    desc: r[2] || '',
-    platforms: r[3] ? r[3].split(',').map(s => s.trim()) : [],
-    priority: r[4] || 'med',
+  ideas = (data.values||[]).slice(1).filter(r=>r[0]).map((r,i) => ({
+    id:r[0], _rowIndex:i+2,
+    title:r[1]||'', desc:r[2]||'',
+    platforms:r[3]?r[3].split(',').map(s=>s.trim()):[],
+    priority:r[4]||'med',
   }));
 }
 
-function showLoading(msg) {
-  document.getElementById('loading-text').textContent = msg;
-  document.getElementById('loading-overlay').style.display = 'flex';
-}
-
-function hideLoading() {
-  document.getElementById('loading-overlay').style.display = 'none';
-}
-
-function generateId() {
-  return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
-}
-
-// ============================================================
-// TAB SWITCHING
-// ============================================================
+// ── TAB SWITCHING ─────────────────────────────────────────────
 function switchTab(name, btn) {
-  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
+  document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
   btn.classList.add('active');
 }
 
-// ============================================================
-// SHOOT LIST — items with a shoot date this week
-// ============================================================
+// ── SHOOT LIST ────────────────────────────────────────────────
 function getWeekRange() {
   const now = new Date();
-  const dow = now.getDay(); // 0=Sun
+  const dow = now.getDay();
   const monday = new Date(now);
   monday.setDate(now.getDate() - (dow === 0 ? 6 : dow - 1));
   monday.setHours(0,0,0,0);
@@ -431,7 +418,6 @@ function renderShootList() {
     return;
   }
 
-  // Group by date
   const grouped = {};
   shootItems.forEach(item => {
     if (!grouped[item.shootDate]) grouped[item.shootDate] = [];
@@ -442,7 +428,6 @@ function renderShootList() {
   Object.keys(grouped).sort().forEach(date => {
     const dayItems = grouped[date];
     const dateLabel = new Date(date+'T00:00:00').toLocaleDateString('en-AU', { weekday:'long', day:'numeric', month:'long' });
-
     const group = document.createElement('div');
     group.className = 'shoot-day-group';
     group.innerHTML = `<div class="shoot-day-label">${dateLabel}</div>`;
@@ -450,7 +435,7 @@ function renderShootList() {
     dayItems.forEach(item => {
       const ti = typeIcon[item.type] || typeIcon['Reel / Short'];
       const platChips = item.platforms.map(p => `<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
-      const isShot = item.stage === 'Shot' || item.stage === 'In edit' || item.stage === 'Scheduled';
+      const isShot = ['Shot','In edit','Scheduled'].includes(item.stage);
       const card = document.createElement('div');
       card.className = 'shoot-card' + (isShot ? ' done' : '');
       card.id = 'shoot-card-' + item.id;
@@ -464,9 +449,7 @@ function renderShootList() {
         </div>
         <div class="shoot-card-chips">${platChips}<span class="chip type">${item.type}</span></div>
         <button class="shot-btn ${isShot ? 'marked' : ''}" onclick="markAsShot('${item.id}', this)" ${isShot ? 'disabled' : ''}>
-          ${isShot
-            ? '<i class="ti ti-check"></i> Shot ✓'
-            : '<i class="ti ti-camera"></i> Mark as shot'}
+          ${isShot ? '<i class="ti ti-check"></i> Shot ✓' : '<i class="ti ti-camera"></i> Mark as shot'}
         </button>`;
       group.appendChild(card);
     });
@@ -479,32 +462,24 @@ async function markAsShot(id, btn) {
   const item = items.find(i => i.id === id);
   if (!item) return;
 
-  // Optimistic UI update
   btn.className = 'shot-btn marked';
   btn.disabled = true;
   btn.innerHTML = '<i class="ti ti-check"></i> Shot ✓';
   const card = document.getElementById('shoot-card-' + id);
   if (card) card.classList.add('done');
 
-  // Advance to stage 4 — "Shot"
   item.stage = 'Shot';
   showToast('Marked as shot 🎬');
 
-  // Save to sheet
   try {
-    await sheetsBatchUpdate([{
-      range: `Content!E${item._rowIndex}`,
-      values: [['Shot']]
-    }]);
+    await sheetsBatchUpdate([{ range: `Content!E${item._rowIndex}`, values: [['Shot']] }]);
   } catch(e) {
     showToast('Save failed — check connection');
     console.error(e);
   }
 }
 
-// ============================================================
-// UPCOMING POSTS — items scheduled to post in next 14 days
-// ============================================================
+// ── UPCOMING ──────────────────────────────────────────────────
 function renderUpcoming() {
   const now = new Date(); now.setHours(0,0,0,0);
   const future = new Date(now); future.setDate(now.getDate() + 14);
@@ -515,7 +490,7 @@ function renderUpcoming() {
       const d = new Date(item.postDate + 'T00:00:00');
       return d >= now && d <= future;
     })
-    .sort((a, b) => a.postDate.localeCompare(b.postDate));
+    .sort((a,b) => a.postDate.localeCompare(b.postDate));
 
   const container = document.getElementById('upcoming-list');
 
@@ -528,9 +503,8 @@ function renderUpcoming() {
     const d = new Date(item.postDate + 'T00:00:00');
     const day = d.toLocaleDateString('en-AU', { day:'numeric' });
     const mon = d.toLocaleDateString('en-AU', { month:'short' });
-    const isPast = d < now;
     const platChips = item.platforms.map(p => `<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
-    return `<div class="post-item ${isPast ? 'post-overdue' : ''}">
+    return `<div class="post-item">
       <div class="post-date-badge">
         <div class="post-date-day">${day}</div>
         <div class="post-date-mon">${mon}</div>
@@ -543,9 +517,7 @@ function renderUpcoming() {
   }).join('');
 }
 
-// ============================================================
-// IDEAS
-// ============================================================
+// ── IDEAS ─────────────────────────────────────────────────────
 function renderSavedIdeas() {
   const container = document.getElementById('saved-ideas');
   if (!ideas.length) {
@@ -565,29 +537,19 @@ function renderSavedIdeas() {
 async function saveIdea() {
   const title = document.getElementById('idea-title').value.trim();
   if (!title) { showToast('Add a title first'); return; }
-  const selPlats = [...document.querySelectorAll('#idea-plat-row .plat-toggle')].filter(b => b.className.includes('sel-')).map(b => b.dataset.plat);
+  const selPlats = [...document.querySelectorAll('#idea-plat-row .plat-toggle')].filter(b=>b.className.includes('sel-')).map(b=>b.dataset.plat);
   const selPrio = document.querySelector('#prio-row .prio-toggle[class*="sel-"]');
-  const newIdea = {
-    id: generateId(),
-    title,
-    desc: document.getElementById('idea-desc').value.trim(),
-    platforms: selPlats,
-    priority: selPrio ? selPrio.dataset.prio : 'med',
-  };
+  const newIdea = { id:generateId(), title, desc:document.getElementById('idea-desc').value.trim(), platforms:selPlats, priority:selPrio?selPrio.dataset.prio:'med' };
 
   ideas.push(newIdea);
   renderSavedIdeas();
   showToast('Idea saved 💡');
 
-  // Reset form
   document.getElementById('idea-title').value = '';
   document.getElementById('idea-desc').value = '';
-  document.querySelectorAll('#idea-plat-row .plat-toggle').forEach(b => b.className = 'plat-toggle');
-  document.querySelectorAll('#prio-row .prio-toggle').forEach(b => {
-    b.className = 'prio-toggle' + (b.dataset.prio === 'med' ? ' sel-med' : '');
-  });
+  document.querySelectorAll('#idea-plat-row .plat-toggle').forEach(b=>b.className='plat-toggle');
+  document.querySelectorAll('#prio-row .prio-toggle').forEach(b=>{b.className='prio-toggle'+(b.dataset.prio==='med'?' sel-med':'');});
 
-  // Save to sheet
   try {
     await sheetsAppend(CONFIG.IDEAS_RANGE, [[newIdea.id, newIdea.title, newIdea.desc, newIdea.platforms.join(', '), newIdea.priority]]);
   } catch(e) {
@@ -596,16 +558,14 @@ async function saveIdea() {
   }
 }
 
-// ============================================================
-// HELPERS
-// ============================================================
+// ── HELPERS ───────────────────────────────────────────────────
 function togglePlat(btn) {
   const cls = platClass[btn.dataset.plat];
   btn.className = btn.className.includes('sel-') ? 'plat-toggle' : 'plat-toggle sel-' + cls;
 }
 
 function selectPrio(btn) {
-  document.querySelectorAll('#prio-row .prio-toggle').forEach(b => b.className = 'prio-toggle');
+  document.querySelectorAll('#prio-row .prio-toggle').forEach(b=>b.className='prio-toggle');
   btn.className = 'prio-toggle sel-' + btn.dataset.prio;
 }
 
