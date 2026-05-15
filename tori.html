@@ -123,6 +123,80 @@
 
   .toast { position: fixed; bottom: calc(24px + var(--safe-bottom)); left: 50%; transform: translateX(-50%) translateY(80px); background: var(--text); color: #fff; padding: 12px 24px; border-radius: 10px; font-size: 14px; z-index: 999; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; white-space: nowrap; }
   .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* === RICH SHOOT (Claude-generated shot list) — card in the picker === */
+  .rich-shoot-card { background: var(--surface); border-radius: 14px; border: 1px solid var(--border); padding: 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; }
+  .rich-shoot-card:active { transform: scale(0.99); border-color: var(--gold); }
+  .rich-shoot-card-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
+  .rich-shoot-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; background: var(--gold); color: var(--text); }
+  .rich-shoot-body { flex: 1; min-width: 0; }
+  .rich-shoot-title-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
+  .rich-shoot-title { font-size: 15px; font-weight: 500; line-height: 1.3; }
+  .rich-shoot-badge { font-size: 9px; padding: 2px 6px; border-radius: 4px; background: var(--gold); color: var(--text); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; flex-shrink: 0; }
+  .rich-shoot-brief { font-size: 13px; color: var(--text-muted); line-height: 1.45; margin-bottom: 6px; }
+  .rich-shoot-meta { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.06em; }
+  .rich-shoot-progress { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+  .rich-shoot-progress-track { flex: 1; height: 5px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .rich-shoot-progress-fill { height: 100%; width: 0%; background: var(--gold); transition: width 0.4s ease; }
+  .rich-shoot-progress-text { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
+  .rich-shoot-cta { font-size: 12px; color: var(--gold-dark); font-weight: 500; margin-top: 10px; display: flex; align-items: center; gap: 6px; }
+
+  /* === DETAIL VIEW (slide-in shot list) === */
+  .detail-view { position: fixed; inset: 0; background: var(--bg); transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; z-index: 100; -webkit-overflow-scrolling: touch; }
+  .detail-view.open { transform: translateX(0); }
+  .detail-header { background: var(--text); padding: calc(14px + var(--safe-top)) 16px 12px; position: sticky; top: 0; z-index: 10; }
+  .detail-header-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .back-btn { background: rgba(255,255,255,0.08); border: none; color: #fff; width: 36px; height: 36px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'DM Sans', sans-serif; font-size: 18px; padding: 0; }
+  .back-btn:active { background: rgba(255,255,255,0.15); }
+  .detail-title-block { flex: 1; min-width: 0; }
+  .detail-doc-type { font-size: 10px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; margin-bottom: 2px; font-weight: 500; }
+  .detail-title { font-family: 'Playfair Display', serif; font-size: 17px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .detail-progress-track { width: 100%; height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
+  .detail-progress-fill { height: 100%; width: 0%; background: var(--gold); transition: width 0.4s ease; }
+  .detail-progress-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 11px; color: rgba(255,255,255,0.5); }
+  .reset-btn { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; letter-spacing: 0.05em; font-family: 'DM Sans', sans-serif; text-transform: uppercase; }
+  .reset-btn:active { background: rgba(255,255,255,0.1); }
+
+  .completion-banner { display: none; background: linear-gradient(135deg, rgba(201,169,110,0.18), rgba(201,169,110,0.08)); border: 1px solid var(--gold); margin: 16px 16px 0; padding: 14px; border-radius: 8px; text-align: center; }
+  .completion-banner.visible { display: block; }
+  .completion-banner p { font-size: 14px; font-weight: 500; color: var(--text); margin: 0; }
+
+  .detail-intro { padding: 16px; border-bottom: 1px solid var(--border); }
+  .detail-intro p { margin: 0 0 6px; font-size: 13px; color: var(--text-muted); }
+  .detail-intro p:last-child { margin-bottom: 0; font-size: 11px; color: var(--text-faint); }
+  .pill-inline { padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 500; }
+  .pill-inline.script { background: rgba(201,169,110,0.2); color: var(--gold-dark); }
+  .pill-inline.note { background: #FFF3D5; color: #7A5000; }
+  .pill-inline.broll { background: #D5F5E3; color: #0A5E2A; }
+
+  .shot-section { padding: 20px 16px 4px; border-bottom: 1px solid var(--border); }
+  .shot-section-title { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .shot-section-warn { color: #8B2500; font-size: 10px; font-weight: 500; }
+
+  .shot { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; -webkit-tap-highlight-color: transparent; }
+  .shot:active { transform: scale(0.99); }
+  .shot.done { opacity: 0.5; background: var(--surface2); }
+  .shot.done .shot-title { text-decoration: line-through; text-decoration-color: var(--text-muted); }
+  .shot.hero { border-color: var(--gold); background: linear-gradient(135deg, var(--surface) 0%, rgba(201,169,110,0.06) 100%); }
+  .shot.broll { border-color: rgba(10,94,42,0.2); }
+  .shot-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .shot-num { font-size: 10px; color: var(--text-faint); letter-spacing: 0.08em; font-weight: 500; }
+  .shot.broll .shot-num { color: #0A5E2A; }
+  .shot-status { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border-strong); background: transparent; position: relative; flex-shrink: 0; }
+  .shot.done .shot-status { background: #0A5E2A; border-color: #0A5E2A; }
+  .shot.done .shot-status::after { content: "✓"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 13px; font-weight: 700; line-height: 1; }
+  .shot-title { font-size: 15px; font-weight: 500; line-height: 1.3; margin-bottom: 8px; color: var(--text); }
+  .shot-setup { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 8px; }
+
+  .script-pill { background: rgba(201,169,110,0.12); border-left: 2px solid var(--gold); color: var(--gold-dark); padding: 8px 12px; margin: 5px 0; border-radius: 0 4px 4px 0; font-size: 12px; font-style: italic; line-height: 1.45; }
+  .note-pill { background: #FFF8E5; border-left: 2px solid #C49A4A; color: #7A5000; padding: 8px 12px; margin: 5px 0; border-radius: 0 4px 4px 0; font-size: 12px; line-height: 1.45; }
+  .broll-pill { background: rgba(10,94,42,0.05); border-left: 2px solid #0A5E2A; color: #0A5E2A; padding: 8px 12px; margin: 5px 0; border-radius: 0 4px 4px 0; font-size: 12px; line-height: 1.45; }
+
+  .detail-footer { padding: 24px 16px calc(40px + var(--safe-bottom)); text-align: center; }
+  .detail-footer p { font-size: 11px; color: var(--text-faint); font-style: italic; margin: 0; }
+
+  .shoot-day-label.from-claude { color: var(--gold-dark); }
+
 </style>
 </head>
 <body>
@@ -197,6 +271,39 @@
       <div class="saved-ideas" id="saved-ideas"></div>
     </div>
   </div>
+  <div class="detail-view" id="detail-view">
+  <div class="detail-header">
+    <div class="detail-header-top">
+      <button class="back-btn" onclick="closeShotDetail()" aria-label="Back"><i class="ti ti-arrow-left"></i></button>
+      <div class="detail-title-block">
+        <div class="detail-doc-type">SHOT LIST</div>
+        <div class="detail-title" id="detail-title"></div>
+      </div>
+    </div>
+    <div class="detail-progress-track">
+      <div class="detail-progress-fill" id="detail-progress-fill"></div>
+    </div>
+    <div class="detail-progress-meta">
+      <span id="detail-progress-count">0 / 0</span>
+      <button class="reset-btn" onclick="resetShotProgress()">Reset</button>
+    </div>
+  </div>
+  <div class="completion-banner" id="completion-banner">
+    <p>🎉 You absolute legend. That's the lot. Get home safe.</p>
+  </div>
+  <div class="detail-intro">
+    <p>Tap a shot to mark it done. Your progress saves on this phone.</p>
+    <p>
+      <span class="pill-inline script">amber</span> = script prompt (riff on it).
+      <span class="pill-inline note">gold</span> = tip.
+      <span class="pill-inline broll">green</span> = B-roll (passive shots, grab as you go).
+    </p>
+  </div>
+  <div id="shot-list-container"></div>
+  <div class="detail-footer">
+    <p>Script lines are prompts — say it your way. If a shot doesn't happen, no stress, we work with what we've got.</p>
+  </div>
+</div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -412,19 +519,23 @@ function renderShootList() {
   });
 
   const container = document.getElementById('shoot-list');
+  container.innerHTML = '';
 
-  if (!shootItems.length) {
+  // Claude-generated shot lists at the top
+  renderRichShoots(container);
+
+  if (!shootItems.length && !RICH_SHOOTS.length) {
     container.innerHTML = `<div class="empty-state"><i class="ti ti-camera"></i><p>No shoots scheduled this week.<br>Check back when Jeremy has added shoot dates.</p></div>`;
     return;
   }
+
+  if (!shootItems.length) return;
 
   const grouped = {};
   shootItems.forEach(item => {
     if (!grouped[item.shootDate]) grouped[item.shootDate] = [];
     grouped[item.shootDate].push(item);
   });
-
-  container.innerHTML = '';
   Object.keys(grouped).sort().forEach(date => {
     const dayItems = grouped[date];
     const dateLabel = new Date(date+'T00:00:00').toLocaleDateString('en-AU', { weekday:'long', day:'numeric', month:'long' });
@@ -575,6 +686,264 @@ function showToast(msg) {
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
 }
+
+// ── RICH SHOOTS (Claude-generated shot lists) ────────────────
+const RICH_SHOOTS = [
+  {
+    id: 'nebo-kembla-2026-05',
+    title: 'Nebo + Kembla Weekend',
+    subtitle: 'Country street party \u2192 racecourse \u2192 podcast \u2192 home',
+    dateRange: 'Fri 15 \u2014 Mon 18 May',
+    locations: 'Nebo \u00b7 Kembla Grange \u00b7 Sydney',
+    sections: [
+      {
+        title: '1. Heading north to Nebo',
+        warn: null,
+        shots: [
+          { num: '1.1', title: 'Mackay airport arrival',
+            setup: '\ud83d\udcf1 Selfie style. Stand somewhere identifiable as the airport \u2014 signage, baggage carousel, exit doors.',
+            scripts: ['"Made it to Mackay \u2014 heading out to Nebo for tonight\'s street party."', '"Country gig tonight, racecourse tomorrow. Let\'s go."'] },
+          { num: '1.2', title: 'Plane window (if not too late)',
+            setup: '\ud83d\udcf1 Vertical, looking out the window. Best near landing as the landscape opens up.',
+            notes: ['\ud83d\udca1 If the flight\'s already done, skip it. Don\'t stress.'] },
+          { num: '1.3', title: 'Travel & road details', broll: true,
+            setup: '\ud83c\udfa5 Quick passive shots as you go. No pressure, no scripts \u2014 just grab whatever looks interesting.',
+            brolls: ['Boots on the airport tile', 'Bag drop / baggage carousel', 'Hat or sunnies in the car', 'Road signs, fence posts, cattle', '"Welcome to Nebo" sign if there is one'] },
+          { num: '1.4', title: 'On the road to Nebo',
+            setup: '\ud83d\udcf1 Phone on the dash or up to the windscreen for 10\u201315 sec. Country roads, big sky.',
+            scripts: ['(optional voiceover) "Nebo\'s about an hour inland. Population \u2014 not much. Crowds \u2014 always."'] },
+          { num: '1.5', title: 'Arrival in Nebo',
+            setup: '\ud83d\udcf1 Walk-and-talk selfie, 15\u201320 sec, when you first see the venue or main street.',
+            scripts: ['"We\'re here. Let\'s see what Nebo\'s got."'] }
+        ]
+      },
+      {
+        title: '2. Nebo Street Party',
+        warn: '\u26a0\ufe0f Needs a helper for performance',
+        shots: [
+          { num: '2.1', title: 'Soundcheck snippets',
+            setup: '\ud83d\udcf1 Prop the phone on an amp, monitor, or chair. Hit record. Walk into frame and do your thing for ~30 sec, then grab the phone.',
+            notes: ['\ud83c\udfa4 If your tech or a band mate is free, ask them to do a 20-sec handheld pass instead \u2014 looks better.'] },
+          { num: '2.2', title: 'Venue & town details', broll: true,
+            setup: '\ud83c\udfa5 Walk through and grab a handful of passive shots. 5 sec each, no people, no scripts.',
+            brolls: ['Venue exterior wide', 'Street party setup', 'Food trucks, stalls, signage', 'The stage from a distance', 'Anything that says "country town energy"'] },
+          { num: '2.3', title: 'Walking the street party',
+            setup: '\ud83d\udcf1 Selfie style. Walk through the crowd or past the stalls for 15\u201320 sec. Talk to camera as you go.',
+            scripts: ['"Country towns do street parties properly. Look at this."', '"We\'re on in about an hour \u2014 vibe\'s already pumping."'] },
+          { num: '2.4', title: 'Crowd shot before the set',
+            setup: '\ud83d\udcf1 From side of stage or behind the desk. Horizontal. 10\u201315 sec. Look for hands up, kids on shoulders, anything with energy.' },
+          { num: '2.5', title: '\ud83c\udfac Performance \u2014 ASK SOMEONE TO FILM',
+            setup: '\ud83d\udcf1 Hand your phone to a band mate, venue contact, or another videographer at the event. Ask: "Can you film me for one song? Landscape. Just hold it steady."',
+            notes: ['\ud83d\udca1 One song is all we need. Two angles (wide + close) if they\'re keen.', '\u26a0\ufe0f Shaky is fine \u2014 the energy is what matters.'] },
+          { num: '2.6', title: 'Backstage details', broll: true,
+            setup: '\ud83c\udfa5 5\u201310 sec of quick close-ups. No people, no scripts.',
+            brolls: ['Setlist on the floor', 'Your boots', 'Guitar leaning against an amp', 'Water bottle / drink', 'In-ears in your hand', 'Mic stand'] },
+          { num: '2.7', title: 'Post-gig piece to camera',
+            setup: '\ud83d\udcf1 Selfie, somewhere the venue or crowd is visible behind you. Just after walking off, while you\'re still buzzing. 20\u201330 sec.',
+            scripts: ['"That was insane. Nebo, you absolute legends."', '"Now we fly south for the racecourse tomorrow."'] }
+        ]
+      },
+      {
+        title: '3. Travel south to NSW',
+        warn: null,
+        shots: [
+          { num: '3.1', title: 'One travel moment',
+            setup: '\ud83d\udcf1 Your pick \u2014 hotel checkout, airport coffee, boarding, plane window, arrival drive. Best 10\u201315 sec you can grab. Doesn\'t need to be polished.',
+            scripts: ['(optional voiceover) "From outback Queensland to a racecourse in New South Wales. Tour life."'] },
+          { num: '3.2', title: 'Hotel & airport details', broll: true,
+            setup: '\ud83c\udfa5 Passive grabs throughout the travel day.',
+            brolls: ['Hotel keycard', 'Suitcase wheels rolling', 'Lobby / view from the room', 'Departures board', 'Coffee in your hand', 'Boarding pass close-up'] }
+        ]
+      },
+      {
+        title: '4. Kembla Grange Racecourse',
+        warn: '\u26a0\ufe0f Needs a helper for performance',
+        shots: [
+          { num: '4.1', title: 'Arrival at the racecourse',
+            setup: '\ud83d\udcf1 Selfie as you walk in. Look for race day vibe \u2014 fascinators, dressed-up crowd, the grandstand.',
+            scripts: ['"Totally different world today. Welcome to Kembla Grange."'] },
+          { num: '4.2', title: 'Race day details', broll: true,
+            setup: '\ud83c\udfa5 The visual contrast with Nebo. Grab dressed-up details.',
+            brolls: ['Grandstand exterior', 'Race day signage / branding', 'Fascinators, suits, champagne details (no faces if you can help it)', 'Horses if they\'re visible', 'Your race day outfit / boots close-up'] },
+          { num: '4.3', title: 'Getting ready BTS',
+            setup: '\ud83d\udcf1 Prop the phone on the bench. Hair touch-ups, outfit, guitar prep. 30 sec total \u2014 doesn\'t need to be one continuous take.',
+            scripts: ['(optional voiceover) "Same country, different crowd."'] },
+          { num: '4.4', title: 'Soundcheck snippets',
+            setup: '\ud83d\udcf1 Same as Nebo \u2014 prop the phone, hit record, walk into frame.' },
+          { num: '4.5', title: '\ud83c\udfac Performance \u2014 ASK SOMEONE TO FILM',
+            setup: '\ud83d\udcf1 Same ask as Nebo. One song. Landscape. Steady-ish.',
+            notes: ['\ud83d\udca1 Get the dressed-up crowd in frame if you can \u2014 it\'s the visual contrast with Nebo.'] },
+          { num: '4.6', title: 'Post-show reflection',
+            setup: '\ud83d\udcf1 Selfie, somewhere quiet just after the set. 20\u201330 sec.',
+            scripts: ['"Two crowds couldn\'t be more different \u2014 and I loved them both."', '"Sydney tomorrow for a podcast. Last leg."'] }
+        ]
+      },
+      {
+        title: '5. Sydney podcast',
+        warn: null,
+        shots: [
+          { num: '5.1', title: 'Walking into the studio',
+            setup: '\ud83d\udcf1 Selfie outside the studio. Don\'t frame any signage \u2014 keep it vague. Doors, street, you.',
+            scripts: ['"Last stop \u2014 podcast appearance. Can\'t say which one yet."'] },
+          { num: '5.2', title: 'BTS inside the studio',
+            setup: '\ud83d\udcf1 Once you\'ve checked with the host that filming\'s fine, grab 20 sec. Headphones, mic, your set-up. Don\'t film the host\'s face unless they\'re cool with it.',
+            notes: ['\ud83d\udca1 If they say no \u2014 just shoot the exterior and move on. No drama.'] },
+          { num: '5.3', title: 'Studio details (with permission)', broll: true,
+            setup: '\ud83c\udfa5 Quick close-ups only. Keep host gear and notes out of frame unless they OK it.',
+            brolls: ['Headphones resting on the table', 'Your hands on the cans', 'Mic from a tight angle', 'Coffee / water on the desk'] },
+          { num: '5.4', title: 'Studio reflection',
+            setup: '\ud83d\udcf1 Selfie outside afterwards, walking back to the car. 15\u201320 sec.',
+            scripts: ['"These conversations are my favourite part of this job \u2014 getting to actually talk about the songs."'] }
+        ]
+      },
+      {
+        title: '6. Home',
+        warn: null,
+        shots: [
+          { num: '6.1', title: 'Arrival details', broll: true,
+            setup: '\ud83c\udfa5 Quick passive shots just before walking inside. Sets up the closing moment.',
+            brolls: ['Keys in the front door', 'Suitcase wheels at the threshold', 'Dog / cat greeting if you have one', 'Sun setting / front porch detail'] },
+          { num: '6.2', title: '\ud83c\udfe1 Walking through the front door', hero: true,
+            setup: '\ud83d\udcf1 Prop the phone on the entry table, or have someone film you walking in. Bags still on you. Drop the bags, exhale, half-laugh at the camera.',
+            scripts: ['"Three days. Two states. Two gigs. One podcast."', '"I\'ll sleep when I\'m dead."'],
+            notes: ['\u2b50 This is the closing shot of the whole vlog. Give it a moment. Don\'t rush.'] }
+        ]
+      }
+    ]
+  }
+];
+
+let currentRichShoot = null;
+
+function richShootKey(id) { return 'tori_rich_shoot_' + id; }
+function loadRichShootState(id) {
+  try { const raw = localStorage.getItem(richShootKey(id)); return raw ? JSON.parse(raw) : {}; }
+  catch(e) { return {}; }
+}
+function saveRichShootState(id, state) {
+  try { localStorage.setItem(richShootKey(id), JSON.stringify(state)); } catch(e) {}
+}
+function getRichShootProgress(shoot) {
+  const state = loadRichShootState(shoot.id);
+  let total = 0, done = 0;
+  shoot.sections.forEach(s => s.shots.forEach(sh => { total++; if (state[sh.num]) done++; }));
+  return { total, done };
+}
+
+function renderRichShoots(container) {
+  if (!RICH_SHOOTS.length) return;
+  const group = document.createElement('div');
+  group.className = 'shoot-day-group';
+  group.innerHTML = '<div class="shoot-day-label from-claude">Shot lists \u2014 from Claude</div>';
+  RICH_SHOOTS.forEach(shoot => {
+    const { total, done } = getRichShootProgress(shoot);
+    const pct = total === 0 ? 0 : (done / total) * 100;
+    const card = document.createElement('div');
+    card.className = 'rich-shoot-card';
+    card.onclick = () => openShotDetail(shoot.id);
+    card.innerHTML = `
+      <div class="rich-shoot-card-top">
+        <div class="rich-shoot-icon"><i class="ti ti-list-check"></i></div>
+        <div class="rich-shoot-body">
+          <div class="rich-shoot-title-row">
+            <div class="rich-shoot-title">${shoot.title}</div>
+            <span class="rich-shoot-badge">Shot list</span>
+          </div>
+          <div class="rich-shoot-brief">${shoot.subtitle}</div>
+          <div class="rich-shoot-meta">${shoot.dateRange} \u00b7 ${shoot.locations}</div>
+        </div>
+      </div>
+      <div class="rich-shoot-progress">
+        <div class="rich-shoot-progress-track">
+          <div class="rich-shoot-progress-fill" style="width: ${pct}%"></div>
+        </div>
+        <div class="rich-shoot-progress-text">${done} / ${total} shots</div>
+      </div>
+      <div class="rich-shoot-cta">Open shot list <i class="ti ti-arrow-right"></i></div>
+    `;
+    group.appendChild(card);
+  });
+  container.appendChild(group);
+}
+
+function openShotDetail(shootId) {
+  currentRichShoot = RICH_SHOOTS.find(s => s.id === shootId);
+  if (!currentRichShoot) return;
+  document.getElementById('detail-title').textContent = currentRichShoot.title;
+  const cont = document.getElementById('shot-list-container');
+  cont.innerHTML = currentRichShoot.sections.map(section => {
+    const warn = section.warn ? `<span class="shot-section-warn">${section.warn}</span>` : '';
+    const shotsHtml = section.shots.map(renderShotHtml).join('');
+    return `<section class="shot-section"><div class="shot-section-title">${section.title}${warn}</div>${shotsHtml}</section>`;
+  }).join('');
+  const state = loadRichShootState(currentRichShoot.id);
+  cont.querySelectorAll('.shot').forEach(el => {
+    if (state[el.dataset.num]) el.classList.add('done');
+    el.onclick = () => toggleRichShot(el);
+  });
+  updateDetailProgress();
+  const dv = document.getElementById('detail-view');
+  dv.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  setTimeout(() => { dv.scrollTop = 0; }, 50);
+}
+
+function renderShotHtml(shot) {
+  const classes = ['shot'];
+  if (shot.hero) classes.push('hero');
+  if (shot.broll) classes.push('broll');
+  const scripts = (shot.scripts || []).map(s => `<p class="script-pill">${s}</p>`).join('');
+  const notes = (shot.notes || []).map(n => `<p class="note-pill">${n}</p>`).join('');
+  const brolls = (shot.brolls || []).map(b => `<p class="broll-pill">\u25b8 ${b}</p>`).join('');
+  return `
+    <div class="${classes.join(' ')}" data-num="${shot.num}">
+      <div class="shot-header">
+        <span class="shot-num">SHOT ${shot.num}${shot.broll ? ' \u00b7 B-ROLL' : ''}</span>
+        <span class="shot-status"></span>
+      </div>
+      <h3 class="shot-title">${shot.title}</h3>
+      <p class="shot-setup">${shot.setup}</p>
+      ${scripts}${notes}${brolls}
+    </div>
+  `;
+}
+
+function toggleRichShot(el) {
+  if (!currentRichShoot) return;
+  el.classList.toggle('done');
+  const state = loadRichShootState(currentRichShoot.id);
+  state[el.dataset.num] = el.classList.contains('done') ? 1 : 0;
+  saveRichShootState(currentRichShoot.id, state);
+  updateDetailProgress();
+}
+
+function updateDetailProgress() {
+  if (!currentRichShoot) return;
+  const shots = document.querySelectorAll('#shot-list-container .shot');
+  const done = document.querySelectorAll('#shot-list-container .shot.done');
+  const total = shots.length, doneCount = done.length;
+  const pct = total === 0 ? 0 : (doneCount / total) * 100;
+  document.getElementById('detail-progress-fill').style.width = pct + '%';
+  document.getElementById('detail-progress-count').textContent = doneCount + ' / ' + total;
+  const banner = document.getElementById('completion-banner');
+  if (doneCount === total && total > 0) banner.classList.add('visible');
+  else banner.classList.remove('visible');
+}
+
+function closeShotDetail() {
+  document.getElementById('detail-view').classList.remove('open');
+  document.body.style.overflow = '';
+  renderShootList();
+}
+
+function resetShotProgress() {
+  if (!currentRichShoot) return;
+  if (!confirm('Reset all shots for this shoot? Your progress will be cleared.')) return;
+  try { localStorage.removeItem(richShootKey(currentRichShoot.id)); } catch(e) {}
+  document.querySelectorAll('#shot-list-container .shot').forEach(el => el.classList.remove('done'));
+  updateDetailProgress();
+}
+
 </script>
 </body>
 </html>
