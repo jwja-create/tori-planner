@@ -431,12 +431,14 @@ function switchTab(name, btn) {
 function renderShotList() {
   const container = document.getElementById('shotlist-container');
   const active = shots.filter(s => s.status !== 'shot');
-  document.getElementById('shotlist-count').textContent = active.length ? `${active.length} shot${active.length!==1?'s':''}` : '';
+  document.getElementById('shotlist-count').textContent = active.length ? active.length + ' shot' + (active.length!==1?'s':'') : '';
 
   if (!active.length) {
-    container.innerHTML = `<div class="empty-state"><i class="ti ti-camera"></i><p>No active shots right now.<br>Jeremy will push a new shoot list here after planning.</p></div>`;
+    container.innerHTML = '<div class="empty-state"><i class="ti ti-camera"></i><p>No active shots right now.<br>Jeremy will push a new shoot list here after planning.</p></div>';
     return;
   }
+
+  // Group by shoot name
   const grouped = {};
   active.forEach(s => { if (!grouped[s.shootName]) grouped[s.shootName] = []; grouped[s.shootName].push(s); });
 
@@ -445,26 +447,41 @@ function renderShotList() {
     const groupShots = grouped[shootName].sort((a,b) => (a.shotNumber||'').localeCompare(b.shotNumber||'', undefined, { numeric: true }));
     const section = document.createElement('div');
     section.className = 'shoot-section';
-    let html = `<div class="shoot-section-hdr">
-      <div class="shoot-name">${shootName}</div>
-      <div class="shoot-count">${groupShots.length} shot${groupShots.length!==1?'s':''}</div>
-    </div>`;
-    groupShots.forEach(shot => {
-      html += `<div class="shot-row" id="shot-${shot.id}">
-        <div class="shot-row-top">
-          <div class="shot-number">${shot.shotNumber || '–'}</div>
-          <div class="shot-body">
-            <div class="shot-desc">${shot.description}</div>
-            ${shot.notes ? `<div class="shot-notes">${shot.notes}</div>` : ''}
-            ${shot.type ? `<span class="shot-type-chip">${shot.type}</span>` : ''}
-          </div>
-        </div>
-        <button class="shot-btn" onclick="markShotDone('${shot.id}')">
-          <i class="ti ti-camera"></i> Mark as shot
-        </button>
-      </div>`;
+
+    const hdr = document.createElement('div');
+    hdr.className = 'shoot-section-hdr';
+    hdr.style.cursor = 'pointer';
+    hdr.innerHTML = '<i class="ti ti-chevron-down shoot-chevron" style="font-size:16px;color:var(--text-muted);transition:transform 0.2s;"></i>' +
+      '<div class="shoot-name">' + shootName + '</div>' +
+      '<div class="shoot-count">' + groupShots.length + ' shot' + (groupShots.length!==1?'s':'') + '</div>';
+
+    const body = document.createElement('div');
+    body.className = 'shoot-section-body';
+
+    hdr.addEventListener('click', () => {
+      const isCollapsed = body.style.display === 'none';
+      body.style.display = isCollapsed ? 'block' : 'none';
+      hdr.querySelector('.shoot-chevron').style.transform = isCollapsed ? 'rotate(0deg)' : 'rotate(-90deg)';
     });
-    section.innerHTML = html;
+
+    groupShots.forEach(shot => {
+      const row = document.createElement('div');
+      row.className = 'shot-row';
+      row.id = 'shot-' + shot.id;
+      row.innerHTML = '<div class="shot-row-top">' +
+        '<div class="shot-number">' + (shot.shotNumber || '\u2013') + '</div>' +
+        '<div class="shot-body">' +
+          '<div class="shot-desc">' + shot.description + '</div>' +
+          (shot.notes ? '<div class="shot-notes">' + shot.notes + '</div>' : '') +
+          (shot.type ? '<span class="shot-type-chip">' + shot.type + '</span>' : '') +
+        '</div></div>' +
+        '<button class="shot-btn" onclick="markShotDone(\'' + shot.id + '\')">' +
+          '<i class="ti ti-camera"></i> Mark as shot</button>';
+      body.appendChild(row);
+    });
+
+    section.appendChild(hdr);
+    section.appendChild(body);
     container.appendChild(section);
   });
 }

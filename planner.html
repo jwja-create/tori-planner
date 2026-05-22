@@ -875,25 +875,44 @@ function renderShotList() {
     container.innerHTML = `<div class="shotlist-empty"><i class="ti ti-camera"></i><p>No active shots in the list.<br>Shot lists are pushed here after a storyboarding session with Claude.</p></div>`;
     return;
   }
-  // Group by shoot name
-  const grouped = {};
-  shots.forEach(s => {
-    if (s.status === 'shot') return; // skip already-shot
-    if (!grouped[s.shootName]) grouped[s.shootName] = [];
-    grouped[s.shootName].push(s);
-  });
-  if (!Object.keys(grouped).length) {
+  // Filter out completed shots
+  const active = shots.filter(s => s.status !== 'shot');
+  if (!active.length) {
     container.innerHTML = `<div class="shotlist-empty"><i class="ti ti-check"></i><p>All shots have been completed!</p></div>`;
     return;
   }
+  // Group by shoot name
+  const grouped = {};
+  active.forEach(s => { if (!grouped[s.shootName]) grouped[s.shootName] = []; grouped[s.shootName].push(s); });
+
   container.innerHTML = '';
   Object.keys(grouped).forEach(shootName => {
-    const groupShots = grouped[shootName].sort((a,b) => (a.shotNumber || '').localeCompare(b.shotNumber || '', undefined, { numeric: true }));
+    const groupShots = grouped[shootName].sort((a,b) => (a.shotNumber||'').localeCompare(b.shotNumber||'', undefined, { numeric: true }));
     const section = document.createElement('div');
     section.className = 'shoot-section';
-    let shotsHTML = '';
+
+    const hdr = document.createElement('div');
+    hdr.className = 'shoot-section-hdr';
+    hdr.style.cursor = 'pointer';
+    hdr.innerHTML = `
+      <i class="ti ti-chevron-down shoot-chevron" style="font-size:16px;color:var(--text-muted);transition:transform 0.2s;"></i>
+      <div class="shoot-name">${shootName}</div>
+      <div class="shoot-count">${groupShots.length} shot${groupShots.length!==1?'s':''}</div>`;
+
+    const body = document.createElement('div');
+    body.className = 'shoot-section-body';
+
+    hdr.addEventListener('click', () => {
+      const isCollapsed = body.style.display === 'none';
+      body.style.display = isCollapsed ? 'block' : 'none';
+      hdr.querySelector('.shoot-chevron').style.transform = isCollapsed ? 'rotate(0deg)' : 'rotate(-90deg)';
+    });
+
     groupShots.forEach(shot => {
-      shotsHTML += `<div class="shot-row" id="shot-${shot.id}">
+      const row = document.createElement('div');
+      row.className = 'shot-row';
+      row.id = 'shot-' + shot.id;
+      row.innerHTML = `
         <div class="shot-number">${shot.shotNumber || '–'}</div>
         <div class="shot-body">
           <div class="shot-desc">${shot.description}</div>
@@ -902,33 +921,14 @@ function renderShotList() {
         </div>
         <div class="shot-action">
           <button class="shot-done-btn" onclick="markShotDone('${shot.id}')"><i class="ti ti-check"></i> Mark as shot</button>
-        </div>
-      </div>`;
+        </div>`;
+      body.appendChild(row);
     });
-    section.innerHTML = `
-      <div class="shoot-section-hdr">
-        <div class="shoot-name">${shootName}</div>
-        <div class="shoot-count">${groupShots.length} shot${groupShots.length!==1?'s':''}</div>
-      </div>
-      ${shotsHTML}`;
+
+    section.appendChild(hdr);
+    section.appendChild(body);
     container.appendChild(section);
   });
-}
-
-function markShotDone(id) {
-  const shot = shots.find(s => s.id === id); if (!shot) return;
-  showConfirm(
-    'Mark this shot as complete?',
-    `Shot "${shot.description}" will be removed from the list. This cannot be undone.`,
-    async () => {
-      // Remove from local + sheet
-      shots = shots.filter(s => s.id !== id);
-      renderShotList();
-      showToast('Shot complete ✓');
-      await deleteShotFromSheet(shot);
-      await loadShots(); // re-sync row indices
-    }
-  );
 }
 
 // ── IDEAS ─────────────────────────────────────────────────────
