@@ -1152,8 +1152,9 @@ function showConfirm(title, msg, callback) {
   confirmCallback = callback;
   document.getElementById('confirm-modal').classList.add('open');
   document.getElementById('confirm-yes-btn').onclick = () => {
+    const cb = confirmCallback;
     closeConfirm();
-    if (confirmCallback) confirmCallback();
+    if (cb) cb();
   };
 }
 function closeConfirm() {

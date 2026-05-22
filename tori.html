@@ -702,7 +702,7 @@ function showConfirm(title, msg, callback, isDanger) {
   btn.textContent = isDanger ? 'Yes, delete' : 'Yes';
   confirmCallback = callback;
   document.getElementById('confirm-overlay').classList.add('open');
-  btn.onclick = () => { closeConfirm(); if (confirmCallback) confirmCallback(); };
+  btn.onclick = () => { const cb = confirmCallback; closeConfirm(); if (cb) cb(); };
 }
 function closeConfirm() { document.getElementById('confirm-overlay').classList.remove('open'); confirmCallback = null; }
 
