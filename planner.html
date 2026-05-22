@@ -617,10 +617,23 @@ function showLoading(msg) { document.getElementById('loading-text').textContent 
 function hideLoading() { document.getElementById('loading-overlay').style.display = 'none'; }
 function generateId() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
 
+async function ensureArchivedColumn() {
+  // Check if column L header exists, add it if not
+  try {
+    const data = await sheetsGet('Content!L1');
+    if (!data.values || !data.values[0] || data.values[0][0] !== 'Archived') {
+      await sheetsBatchUpdate([{ range: 'Content!L1', values: [['Archived']] }]);
+    }
+  } catch(e) {
+    try { await sheetsBatchUpdate([{ range: 'Content!L1', values: [['Archived']] }]); } catch(e2) {}
+  }
+}
+
 async function loadAllData() {
   setSyncStatus('syncing','Loading...');
   showLoading('Loading your content...');
   try {
+    await ensureArchivedColumn();
     await Promise.all([loadItems(), loadIdeas(), loadShots()]);
     setSyncStatus('ok','Connected');
     renderCalendar(); renderKanban();
@@ -846,8 +859,11 @@ function archiveItem(e, id) {
     async () => {
       item.archived = true;
       renderKanban(); renderCalendar();
-      showToast('Archived');
+      showToast('Archiving...');
       await saveItemToSheet(item, false);
+      await loadItems(); // reload to confirm sheet state
+      renderKanban(); renderCalendar();
+      showToast('Archived');
     }
   );
 }
