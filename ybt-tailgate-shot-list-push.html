@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shot List Push — You Better Think — Tailgate</title>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #0F0D0B;
+    color: #F0EAE2;
+    font-family: -apple-system, 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .header {
+    padding: 32px 24px 24px;
+    border-bottom: 1px solid rgba(240,234,226,0.08);
+  }
+  .label {
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #C49A4A;
+    margin-bottom: 8px;
+  }
+  h1 { font-size: 26px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; }
+  .subtitle { font-size: 14px; color: rgba(240,234,226,0.6); }
+  .content { padding: 24px; }
+  .section-label {
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid;
+  }
+  .section-label.rose { color: #D4856A; border-color: rgba(212,133,106,0.2); }
+  .section-label.sage { color: #7FA882; border-color: rgba(127,168,130,0.2); }
+  .section { margin-bottom: 24px; }
+  .shot {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 10px;
+  }
+  .shot-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .shot-num {
+    font-family: monospace;
+    font-size: 11px;
+    color: #C49A4A;
+    letter-spacing: 0.1em;
+    min-width: 36px;
+  }
+  .shot-title { font-weight: 700; font-size: 15px; flex: 1; }
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .badge-hero { background: rgba(212,133,106,0.15); color: #D4856A; border: 1px solid rgba(212,133,106,0.3); }
+  .badge-insert { background: rgba(196,154,74,0.15); color: #C49A4A; border: 1px solid rgba(196,154,74,0.3); }
+  .badge-broll { background: rgba(127,168,130,0.15); color: #7FA882; border: 1px solid rgba(127,168,130,0.3); }
+  .badge-establishing { background: rgba(58,90,138,0.15); color: #6B9BD2; border: 1px solid rgba(58,90,138,0.3); }
+  .shot-desc {
+    font-size: 13px;
+    color: rgba(240,234,226,0.7);
+    line-height: 1.5;
+    margin: 0 0 8px 46px;
+  }
+  .shot-notes {
+    margin-left: 46px;
+    background: rgba(196,154,74,0.08);
+    border: 1px solid rgba(196,154,74,0.15);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #C49A4A;
+    line-height: 1.45;
+  }
+  .action-area {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    margin-top: 12px;
+  }
+  .action-area p { font-size: 14px; color: rgba(240,234,226,0.6); margin-bottom: 16px; }
+  .btn-push {
+    background: linear-gradient(135deg, #C49A4A, #D4856A);
+    color: #0F0D0B;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: transform 0.15s ease, opacity 0.15s ease;
+  }
+  .btn-push:hover { transform: scale(1.03); }
+  .btn-push:disabled { opacity: 0.4; cursor: default; transform: none; }
+  .btn-secondary {
+    background: rgba(255,255,255,0.08);
+    color: #F0EAE2;
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0 6px;
+  }
+  .btn-ghost {
+    background: transparent;
+    color: rgba(240,234,226,0.5);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0 6px;
+  }
+  .status-icon { font-size: 32px; margin-bottom: 8px; }
+  .status-title { font-weight: 700; font-size: 16px; margin-bottom: 6px; }
+  .status-detail { color: rgba(240,234,226,0.6); font-size: 13px; }
+  .warn { color: #D4856A; font-weight: 600; margin-bottom: 16px; }
+  .success { color: #7FA882; }
+  .error { color: #D4856A; }
+  .dup-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .error-msg { font-size: 12px; color: rgba(240,234,226,0.5); font-family: monospace; margin-bottom: 16px; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="label">Shot List Push</div>
+  <h1>You Better Think — Tailgate</h1>
+  <p class="subtitle">6 shots → ShotList tab in Google Sheet</p>
+</div>
+
+<div class="content">
+
+  <!-- HERO SHOTS -->
+  <div class="section">
+    <div class="section-label rose">Hero Shots — The Hook</div>
+    <div id="hero-shots"></div>
+  </div>
+
+  <!-- B-ROLL -->
+  <div class="section">
+    <div class="section-label sage">B-Roll — Extra 5 Mins</div>
+    <div id="broll-shots"></div>
+  </div>
+
+  <!-- ACTION AREA -->
+  <div class="action-area">
+    <div id="state-idle">
+      <p>This will append 6 rows to the ShotList tab. Tori will see them in her app after refresh.</p>
+      <button class="btn-push" id="btn-push" onclick="handlePush()">Push to Google Sheet</button>
+    </div>
+    <div id="state-checking" class="hidden">
+      <div class="status-icon">⏳</div>
+      <p style="color:#C49A4A; margin:0;">Checking for existing shots…</p>
+    </div>
+    <div id="state-duplicates" class="hidden">
+      <div class="status-icon">⚠️</div>
+      <p class="warn" id="dup-msg"></p>
+      <div class="dup-buttons">
+        <button class="btn-push" onclick="executePush('replace')">Replace existing</button>
+        <button class="btn-secondary" onclick="executePush('append')">Add anyway</button>
+        <button class="btn-ghost" onclick="showState('idle')">Cancel</button>
+      </div>
+    </div>
+    <div id="state-pushing" class="hidden">
+      <div class="status-icon">⏳</div>
+      <p style="color:#C49A4A; margin:0;">Pushing 6 shots to Sheet…</p>
+    </div>
+    <div id="state-success" class="hidden success">
+      <div class="status-icon">✓</div>
+      <div class="status-title">Pushed successfully</div>
+      <div class="status-detail">6 shots written to ShotList tab. Tori will see them after refreshing her app.</div>
+    </div>
+    <div id="state-error" class="hidden">
+      <div class="status-icon">❌</div>
+      <div class="status-title error">Push failed</div>
+      <div class="error-msg" id="error-msg"></div>
+      <button class="btn-secondary" onclick="showState('idle')">Try again</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ── CONFIG ──
+const SHEET_ID = '1yfvDg-qWKAJX9BhjUoOQgld1x-xflUFADwE116Ciosc';
+const CLIENT_ID = '406806791329-a3bqrgfhcblkmkpfj1pjqn21gu7sdrhf.apps.googleusercontent.com';
+const SCOPES = 'https://www.googleapis.com/auth/spreadsheets';
+const SHOOT_NAME = 'You Better Think \u2014 Tailgate';
+
+const SHOT_ROWS = [
+  ['ybt-tailgate-1.1', SHOOT_NAME, '1.1', 'Wide on the tailgate \u2014 Set phone on tripod or rest on ground/rock. Frame WIDE showing the whole ute, you on the tailgate, guitar across your lap, sky and golden light behind. Low angle (waist height or lower).', 'hero', 'Start strumming before the hook plays. Mouth the words with a big easy smile, swing your boots, shoulder bounce. Carefree energy. Run the full hook 3\u20134 times back to back without resetting.', 'pending'],
+  ['ybt-tailgate-1.2', SHOOT_NAME, '1.2', 'Hips up \u2014 the lip sync hero \u2014 Move phone closer. Frame from hips up, guitar prominent, you centred. Background goes soft and golden. Phone at chest height, eye-line straight down the lens.', 'hero', 'Sing the hook DIRECTLY to camera. Playful \u2014 raise an eyebrow, half-smile, cheeky head tilt on a key word. This is the money shot. 3\u20134 full takes \u2014 vary energy: one sassy, one softer, one with a laugh.', 'pending'],
+  ['ybt-tailgate-1.3', SHOOT_NAME, '1.3', 'Close-up texture shot \u2014 Get the phone close. Hand on guitar strings, OR boots swinging against tailgate, OR your face mid-laugh. Pick whichever feels best in the moment.', 'insert', 'Just a beat. Laugh at yourself, brush hair back, look off into the distance, then back at camera. Something charming and human. Get 2\u20133 different detail options \u2014 hands, boots, face.', 'pending'],
+  ['ybt-tailgate-2.1', SHOOT_NAME, '2.1', 'Walking up to the ute \u2014 Phone locked off framing the ute. Walk into frame holding the guitar, hop up onto the tailgate.', 'broll', 'Gives the editor a possible opening shot. Sets the scene before the music kicks in.', 'pending'],
+  ['ybt-tailgate-2.2', SHOOT_NAME, '2.2', 'Tuning / strumming detail \u2014 Phone close, just your hands on the guitar. Tuning pegs, fingers on strings. About 10 seconds of footage.', 'broll', 'Texture shot. Could be the very first frame of the clip \u2014 a pre-music tease.', 'pending'],
+  ['ybt-tailgate-2.3', SHOOT_NAME, '2.3', 'Wide shot \u2014 no you in it \u2014 Step out of frame entirely. Get a 10-sec wide of the landscape: paddock, road, golden sky, the ute parked.', 'establishing', 'Breather shot. Could open or close the clip. Always nice to have an establishing option without the talent in frame.', 'pending']
+];
+
+// ── RENDER SHOT CARDS ──
+const TYPE_BADGES = {
+  hero: 'badge-hero', insert: 'badge-insert',
+  broll: 'badge-broll', establishing: 'badge-establishing'
+};
+
+function renderShot(row) {
+  const [id, , num, desc, type, notes] = row;
+  const title = desc.split('\u2014')[0].trim();
+  const setup = desc.includes('\u2014') ? desc.split('\u2014').slice(1).join('\u2014').trim() : desc;
+  return `
+    <div class="shot">
+      <div class="shot-header">
+        <span class="shot-num">${num}</span>
+        <span class="shot-title">${title}</span>
+        <span class="badge ${TYPE_BADGES[type] || 'badge-hero'}">${type}</span>
+      </div>
+      <div class="shot-desc">${setup}</div>
+      ${notes ? `<div class="shot-notes">${notes}</div>` : ''}
+    </div>`;
+}
+
+document.getElementById('hero-shots').innerHTML =
+  SHOT_ROWS.filter(r => r[4]==='hero' || r[4]==='insert').map(renderShot).join('');
+document.getElementById('broll-shots').innerHTML =
+  SHOT_ROWS.filter(r => r[4]==='broll' || r[4]==='establishing').map(renderShot).join('');
+
+// ── STATE MANAGEMENT ──
+const STATES = ['idle','checking','duplicates','pushing','success','error'];
+function showState(name) {
+  STATES.forEach(s => {
+    document.getElementById('state-'+s).classList.toggle('hidden', s !== name);
+  });
+}
+
+// ── GOOGLE AUTH ──
+let accessToken = null;
+let tokenClient = null;
+
+function waitForGis() {
+  return new Promise((resolve) => {
+    if (window.google && window.google.accounts) return resolve();
+    const iv = setInterval(() => {
+      if (window.google && window.google.accounts) { clearInterval(iv); resolve(); }
+    }, 200);
+    // Timeout after 15 seconds
+    setTimeout(() => { clearInterval(iv); resolve(); }, 15000);
+  });
+}
+
+function getToken() {
+  return new Promise(async (resolve, reject) => {
+    await waitForGis();
+    if (!window.google || !window.google.accounts) {
+      return reject(new Error('Google Identity Services failed to load. Check your internet connection and try again.'));
+    }
+    if (!tokenClient) {
+      tokenClient = google.accounts.oauth2.initTokenClient({
+        client_id: CLIENT_ID,
+        scope: SCOPES,
+        callback: () => {}
+      });
+    }
+    tokenClient.callback = (resp) => {
+      if (resp.error) return reject(new Error(resp.error));
+      accessToken = resp.access_token;
+      resolve(accessToken);
+    };
+    tokenClient.requestAccessToken();
+  });
+}
+
+// ── SHEETS API ──
+async function sheetsGet(range) {
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent(range)}`;
+  const r = await fetch(url, { headers: { Authorization: 'Bearer ' + accessToken } });
+  if (!r.ok) throw new Error('Sheet read failed: ' + r.status);
+  return r.json();
+}
+
+async function checkExisting() {
+  const data = await sheetsGet('ShotList!A:B');
+  const rows = data.values || [];
+  return rows.filter(r => r[1] === SHOOT_NAME).length;
+}
+
+async function deleteExisting() {
+  const data = await sheetsGet('ShotList!A:G');
+  const rows = data.values || [];
+  const toDelete = [];
+  for (let i = rows.length - 1; i >= 1; i--) {
+    if (rows[i][1] === SHOOT_NAME) toDelete.push(i);
+  }
+  if (toDelete.length === 0) return;
+
+  const metaUrl = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}?fields=sheets.properties`;
+  const meta = await fetch(metaUrl, { headers: { Authorization: 'Bearer ' + accessToken } }).then(r => r.json());
+  const sheet = meta.sheets.find(s => s.properties.title === 'ShotList');
+  if (!sheet) throw new Error('ShotList tab not found in the Sheet');
+
+  const requests = toDelete.map(idx => ({
+    deleteDimension: { range: { sheetId: sheet.properties.sheetId, dimension: 'ROWS', startIndex: idx, endIndex: idx + 1 } }
+  }));
+
+  const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}:batchUpdate`, {
+    method: 'POST',
+    headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ requests })
+  });
+  if (!r.ok) throw new Error('Delete failed: ' + r.status);
+}
+
+async function appendRows() {
+  const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${encodeURIComponent('ShotList!A:G')}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`;
+  const r = await fetch(url, {
+    method: 'POST',
+    headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ values: SHOT_ROWS })
+  });
+  if (!r.ok) throw new Error('Append failed: ' + r.status);
+}
+
+// ── ACTIONS ──
+async function handlePush() {
+  try {
+    showState('checking');
+    if (!accessToken) await getToken();
+    const count = await checkExisting();
+    if (count > 0) {
+      document.getElementById('dup-msg').textContent =
+        `Found ${count} existing shot${count !== 1 ? 's' : ''} for "${SHOOT_NAME}"`;
+      showState('duplicates');
+      return;
+    }
+    showState('pushing');
+    await appendRows();
+    showState('success');
+  } catch (e) {
+    document.getElementById('error-msg').textContent = e.message;
+    showState('error');
+  }
+}
+
+async function executePush(action) {
+  try {
+    showState('pushing');
+    if (!accessToken) await getToken();
+    if (action === 'replace') await deleteExisting();
+    await appendRows();
+    showState('success');
+  } catch (e) {
+    document.getElementById('error-msg').textContent = e.message;
+    showState('error');
+  }
+}
+</script>
+</body>
+</html>
