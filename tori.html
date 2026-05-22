@@ -37,17 +37,14 @@
   .loading-text { font-size: 13px; color: var(--text-muted); }
 
   .app { display: flex; flex-direction: column; min-height: 100vh; }
-
   .header { background: var(--text); padding: calc(16px + var(--safe-top)) 20px 16px; position: sticky; top: 0; z-index: 40; }
   .header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
   .header-name { font-family: 'Playfair Display', serif; font-size: 20px; color: #fff; }
   .header-date { font-size: 12px; color: rgba(255,255,255,0.4); }
   .sign-out-btn { background: none; border: none; color: rgba(255,255,255,0.3); cursor: pointer; font-size: 20px; padding: 4px; }
-
   .tab-bar { display: flex; gap: 4px; }
-  .tab-btn { flex: 1; padding: 8px 6px; background: rgba(255,255,255,0.08); border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.15s; text-align: center; }
+  .tab-btn { flex: 1; padding: 8px 6px; background: rgba(255,255,255,0.08); border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.4); cursor: pointer; text-align: center; }
   .tab-btn.active { background: var(--gold); color: var(--text); }
-
   .content-area { flex: 1; padding: 20px 16px; padding-bottom: calc(20px + var(--safe-bottom)); }
   .tab-section { display: none; }
   .tab-section.active { display: block; }
@@ -56,147 +53,105 @@
   .section-title { font-family: 'Playfair Display', serif; font-size: 20px; }
   .section-sub { font-size: 12px; color: var(--text-muted); }
 
-  .shoot-day-group { margin-bottom: 24px; }
-  .shoot-day-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-  .shoot-day-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  /* SHOT LIST */
+  .shoot-section { background: var(--surface); border-radius: 14px; border: 1px solid var(--border); margin-bottom: 14px; overflow: hidden; }
+  .shoot-section-hdr { padding: 14px 16px; border-bottom: 1px solid var(--border); background: var(--bg); display: flex; align-items: center; gap: 10px; }
+  .shoot-name { font-family: 'Playfair Display', serif; font-size: 16px; flex: 1; }
+  .shoot-count { font-size: 11px; color: var(--text-muted); background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 2px 8px; }
+  .shot-row { padding: 14px 16px; border-bottom: 1px solid var(--border); }
+  .shot-row:last-child { border-bottom: none; }
+  .shot-row-top { display: flex; gap: 10px; align-items: flex-start; margin-bottom: 10px; }
+  .shot-number { background: var(--text); color: var(--gold); font-family: 'Playfair Display', serif; font-size: 13px; padding: 4px 9px; border-radius: 6px; flex-shrink: 0; }
+  .shot-body { flex: 1; }
+  .shot-desc { font-size: 14px; font-weight: 500; margin-bottom: 4px; line-height: 1.4; }
+  .shot-notes { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+  .shot-type-chip { font-size: 10px; padding: 2px 7px; border-radius: 20px; background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); margin-top: 6px; display: inline-block; }
+  .shot-btn { width: 100%; padding: 10px; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+  .shot-btn:active { transform: scale(0.97); }
 
-  .shoot-card { background: var(--surface); border-radius: 14px; border: 1px solid var(--border); padding: 16px; margin-bottom: 10px; transition: all 0.15s; }
-  .shoot-card.done { opacity: 0.5; }
-  .shoot-card-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
-  .shoot-card-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
-  .type-icon-reel { background: #F0D5F5; color: #5B1A7E; }
-  .type-icon-static { background: #D5E8FF; color: #1A3A6E; }
-  .type-icon-story { background: #FFF3D5; color: #7A5000; }
-  .type-icon-carousel { background: #D5F5EE; color: #0A5E45; }
-  .type-icon-youtube { background: #FDDDD5; color: #8B2500; }
-  .shoot-card-body { flex: 1; min-width: 0; }
-  .shoot-card-title { font-size: 15px; font-weight: 500; line-height: 1.3; margin-bottom: 4px; }
-  .shoot-card-brief { font-size: 13px; color: var(--text-muted); line-height: 1.45; }
-  .shoot-card-chips { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 12px; }
+  .empty-state { text-align: center; padding: 60px 24px; color: var(--text-faint); }
+  .empty-state i { font-size: 40px; display: block; margin-bottom: 14px; opacity: 0.3; }
+  .empty-state p { font-size: 14px; line-height: 1.6; }
 
+  /* UPCOMING */
+  .upcoming-group { margin-bottom: 24px; }
+  .upcoming-group-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+  .upcoming-group-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .upc-item { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 14px 16px; margin-bottom: 8px; }
+  .upc-item-top { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .upc-date-badge { background: var(--text); color: var(--gold); border-radius: 8px; padding: 6px 10px; text-align: center; flex-shrink: 0; min-width: 48px; }
+  .upc-date-badge.shoot-badge { background: #D5F5E3; color: #0A5E2A; }
+  .upc-date-day { font-family: 'Playfair Display', serif; font-size: 20px; line-height: 1; }
+  .upc-date-mon { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
+  .upc-body { flex: 1; min-width: 0; }
+  .upc-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .upc-chips { display: flex; gap: 4px; flex-wrap: wrap; }
   .chip { font-size: 11px; padding: 3px 8px; border-radius: 20px; font-weight: 500; }
   .chip.ig { background: var(--ig); color: var(--ig-text); }
   .chip.tk { background: var(--tk); color: var(--tk-text); }
   .chip.yt { background: var(--yt); color: var(--yt-text); }
   .chip.fb { background: var(--fb); color: var(--fb-text); }
   .chip.type { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
+  .chip.kind { background: var(--text); color: var(--gold); }
+  .upc-action-btn { width: 100%; padding: 9px; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
+  .upc-action-btn:active { transform: scale(0.97); }
 
-  .shot-btn { width: 100%; padding: 12px; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--text-muted); cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px; }
-  .shot-btn:active { transform: scale(0.97); }
-  .shot-btn.marked { background: #D5F5E3; border-color: #D5F5E3; color: #0A5E2A; }
-
-  .empty-state { text-align: center; padding: 60px 24px; color: var(--text-faint); }
-  .empty-state i { font-size: 40px; display: block; margin-bottom: 14px; opacity: 0.3; }
-  .empty-state p { font-size: 14px; line-height: 1.6; }
-
-  .post-item { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 14px 16px; margin-bottom: 8px; display: flex; align-items: center; gap: 14px; }
-  .post-date-badge { background: var(--text); color: var(--gold); border-radius: 8px; padding: 6px 10px; text-align: center; flex-shrink: 0; min-width: 48px; }
-  .post-date-day { font-family: 'Playfair Display', serif; font-size: 20px; line-height: 1; }
-  .post-date-mon { font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; opacity: 0.7; }
-  .post-item-body { flex: 1; min-width: 0; }
-  .post-item-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .post-item-chips { display: flex; gap: 4px; flex-wrap: wrap; }
-
+  /* IDEAS */
   .idea-form { background: var(--surface); border-radius: 14px; border: 1px solid var(--border); padding: 16px; margin-bottom: 16px; }
   .idea-form-title { font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
   .idea-input { width: 100%; padding: 12px; border: 1px solid var(--border); border-radius: 10px; font-size: 15px; font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); margin-bottom: 10px; }
   .idea-input:focus { outline: none; border-color: var(--gold); }
   .idea-input.textarea { min-height: 80px; resize: none; }
   .idea-plat-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
-  .plat-toggle { padding: 7px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface2); font-size: 13px; font-weight: 500; cursor: pointer; color: var(--text-muted); transition: all 0.15s; font-family: 'DM Sans', sans-serif; }
+  .plat-toggle { padding: 7px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface2); font-size: 13px; font-weight: 500; cursor: pointer; color: var(--text-muted); font-family: 'DM Sans', sans-serif; }
   .plat-toggle.sel-ig { background: var(--ig); color: var(--ig-text); border-color: var(--ig); }
   .plat-toggle.sel-tk { background: var(--tk); color: var(--tk-text); border-color: var(--tk); }
   .plat-toggle.sel-yt { background: var(--yt); color: var(--yt-text); border-color: var(--yt); }
   .plat-toggle.sel-fb { background: var(--fb); color: var(--fb-text); border-color: var(--fb); }
   .prio-row { display: flex; gap: 6px; margin-bottom: 14px; }
-  .prio-toggle { flex: 1; padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); font-size: 13px; cursor: pointer; color: var(--text-muted); font-family: 'DM Sans', sans-serif; text-align: center; transition: all 0.15s; }
+  .prio-toggle { flex: 1; padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); font-size: 13px; cursor: pointer; color: var(--text-muted); font-family: 'DM Sans', sans-serif; text-align: center; }
   .prio-toggle.sel-high { background: #FDDDD5; color: #8B2500; border-color: #FDDDD5; font-weight: 500; }
   .prio-toggle.sel-med { background: #FFF3D5; color: #7A5000; border-color: #FFF3D5; font-weight: 500; }
   .prio-toggle.sel-low { background: #D5F5E3; color: #0A5E2A; border-color: #D5F5E3; font-weight: 500; }
   .save-idea-btn { width: 100%; padding: 14px; background: var(--gold); color: var(--text); border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; }
   .save-idea-btn:active { background: var(--gold-dark); color: #fff; }
-
   .saved-ideas { display: flex; flex-direction: column; gap: 8px; }
-  .saved-idea-card { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 14px; }
+  .saved-idea-card { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 14px; cursor: pointer; }
+  .saved-idea-card:active { transform: scale(0.99); }
   .saved-idea-title { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
   .saved-idea-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; line-height: 1.4; }
 
+  /* SHEET (idea edit) */
+  .sheet-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; }
+  .sheet-overlay.open { display: block; }
+  .sheet { position: fixed; left: 0; right: 0; bottom: -100%; background: var(--surface); z-index: 201; border-radius: 16px 16px 0 0; transition: bottom 0.3s cubic-bezier(0.4,0,0.2,1); max-height: 90vh; overflow-y: auto; padding-bottom: calc(20px + var(--safe-bottom)); }
+  .sheet.open { bottom: 0; }
+  .sheet-handle { width: 36px; height: 4px; background: var(--border-strong); border-radius: 2px; margin: 10px auto; }
+  .sheet-hdr { padding: 10px 20px 16px; display: flex; align-items: center; justify-content: space-between; }
+  .sheet-title { font-family: 'Playfair Display', serif; font-size: 20px; }
+  .sheet-close { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 22px; }
+  .sheet-body { padding: 0 20px; }
+  .sheet-actions { padding: 16px 20px; display: flex; gap: 8px; }
+
+  /* CONFIRM */
+  .confirm-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 300; align-items: center; justify-content: center; padding: 20px; }
+  .confirm-overlay.open { display: flex; }
+  .confirm-card { background: var(--surface); border-radius: 16px; padding: 24px; width: 100%; max-width: 360px; }
+  .confirm-title { font-family: 'Playfair Display', serif; font-size: 19px; margin-bottom: 8px; }
+  .confirm-msg { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; }
+  .confirm-actions { display: flex; gap: 8px; }
+  .confirm-btn { flex: 1; padding: 12px; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; border: none; }
+  .confirm-btn-cancel { background: var(--surface2); color: var(--text-muted); }
+  .confirm-btn-yes { background: var(--gold); color: var(--text); }
+  .confirm-btn-yes.danger { background: #E24B4A; color: #fff; }
+
+  /* BUTTONS */
+  .btn-primary { padding: 12px 20px; background: var(--gold); color: var(--text); border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; flex: 1; }
+  .btn-danger { padding: 12px 14px; background: none; color: #E24B4A; border: 1px solid rgba(226,75,74,0.2); border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 14px; cursor: pointer; }
+
   .toast { position: fixed; bottom: calc(24px + var(--safe-bottom)); left: 50%; transform: translateX(-50%) translateY(80px); background: var(--text); color: #fff; padding: 12px 24px; border-radius: 10px; font-size: 14px; z-index: 999; transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; white-space: nowrap; }
   .toast.show { transform: translateX(-50%) translateY(0); }
-
-  /* === RICH SHOOT (Claude-generated shot list) — card in the picker === */
-  .rich-shoot-card { background: var(--surface); border-radius: 14px; border: 1px solid var(--border); padding: 16px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; }
-  .rich-shoot-card:active { transform: scale(0.99); border-color: var(--gold); }
-  .rich-shoot-card-top { display: flex; align-items: flex-start; gap: 12px; margin-bottom: 10px; }
-  .rich-shoot-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; background: var(--gold); color: var(--text); }
-  .rich-shoot-body { flex: 1; min-width: 0; }
-  .rich-shoot-title-row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
-  .rich-shoot-title { font-size: 15px; font-weight: 500; line-height: 1.3; }
-  .rich-shoot-badge { font-size: 9px; padding: 2px 6px; border-radius: 4px; background: var(--gold); color: var(--text); font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; flex-shrink: 0; }
-  .rich-shoot-brief { font-size: 13px; color: var(--text-muted); line-height: 1.45; margin-bottom: 6px; }
-  .rich-shoot-meta { font-size: 11px; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.06em; }
-  .rich-shoot-progress { display: flex; align-items: center; gap: 10px; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
-  .rich-shoot-progress-track { flex: 1; height: 5px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
-  .rich-shoot-progress-fill { height: 100%; width: 0%; background: var(--gold); transition: width 0.4s ease; }
-  .rich-shoot-progress-text { font-size: 11px; color: var(--text-muted); white-space: nowrap; }
-  .rich-shoot-cta { font-size: 12px; color: var(--gold-dark); font-weight: 500; margin-top: 10px; display: flex; align-items: center; gap: 6px; }
-
-  /* === DETAIL VIEW (slide-in shot list) === */
-  .detail-view { position: fixed; inset: 0; background: var(--bg); transform: translateX(100%); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); overflow-y: auto; z-index: 100; -webkit-overflow-scrolling: touch; }
-  .detail-view.open { transform: translateX(0); }
-  .detail-header { background: var(--text); padding: calc(14px + var(--safe-top)) 16px 12px; position: sticky; top: 0; z-index: 10; }
-  .detail-header-top { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  .back-btn { background: rgba(255,255,255,0.08); border: none; color: #fff; width: 36px; height: 36px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-family: 'DM Sans', sans-serif; font-size: 18px; padding: 0; }
-  .back-btn:active { background: rgba(255,255,255,0.15); }
-  .detail-title-block { flex: 1; min-width: 0; }
-  .detail-doc-type { font-size: 10px; letter-spacing: 0.12em; color: var(--gold); text-transform: uppercase; margin-bottom: 2px; font-weight: 500; }
-  .detail-title { font-family: 'Playfair Display', serif; font-size: 17px; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .detail-progress-track { width: 100%; height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; overflow: hidden; }
-  .detail-progress-fill { height: 100%; width: 0%; background: var(--gold); transition: width 0.4s ease; }
-  .detail-progress-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; font-size: 11px; color: rgba(255,255,255,0.5); }
-  .reset-btn { background: transparent; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.6); font-size: 10px; padding: 3px 8px; border-radius: 4px; cursor: pointer; letter-spacing: 0.05em; font-family: 'DM Sans', sans-serif; text-transform: uppercase; }
-  .reset-btn:active { background: rgba(255,255,255,0.1); }
-
-  .completion-banner { display: none; background: linear-gradient(135deg, rgba(201,169,110,0.18), rgba(201,169,110,0.08)); border: 1px solid var(--gold); margin: 16px 16px 0; padding: 14px; border-radius: 8px; text-align: center; }
-  .completion-banner.visible { display: block; }
-  .completion-banner p { font-size: 14px; font-weight: 500; color: var(--text); margin: 0; }
-
-  .detail-intro { padding: 16px; border-bottom: 1px solid var(--border); }
-  .detail-intro p { margin: 0 0 6px; font-size: 13px; color: var(--text-muted); }
-  .detail-intro p:last-child { margin-bottom: 0; font-size: 11px; color: var(--text-faint); }
-  .pill-inline { padding: 1px 6px; border-radius: 3px; font-size: 10px; font-weight: 500; }
-  .pill-inline.script { background: rgba(201,169,110,0.2); color: var(--gold-dark); }
-  .pill-inline.note { background: #FFF3D5; color: #7A5000; }
-  .pill-inline.broll { background: #D5F5E3; color: #0A5E2A; }
-
-  .shot-section { padding: 20px 16px 4px; border-bottom: 1px solid var(--border); }
-  .shot-section-title { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
-  .shot-section-warn { color: #8B2500; font-size: 10px; font-weight: 500; }
-
-  .shot { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; margin-bottom: 10px; cursor: pointer; transition: all 0.15s; -webkit-tap-highlight-color: transparent; }
-  .shot:active { transform: scale(0.99); }
-  .shot.done { opacity: 0.5; background: var(--surface2); }
-  .shot.done .shot-title { text-decoration: line-through; text-decoration-color: var(--text-muted); }
-  .shot.hero { border-color: var(--gold); background: linear-gradient(135deg, var(--surface) 0%, rgba(201,169,110,0.06) 100%); }
-  .shot.broll { border-color: rgba(10,94,42,0.2); }
-  .shot-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-  .shot-num { font-size: 10px; color: var(--text-faint); letter-spacing: 0.08em; font-weight: 500; }
-  .shot.broll .shot-num { color: #0A5E2A; }
-  .shot-status { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--border-strong); background: transparent; position: relative; flex-shrink: 0; }
-  .shot.done .shot-status { background: #0A5E2A; border-color: #0A5E2A; }
-  .shot.done .shot-status::after { content: "✓"; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 13px; font-weight: 700; line-height: 1; }
-  .shot-title { font-size: 15px; font-weight: 500; line-height: 1.3; margin-bottom: 8px; color: var(--text); }
-  .shot-setup { font-size: 13px; color: var(--text-muted); line-height: 1.5; margin-bottom: 8px; }
-
-  .script-pill { background: rgba(201,169,110,0.12); border-left: 2px solid var(--gold); color: var(--gold-dark); padding: 8px 12px; margin: 5px 0; border-radius: 0 4px 4px 0; font-size: 12px; font-style: italic; line-height: 1.45; }
-  .note-pill { background: #FFF8E5; border-left: 2px solid #C49A4A; color: #7A5000; padding: 8px 12px; margin: 5px 0; border-radius: 0 4px 4px 0; font-size: 12px; line-height: 1.45; }
-  .broll-pill { background: rgba(10,94,42,0.05); border-left: 2px solid #0A5E2A; color: #0A5E2A; padding: 8px 12px; margin: 5px 0; border-radius: 0 4px 4px 0; font-size: 12px; line-height: 1.45; }
-
-  .detail-footer { padding: 24px 16px calc(40px + var(--safe-bottom)); text-align: center; }
-  .detail-footer p { font-size: 11px; color: var(--text-faint); font-style: italic; margin: 0; }
-
-  .shoot-day-label.from-claude { color: var(--gold-dark); }
-
 </style>
 </head>
 <body>
@@ -206,8 +161,7 @@
     <div class="auth-logo">Tori Darke</div>
     <div class="auth-sub">Content Studio</div>
     <button class="auth-btn" onclick="signIn()">
-      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
-      Sign in with Google
+      <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google"> Sign in with Google
     </button>
   </div>
 </div>
@@ -227,24 +181,25 @@
       <button class="sign-out-btn" onclick="signOut()"><i class="ti ti-logout"></i></button>
     </div>
     <div class="tab-bar">
-      <button class="tab-btn active" onclick="switchTab('shoot',this)">This week</button>
+      <button class="tab-btn active" onclick="switchTab('shotlist',this)">Shoot list</button>
       <button class="tab-btn" onclick="switchTab('upcoming',this)">Upcoming</button>
       <button class="tab-btn" onclick="switchTab('ideas',this)">Ideas</button>
     </div>
   </div>
 
   <div class="content-area">
-    <div id="tab-shoot" class="tab-section active">
+
+    <div id="tab-shotlist" class="tab-section active">
       <div class="section-hdr">
         <div class="section-title">Shoot list</div>
-        <div class="section-sub" id="shoot-week-label"></div>
+        <div class="section-sub" id="shotlist-count"></div>
       </div>
-      <div id="shoot-list"></div>
+      <div id="shotlist-container"></div>
     </div>
 
     <div id="tab-upcoming" class="tab-section">
       <div class="section-hdr">
-        <div class="section-title">Posting soon</div>
+        <div class="section-title">Coming up</div>
         <div class="section-sub">Next 14 days</div>
       </div>
       <div id="upcoming-list"></div>
@@ -262,48 +217,57 @@
           <button type="button" class="plat-toggle" data-plat="Facebook" onclick="togglePlat(this)">Facebook</button>
         </div>
         <div class="prio-row" id="prio-row">
-          <button type="button" class="prio-toggle" data-prio="high" onclick="selectPrio(this)">High</button>
-          <button type="button" class="prio-toggle sel-med" data-prio="med" onclick="selectPrio(this)">Medium</button>
-          <button type="button" class="prio-toggle" data-prio="low" onclick="selectPrio(this)">Low</button>
+          <button type="button" class="prio-toggle" data-prio="high" onclick="selectPrio(this,'prio-row')">High</button>
+          <button type="button" class="prio-toggle sel-med" data-prio="med" onclick="selectPrio(this,'prio-row')">Medium</button>
+          <button type="button" class="prio-toggle" data-prio="low" onclick="selectPrio(this,'prio-row')">Low</button>
         </div>
         <button class="save-idea-btn" onclick="saveIdea()">Save idea</button>
       </div>
       <div class="saved-ideas" id="saved-ideas"></div>
     </div>
-  </div>
-  <div class="detail-view" id="detail-view">
-  <div class="detail-header">
-    <div class="detail-header-top">
-      <button class="back-btn" onclick="closeShotDetail()" aria-label="Back"><i class="ti ti-arrow-left"></i></button>
-      <div class="detail-title-block">
-        <div class="detail-doc-type">SHOT LIST</div>
-        <div class="detail-title" id="detail-title"></div>
-      </div>
-    </div>
-    <div class="detail-progress-track">
-      <div class="detail-progress-fill" id="detail-progress-fill"></div>
-    </div>
-    <div class="detail-progress-meta">
-      <span id="detail-progress-count">0 / 0</span>
-      <button class="reset-btn" onclick="resetShotProgress()">Reset</button>
-    </div>
-  </div>
-  <div class="completion-banner" id="completion-banner">
-    <p>🎉 You absolute legend. That's the lot. Get home safe.</p>
-  </div>
-  <div class="detail-intro">
-    <p>Tap a shot to mark it done. Your progress saves on this phone.</p>
-    <p>
-      <span class="pill-inline script">amber</span> = script prompt (riff on it).
-      <span class="pill-inline note">gold</span> = tip.
-      <span class="pill-inline broll">green</span> = B-roll (passive shots, grab as you go).
-    </p>
-  </div>
-  <div id="shot-list-container"></div>
-  <div class="detail-footer">
-    <p>Script lines are prompts — say it your way. If a shot doesn't happen, no stress, we work with what we've got.</p>
+
   </div>
 </div>
+
+<!-- IDEA EDIT SHEET (bottom sheet) -->
+<div class="sheet-overlay" id="sheet-overlay" onclick="closeSheet()"></div>
+<div class="sheet" id="idea-sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-hdr">
+    <div class="sheet-title">Edit idea</div>
+    <button class="sheet-close" onclick="closeSheet()"><i class="ti ti-x"></i></button>
+  </div>
+  <div class="sheet-body">
+    <input class="idea-input" id="edit-title" type="text" placeholder="Title" />
+    <textarea class="idea-input textarea" id="edit-desc" placeholder="Description"></textarea>
+    <div class="idea-plat-row" id="edit-plat-row">
+      <button type="button" class="plat-toggle" data-plat="Instagram" onclick="togglePlat(this)">Instagram</button>
+      <button type="button" class="plat-toggle" data-plat="TikTok" onclick="togglePlat(this)">TikTok</button>
+      <button type="button" class="plat-toggle" data-plat="YouTube" onclick="togglePlat(this)">YouTube</button>
+      <button type="button" class="plat-toggle" data-plat="Facebook" onclick="togglePlat(this)">Facebook</button>
+    </div>
+    <div class="prio-row" id="edit-prio-row">
+      <button type="button" class="prio-toggle" data-prio="high" onclick="selectPrio(this,'edit-prio-row')">High</button>
+      <button type="button" class="prio-toggle" data-prio="med" onclick="selectPrio(this,'edit-prio-row')">Medium</button>
+      <button type="button" class="prio-toggle" data-prio="low" onclick="selectPrio(this,'edit-prio-row')">Low</button>
+    </div>
+  </div>
+  <div class="sheet-actions">
+    <button class="btn-danger" onclick="deleteEditedIdea()"><i class="ti ti-trash"></i></button>
+    <button class="btn-primary" onclick="saveEditedIdea()">Save</button>
+  </div>
+</div>
+
+<!-- CONFIRM -->
+<div class="confirm-overlay" id="confirm-overlay">
+  <div class="confirm-card">
+    <div class="confirm-title" id="confirm-title">Are you sure?</div>
+    <div class="confirm-msg" id="confirm-msg"></div>
+    <div class="confirm-actions">
+      <button class="confirm-btn confirm-btn-cancel" onclick="closeConfirm()">Cancel</button>
+      <button class="confirm-btn confirm-btn-yes" id="confirm-yes-btn">Yes</button>
+    </div>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -313,334 +277,344 @@
 const CONFIG = {
   CLIENT_ID: '520857299754-k334d5eq7fo7m9276dsbbp6ikj4qem0n.apps.googleusercontent.com',
   SHEET_ID:  '1yfvDg-qWKAJX9BhjUoOQgld1x-xflUFADwE116Ciosc',
-  CONTENT_RANGE: 'Content!A:K',
+  CONTENT_RANGE: 'Content!A:L',
   IDEAS_RANGE:   'Ideas!A:E',
+  SHOTLIST_RANGE: 'ShotList!A:G',
   SCOPES: 'https://www.googleapis.com/auth/spreadsheets',
   STORAGE_KEY: 'td_tori_token',
 };
-
 const platClass = { Instagram:'ig', TikTok:'tk', YouTube:'yt', Facebook:'fb' };
-const typeIcon = {
-  'Reel / Short':  { cls:'type-icon-reel',     icon:'device-mobile-vibration' },
-  'Static post':   { cls:'type-icon-static',   icon:'photo' },
-  'Story':         { cls:'type-icon-story',     icon:'layout-sidebar' },
-  'Carousel':      { cls:'type-icon-carousel', icon:'carousel-horizontal' },
-  'YouTube video': { cls:'type-icon-youtube',  icon:'brand-youtube' },
-};
-const STAGES = ['Idea','Scripted','Scheduled shoot','Shot','In edit','Scheduled'];
+const PLATFORMS = ['Instagram','TikTok','YouTube','Facebook'];
 
-let accessToken = null;
-let tokenExpiry = 0;
-let items = [], ideas = [];
+let accessToken = null, tokenExpiry = 0;
+let items = [], ideas = [], shots = [];
 let tokenClient = null;
+let confirmCallback = null;
+let editingIdeaId = null;
 
-// ── PERSISTENT AUTH ──────────────────────────────────────────
+// ── AUTH ──
 function saveToken(token, expiresIn) {
   const expiry = Date.now() + (expiresIn * 1000) - 60000;
   localStorage.setItem(CONFIG.STORAGE_KEY, JSON.stringify({ token, expiry }));
-  accessToken = token;
-  tokenExpiry = expiry;
+  accessToken = token; tokenExpiry = expiry;
 }
-
 function loadStoredToken() {
-  try {
-    const stored = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY));
-    if (stored && stored.expiry > Date.now()) {
-      accessToken = stored.token;
-      tokenExpiry = stored.expiry;
-      return true;
-    }
+  try { const s = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEY));
+    if (s && s.expiry > Date.now()) { accessToken = s.token; tokenExpiry = s.expiry; return true; }
   } catch(e) {}
   return false;
 }
-
-function clearStoredToken() {
-  localStorage.removeItem(CONFIG.STORAGE_KEY);
-  accessToken = null;
-  tokenExpiry = 0;
-}
+function clearStoredToken() { localStorage.removeItem(CONFIG.STORAGE_KEY); accessToken = null; tokenExpiry = 0; }
 
 function initAuth() {
   tokenClient = google.accounts.oauth2.initTokenClient({
-    client_id: CONFIG.CLIENT_ID,
-    scope: CONFIG.SCOPES,
+    client_id: CONFIG.CLIENT_ID, scope: CONFIG.SCOPES,
     callback: async (resp) => {
-      if (resp.error) {
-        if (window._tokenResolve) { window._tokenResolve(false); window._tokenResolve = null; }
-        return;
-      }
+      if (resp.error) { if (window._tokenResolve) { window._tokenResolve(false); window._tokenResolve = null; } return; }
       saveToken(resp.access_token, resp.expires_in || 3600);
       if (window._tokenResolve) { window._tokenResolve(true); window._tokenResolve = null; return; }
-      showApp();
-      await loadAllData();
+      showApp(); await loadAllData();
     },
   });
-
-  if (loadStoredToken()) {
-    showApp();
-    loadAllData();
-  }
+  if (loadStoredToken()) { showApp(); loadAllData(); }
 }
-
 async function ensureToken() {
   if (accessToken && tokenExpiry > Date.now()) return true;
-  return new Promise((resolve) => {
-    window._tokenResolve = resolve;
-    tokenClient.requestAccessToken({ prompt: '' });
-  });
+  return new Promise((resolve) => { window._tokenResolve = resolve; tokenClient.requestAccessToken({ prompt: '' }); });
 }
-
-function signIn() {
-  tokenClient.requestAccessToken({ prompt: 'consent' });
-}
-
+function signIn() { tokenClient.requestAccessToken({ prompt: 'consent' }); }
 function signOut() {
   if (accessToken) google.accounts.oauth2.revoke(accessToken);
-  clearStoredToken();
-  items = []; ideas = [];
+  clearStoredToken(); items=[]; ideas=[]; shots=[];
   document.getElementById('app').style.display = 'none';
   document.getElementById('auth-screen').style.display = 'flex';
 }
-
 function showApp() {
   document.getElementById('auth-screen').style.display = 'none';
   document.getElementById('app').style.display = 'flex';
-  const now = new Date();
-  document.getElementById('header-date').textContent = now.toLocaleDateString('en-AU', { weekday:'long', day:'numeric', month:'long' });
+  document.getElementById('header-date').textContent = new Date().toLocaleDateString('en-AU', { weekday:'long', day:'numeric', month:'long' });
 }
-
 window.addEventListener('load', () => {
-  const check = setInterval(() => {
-    if (window.google && google.accounts) { clearInterval(check); initAuth(); }
-  }, 100);
+  const check = setInterval(() => { if (window.google && google.accounts) { clearInterval(check); initAuth(); } }, 100);
 });
 
-// ── SHEETS API ───────────────────────────────────────────────
+// ── SHEETS API ──
 async function sheetsGet(range) {
   await ensureToken();
-  const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values/${encodeURIComponent(range)}`,
-    { headers: { Authorization: 'Bearer ' + accessToken } });
+  const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values/${encodeURIComponent(range)}`, { headers: { Authorization: 'Bearer ' + accessToken } });
   if (!r.ok) throw new Error('GET failed');
   return r.json();
 }
-
 async function sheetsAppend(range, values) {
   await ensureToken();
   const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values/${encodeURIComponent(range)}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`, {
-    method: 'POST',
-    headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ values })
+    method:'POST', headers: { Authorization:'Bearer '+accessToken,'Content-Type':'application/json' }, body: JSON.stringify({ values })
   });
   if (!r.ok) throw new Error('APPEND failed');
   return r.json();
 }
-
 async function sheetsBatchUpdate(data) {
   await ensureToken();
   const r = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}/values:batchUpdate`, {
-    method: 'POST',
-    headers: { Authorization: 'Bearer ' + accessToken, 'Content-Type': 'application/json' },
-    body: JSON.stringify({ valueInputOption: 'RAW', data })
+    method:'POST', headers: { Authorization:'Bearer '+accessToken,'Content-Type':'application/json' }, body: JSON.stringify({ valueInputOption:'RAW', data })
   });
-  if (!r.ok) throw new Error('BATCH UPDATE failed');
+  if (!r.ok) throw new Error('BATCH failed');
   return r.json();
 }
+async function sheetsDeleteRow(sheetName, rowIndex) {
+  await ensureToken();
+  const meta = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}?fields=sheets.properties`, { headers: { Authorization: 'Bearer ' + accessToken } }).then(r => r.json());
+  const sheet = meta.sheets.find(s => s.properties.title === sheetName);
+  if (!sheet) throw new Error('Tab not found');
+  await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${CONFIG.SHEET_ID}:batchUpdate`, {
+    method:'POST', headers: { Authorization:'Bearer '+accessToken,'Content-Type':'application/json' },
+    body: JSON.stringify({ requests: [{ deleteDimension: { range: { sheetId: sheet.properties.sheetId, dimension:'ROWS', startIndex:rowIndex, endIndex:rowIndex+1 } } }] })
+  });
+}
 
-// ── DATA ─────────────────────────────────────────────────────
+// ── DATA ──
 function showLoading(msg) { document.getElementById('loading-text').textContent = msg; document.getElementById('loading-overlay').style.display = 'flex'; }
 function hideLoading() { document.getElementById('loading-overlay').style.display = 'none'; }
 function generateId() { return Date.now().toString(36) + Math.random().toString(36).slice(2,6); }
 
 async function loadAllData() {
-  showLoading('Loading your content...');
+  showLoading('Loading...');
   try {
-    await Promise.all([loadItems(), loadIdeas()]);
-    renderShootList();
-    renderUpcoming();
-    renderSavedIdeas();
-  } catch(e) {
-    showToast('Error loading — check your connection');
-    console.error(e);
-  }
+    await Promise.all([loadItems(), loadIdeas(), loadShots()]);
+    renderShotList(); renderUpcoming(); renderSavedIdeas();
+  } catch(e) { showToast('Error loading'); console.error(e); }
   hideLoading();
 }
 
 async function loadItems() {
   const data = await sheetsGet(CONFIG.CONTENT_RANGE);
-  items = (data.values||[]).slice(1).filter(r=>r[0]).map((r,i) => ({
+  items = (data.values||[]).slice(1).filter(r=>r[0]).map((r,i)=>({
     id:r[0], _rowIndex:i+2,
-    title:r[1]||'', platforms:r[2]?r[2].split(',').map(s=>s.trim()):[],
+    title:r[1]||'', platforms:r[2]?r[2].split(',').map(s=>s.trim()).filter(Boolean):[],
     type:r[3]||'Reel / Short', stage:r[4]||'Idea', priority:r[5]||'med',
-    brainstormDate:r[6]||'', shootDate:r[7]||'', editDate:r[8]||'', postDate:r[9]||'', notes:r[10]||'',
+    brainstormDate:r[6]||'', shootDate:r[7]||'', editDate:r[8]||'', postDate:r[9]||'',
+    notes:r[10]||'', archived:(r[11]||'').toLowerCase()==='true'
   }));
 }
 
 async function loadIdeas() {
   const data = await sheetsGet(CONFIG.IDEAS_RANGE);
-  ideas = (data.values||[]).slice(1).filter(r=>r[0]).map((r,i) => ({
+  ideas = (data.values||[]).slice(1).filter(r=>r[0]).map((r,i)=>({
     id:r[0], _rowIndex:i+2,
     title:r[1]||'', desc:r[2]||'',
-    platforms:r[3]?r[3].split(',').map(s=>s.trim()):[],
-    priority:r[4]||'med',
+    platforms:r[3]?r[3].split(',').map(s=>s.trim()).filter(Boolean):[],
+    priority:r[4]||'med'
   }));
 }
 
-// ── TAB SWITCHING ─────────────────────────────────────────────
+async function loadShots() {
+  try {
+    const data = await sheetsGet(CONFIG.SHOTLIST_RANGE);
+    shots = (data.values||[]).slice(1).filter(r=>r[0]).map((r,i)=>({
+      id:r[0], _rowIndex:i+2,
+      shootName:r[1]||'', shotNumber:r[2]||'', description:r[3]||'', type:r[4]||'', notes:r[5]||'', status:r[6]||'pending'
+    }));
+  } catch(e) { shots = []; }
+}
+
+// ── TABS ──
 function switchTab(name, btn) {
   document.querySelectorAll('.tab-section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
   btn.classList.add('active');
+  if (name === 'shotlist') { loadShots().then(renderShotList); }
+  if (name === 'upcoming') { loadItems().then(renderUpcoming); }
 }
 
-// ── SHOOT LIST ────────────────────────────────────────────────
-function getWeekRange() {
-  const now = new Date();
-  const dow = now.getDay();
-  const monday = new Date(now);
-  monday.setDate(now.getDate() - (dow === 0 ? 6 : dow - 1));
-  monday.setHours(0,0,0,0);
-  const sunday = new Date(monday);
-  sunday.setDate(monday.getDate() + 6);
-  sunday.setHours(23,59,59,999);
-  return { monday, sunday };
-}
+// ── SHOT LIST ──
+function renderShotList() {
+  const container = document.getElementById('shotlist-container');
+  const active = shots.filter(s => s.status !== 'shot');
+  document.getElementById('shotlist-count').textContent = active.length ? `${active.length} shot${active.length!==1?'s':''}` : '';
 
-function renderShootList() {
-  const { monday, sunday } = getWeekRange();
-  const monStr = monday.toLocaleDateString('en-AU', { day:'numeric', month:'short' });
-  const sunStr = sunday.toLocaleDateString('en-AU', { day:'numeric', month:'short' });
-  document.getElementById('shoot-week-label').textContent = monStr + ' – ' + sunStr;
-
-  const shootItems = items.filter(item => {
-    if (!item.shootDate) return false;
-    const d = new Date(item.shootDate + 'T00:00:00');
-    return d >= monday && d <= sunday;
-  });
-
-  const container = document.getElementById('shoot-list');
-  container.innerHTML = '';
-
-  // Claude-generated shot lists at the top
-  renderRichShoots(container);
-
-  if (!shootItems.length && !RICH_SHOOTS.length) {
-    container.innerHTML = `<div class="empty-state"><i class="ti ti-camera"></i><p>No shoots scheduled this week.<br>Check back when Jeremy has added shoot dates.</p></div>`;
+  if (!active.length) {
+    container.innerHTML = `<div class="empty-state"><i class="ti ti-camera"></i><p>No active shots right now.<br>Jeremy will push a new shoot list here after planning.</p></div>`;
     return;
   }
-
-  if (!shootItems.length) return;
-
   const grouped = {};
-  shootItems.forEach(item => {
-    if (!grouped[item.shootDate]) grouped[item.shootDate] = [];
-    grouped[item.shootDate].push(item);
-  });
-  Object.keys(grouped).sort().forEach(date => {
-    const dayItems = grouped[date];
-    const dateLabel = new Date(date+'T00:00:00').toLocaleDateString('en-AU', { weekday:'long', day:'numeric', month:'long' });
-    const group = document.createElement('div');
-    group.className = 'shoot-day-group';
-    group.innerHTML = `<div class="shoot-day-label">${dateLabel}</div>`;
+  active.forEach(s => { if (!grouped[s.shootName]) grouped[s.shootName] = []; grouped[s.shootName].push(s); });
 
-    dayItems.forEach(item => {
-      const ti = typeIcon[item.type] || typeIcon['Reel / Short'];
-      const platChips = item.platforms.map(p => `<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
-      const isShot = ['Shot','In edit','Scheduled'].includes(item.stage);
-      const card = document.createElement('div');
-      card.className = 'shoot-card' + (isShot ? ' done' : '');
-      card.id = 'shoot-card-' + item.id;
-      card.innerHTML = `
-        <div class="shoot-card-top">
-          <div class="shoot-card-icon ${ti.cls}"><i class="ti ti-${ti.icon}"></i></div>
-          <div class="shoot-card-body">
-            <div class="shoot-card-title">${item.title}</div>
-            <div class="shoot-card-brief">${item.notes || 'No brief yet.'}</div>
+  container.innerHTML = '';
+  Object.keys(grouped).forEach(shootName => {
+    const groupShots = grouped[shootName].sort((a,b) => (a.shotNumber||'').localeCompare(b.shotNumber||'', undefined, { numeric: true }));
+    const section = document.createElement('div');
+    section.className = 'shoot-section';
+    let html = `<div class="shoot-section-hdr">
+      <div class="shoot-name">${shootName}</div>
+      <div class="shoot-count">${groupShots.length} shot${groupShots.length!==1?'s':''}</div>
+    </div>`;
+    groupShots.forEach(shot => {
+      html += `<div class="shot-row" id="shot-${shot.id}">
+        <div class="shot-row-top">
+          <div class="shot-number">${shot.shotNumber || '–'}</div>
+          <div class="shot-body">
+            <div class="shot-desc">${shot.description}</div>
+            ${shot.notes ? `<div class="shot-notes">${shot.notes}</div>` : ''}
+            ${shot.type ? `<span class="shot-type-chip">${shot.type}</span>` : ''}
           </div>
         </div>
-        <div class="shoot-card-chips">${platChips}<span class="chip type">${item.type}</span></div>
-        <button class="shot-btn ${isShot ? 'marked' : ''}" onclick="markAsShot('${item.id}', this)" ${isShot ? 'disabled' : ''}>
-          ${isShot ? '<i class="ti ti-check"></i> Shot ✓' : '<i class="ti ti-camera"></i> Mark as shot'}
-        </button>`;
-      group.appendChild(card);
+        <button class="shot-btn" onclick="markShotDone('${shot.id}')">
+          <i class="ti ti-camera"></i> Mark as shot
+        </button>
+      </div>`;
     });
-
-    container.appendChild(group);
+    section.innerHTML = html;
+    container.appendChild(section);
   });
 }
 
-async function markAsShot(id, btn) {
-  const item = items.find(i => i.id === id);
-  if (!item) return;
-
-  btn.className = 'shot-btn marked';
-  btn.disabled = true;
-  btn.innerHTML = '<i class="ti ti-check"></i> Shot ✓';
-  const card = document.getElementById('shoot-card-' + id);
-  if (card) card.classList.add('done');
-
-  item.stage = 'Shot';
-  showToast('Marked as shot 🎬');
-
-  try {
-    await sheetsBatchUpdate([{ range: `Content!E${item._rowIndex}`, values: [['Shot']] }]);
-  } catch(e) {
-    showToast('Save failed — check connection');
-    console.error(e);
-  }
+function markShotDone(id) {
+  const shot = shots.find(s => s.id === id); if (!shot) return;
+  showConfirm(
+    'Mark this shot as complete?',
+    `"${shot.description}" will be removed from your list. This can't be undone.`,
+    async () => {
+      shots = shots.filter(s => s.id !== id);
+      renderShotList();
+      showToast('Shot complete 🎬');
+      try { await sheetsDeleteRow('ShotList', shot._rowIndex - 1); await loadShots(); }
+      catch(e) { showToast('Save failed'); console.error(e); }
+    }
+  );
 }
 
-// ── UPCOMING ──────────────────────────────────────────────────
+// ── UPCOMING ──
 function renderUpcoming() {
   const now = new Date(); now.setHours(0,0,0,0);
   const future = new Date(now); future.setDate(now.getDate() + 14);
 
-  const upcoming = items
+  const upcomingShoots = items
     .filter(item => {
-      if (!item.postDate) return false;
+      if (item.archived || !item.shootDate) return false;
+      if (['Shot','In edit','Scheduled'].includes(item.stage)) return false;
+      const d = new Date(item.shootDate + 'T00:00:00');
+      return d >= now && d <= future;
+    })
+    .map(item => ({ kind:'shoot', date:item.shootDate, item }));
+
+  const upcomingPosts = items
+    .filter(item => {
+      if (item.archived || !item.postDate) return false;
+      if (item.stage !== 'Scheduled') return false;
       const d = new Date(item.postDate + 'T00:00:00');
       return d >= now && d <= future;
     })
-    .sort((a,b) => a.postDate.localeCompare(b.postDate));
+    .map(item => ({ kind:'post', date:item.postDate, item }));
+
+  const all = [...upcomingShoots, ...upcomingPosts].sort((a,b) => a.date.localeCompare(b.date));
 
   const container = document.getElementById('upcoming-list');
 
-  if (!upcoming.length) {
-    container.innerHTML = `<div class="empty-state"><i class="ti ti-calendar"></i><p>Nothing scheduled to post in the next 14 days.</p></div>`;
+  if (!all.length) {
+    container.innerHTML = `<div class="empty-state"><i class="ti ti-calendar"></i><p>Nothing coming up in the next 14 days.</p></div>`;
     return;
   }
 
-  container.innerHTML = upcoming.map(item => {
-    const d = new Date(item.postDate + 'T00:00:00');
-    const day = d.toLocaleDateString('en-AU', { day:'numeric' });
-    const mon = d.toLocaleDateString('en-AU', { month:'short' });
-    const platChips = item.platforms.map(p => `<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
-    return `<div class="post-item">
-      <div class="post-date-badge">
-        <div class="post-date-day">${day}</div>
-        <div class="post-date-mon">${mon}</div>
-      </div>
-      <div class="post-item-body">
-        <div class="post-item-title">${item.title}</div>
-        <div class="post-item-chips">${platChips}<span class="chip type">${item.type}</span></div>
-      </div>
-    </div>`;
-  }).join('');
+  // Group by kind
+  const shootsGroup = all.filter(x => x.kind === 'shoot');
+  const postsGroup = all.filter(x => x.kind === 'post');
+
+  let html = '';
+
+  if (shootsGroup.length) {
+    html += `<div class="upcoming-group"><div class="upcoming-group-label">Upcoming shoots</div>`;
+    shootsGroup.forEach(x => {
+      const d = new Date(x.date + 'T00:00:00');
+      const day = d.toLocaleDateString('en-AU', { day:'numeric' });
+      const mon = d.toLocaleDateString('en-AU', { month:'short' });
+      const platChips = x.item.platforms.map(p => `<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
+      html += `<div class="upc-item">
+        <div class="upc-item-top">
+          <div class="upc-date-badge shoot-badge">
+            <div class="upc-date-day">${day}</div>
+            <div class="upc-date-mon">${mon}</div>
+          </div>
+          <div class="upc-body">
+            <div class="upc-title">${x.item.title}</div>
+            <div class="upc-chips">${platChips}<span class="chip type">${x.item.type}</span></div>
+          </div>
+        </div>
+        <button class="upc-action-btn" onclick="markAsShot('${x.item.id}')"><i class="ti ti-camera"></i> Mark as shot</button>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  if (postsGroup.length) {
+    html += `<div class="upcoming-group"><div class="upcoming-group-label">Posting soon</div>`;
+    postsGroup.forEach(x => {
+      const d = new Date(x.date + 'T00:00:00');
+      const day = d.toLocaleDateString('en-AU', { day:'numeric' });
+      const mon = d.toLocaleDateString('en-AU', { month:'short' });
+      const platChips = x.item.platforms.map(p => `<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
+      html += `<div class="upc-item">
+        <div class="upc-item-top">
+          <div class="upc-date-badge">
+            <div class="upc-date-day">${day}</div>
+            <div class="upc-date-mon">${mon}</div>
+          </div>
+          <div class="upc-body">
+            <div class="upc-title">${x.item.title}</div>
+            <div class="upc-chips">${platChips}<span class="chip type">${x.item.type}</span></div>
+          </div>
+        </div>
+        <button class="upc-action-btn" onclick="markAsPosted('${x.item.id}')"><i class="ti ti-check"></i> Mark as posted</button>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  container.innerHTML = html;
 }
 
-// ── IDEAS ─────────────────────────────────────────────────────
+function markAsShot(id) {
+  const item = items.find(i => i.id === id); if (!item) return;
+  showConfirm(
+    'Mark as shot?',
+    `"${item.title}" will move to the edit stage.`,
+    async () => {
+      item.stage = 'Shot';
+      showToast('Marked as shot 🎬');
+      renderUpcoming();
+      try {
+        await sheetsBatchUpdate([{ range:`Content!E${item._rowIndex}`, values:[['Shot']] }]);
+      } catch(e) { showToast('Save failed'); console.error(e); }
+    }
+  );
+}
+
+function markAsPosted(id) {
+  const item = items.find(i => i.id === id); if (!item) return;
+  showConfirm(
+    'Mark as posted?',
+    `"${item.title}" will be archived. Only the post date will remain on the calendar.`,
+    async () => {
+      item.archived = true;
+      showToast('Posted 🎉');
+      renderUpcoming();
+      try {
+        await sheetsBatchUpdate([{ range:`Content!L${item._rowIndex}`, values:[['true']] }]);
+      } catch(e) { showToast('Save failed'); console.error(e); }
+    }
+  );
+}
+
+// ── IDEAS ──
 function renderSavedIdeas() {
   const container = document.getElementById('saved-ideas');
-  if (!ideas.length) {
-    container.innerHTML = '<div style="text-align:center;color:var(--text-faint);font-size:13px;padding:20px;">Your saved ideas will appear here.</div>';
-    return;
-  }
+  if (!ideas.length) { container.innerHTML = '<div style="text-align:center;color:var(--text-faint);font-size:13px;padding:20px;">Your saved ideas will appear here.</div>'; return; }
   container.innerHTML = ideas.map(idea => {
-    const platChips = idea.platforms.map(p => `<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
-    return `<div class="saved-idea-card">
+    const chips = idea.platforms.map(p => `<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
+    return `<div class="saved-idea-card" onclick="openIdeaSheet('${idea.id}')">
       <div class="saved-idea-title">${idea.title}</div>
       ${idea.desc ? `<div class="saved-idea-desc">${idea.desc}</div>` : ''}
-      <div style="display:flex;gap:5px;flex-wrap:wrap;">${platChips}</div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;">${chips}</div>
     </div>`;
   }).join('');
 }
@@ -652,9 +626,7 @@ async function saveIdea() {
   const selPrio = document.querySelector('#prio-row .prio-toggle[class*="sel-"]');
   const newIdea = { id:generateId(), title, desc:document.getElementById('idea-desc').value.trim(), platforms:selPlats, priority:selPrio?selPrio.dataset.prio:'med' };
 
-  ideas.push(newIdea);
-  renderSavedIdeas();
-  showToast('Idea saved 💡');
+  ideas.push(newIdea); renderSavedIdeas(); showToast('Idea saved 💡');
 
   document.getElementById('idea-title').value = '';
   document.getElementById('idea-desc').value = '';
@@ -663,287 +635,92 @@ async function saveIdea() {
 
   try {
     await sheetsAppend(CONFIG.IDEAS_RANGE, [[newIdea.id, newIdea.title, newIdea.desc, newIdea.platforms.join(', '), newIdea.priority]]);
-  } catch(e) {
-    showToast('Save failed — check connection');
-    console.error(e);
-  }
+    await loadIdeas();
+  } catch(e) { showToast('Save failed'); console.error(e); }
 }
 
-// ── HELPERS ───────────────────────────────────────────────────
+function openIdeaSheet(id) {
+  const idea = ideas.find(i => i.id === id); if (!idea) return;
+  editingIdeaId = id;
+  document.getElementById('edit-title').value = idea.title;
+  document.getElementById('edit-desc').value = idea.desc;
+  document.querySelectorAll('#edit-plat-row .plat-toggle').forEach(b => {
+    b.className = 'plat-toggle' + (idea.platforms.includes(b.dataset.plat) ? ' sel-' + platClass[b.dataset.plat] : '');
+  });
+  document.querySelectorAll('#edit-prio-row .prio-toggle').forEach(b => {
+    b.className = 'prio-toggle' + (b.dataset.prio === idea.priority ? ' sel-' + b.dataset.prio : '');
+  });
+  document.getElementById('sheet-overlay').classList.add('open');
+  document.getElementById('idea-sheet').classList.add('open');
+}
+
+function closeSheet() {
+  document.getElementById('sheet-overlay').classList.remove('open');
+  document.getElementById('idea-sheet').classList.remove('open');
+  editingIdeaId = null;
+}
+
+async function saveEditedIdea() {
+  const idea = ideas.find(i => i.id === editingIdeaId); if (!idea) return;
+  idea.title = document.getElementById('edit-title').value.trim() || idea.title;
+  idea.desc = document.getElementById('edit-desc').value;
+  idea.platforms = [...document.querySelectorAll('#edit-plat-row .plat-toggle')].filter(b=>b.className.includes('sel-')).map(b=>b.dataset.plat);
+  const selPrio = document.querySelector('#edit-prio-row .prio-toggle[class*="sel-"]');
+  if (selPrio) idea.priority = selPrio.dataset.prio;
+
+  closeSheet();
+  renderSavedIdeas();
+  showToast('Saving...');
+  try {
+    await sheetsBatchUpdate([{ range:`Ideas!A${idea._rowIndex}:E${idea._rowIndex}`,
+      values:[[idea.id, idea.title, idea.desc, idea.platforms.join(', '), idea.priority]] }]);
+    showToast('Idea updated');
+  } catch(e) { showToast('Save failed'); console.error(e); }
+}
+
+function deleteEditedIdea() {
+  const idea = ideas.find(i => i.id === editingIdeaId); if (!idea) return;
+  showConfirm(
+    'Delete this idea?',
+    `"${idea.title}" will be permanently removed.`,
+    async () => {
+      ideas = ideas.filter(i => i.id !== editingIdeaId);
+      closeSheet(); renderSavedIdeas(); showToast('Deleted');
+      try { await sheetsDeleteRow('Ideas', idea._rowIndex - 1); await loadIdeas(); }
+      catch(e) { console.error(e); }
+    },
+    true
+  );
+}
+
+// ── CONFIRM ──
+function showConfirm(title, msg, callback, isDanger) {
+  document.getElementById('confirm-title').textContent = title;
+  document.getElementById('confirm-msg').textContent = msg;
+  const btn = document.getElementById('confirm-yes-btn');
+  btn.className = 'confirm-btn confirm-btn-yes' + (isDanger ? ' danger' : '');
+  btn.textContent = isDanger ? 'Yes, delete' : 'Yes';
+  confirmCallback = callback;
+  document.getElementById('confirm-overlay').classList.add('open');
+  btn.onclick = () => { closeConfirm(); if (confirmCallback) confirmCallback(); };
+}
+function closeConfirm() { document.getElementById('confirm-overlay').classList.remove('open'); confirmCallback = null; }
+
+// ── HELPERS ──
 function togglePlat(btn) {
   const cls = platClass[btn.dataset.plat];
   btn.className = btn.className.includes('sel-') ? 'plat-toggle' : 'plat-toggle sel-' + cls;
 }
-
-function selectPrio(btn) {
-  document.querySelectorAll('#prio-row .prio-toggle').forEach(b=>b.className='prio-toggle');
+function selectPrio(btn, groupId) {
+  document.querySelectorAll('#'+groupId+' .prio-toggle').forEach(b=>b.className='prio-toggle');
   btn.className = 'prio-toggle sel-' + btn.dataset.prio;
 }
-
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2500);
 }
-
-// ── RICH SHOOTS (Claude-generated shot lists) ────────────────
-const RICH_SHOOTS = [
-  {
-    id: 'nebo-kembla-2026-05',
-    title: 'Nebo + Kembla Weekend',
-    subtitle: 'Country street party \u2192 racecourse \u2192 podcast \u2192 home',
-    dateRange: 'Fri 15 \u2014 Mon 18 May',
-    locations: 'Nebo \u00b7 Kembla Grange \u00b7 Sydney',
-    sections: [
-      {
-        title: '1. Heading north to Nebo',
-        warn: null,
-        shots: [
-          { num: '1.1', title: 'Mackay airport arrival',
-            setup: '\ud83d\udcf1 Selfie style. Stand somewhere identifiable as the airport \u2014 signage, baggage carousel, exit doors.',
-            scripts: ['"Made it to Mackay \u2014 heading out to Nebo for tonight\'s street party."', '"Country gig tonight, racecourse tomorrow. Let\'s go."'] },
-          { num: '1.2', title: 'Plane window (if not too late)',
-            setup: '\ud83d\udcf1 Vertical, looking out the window. Best near landing as the landscape opens up.',
-            notes: ['\ud83d\udca1 If the flight\'s already done, skip it. Don\'t stress.'] },
-          { num: '1.3', title: 'Travel & road details', broll: true,
-            setup: '\ud83c\udfa5 Quick passive shots as you go. No pressure, no scripts \u2014 just grab whatever looks interesting.',
-            brolls: ['Boots on the airport tile', 'Bag drop / baggage carousel', 'Hat or sunnies in the car', 'Road signs, fence posts, cattle', '"Welcome to Nebo" sign if there is one'] },
-          { num: '1.4', title: 'On the road to Nebo',
-            setup: '\ud83d\udcf1 Phone on the dash or up to the windscreen for 10\u201315 sec. Country roads, big sky.',
-            scripts: ['(optional voiceover) "Nebo\'s about an hour inland. Population \u2014 not much. Crowds \u2014 always."'] },
-          { num: '1.5', title: 'Arrival in Nebo',
-            setup: '\ud83d\udcf1 Walk-and-talk selfie, 15\u201320 sec, when you first see the venue or main street.',
-            scripts: ['"We\'re here. Let\'s see what Nebo\'s got."'] }
-        ]
-      },
-      {
-        title: '2. Nebo Street Party',
-        warn: '\u26a0\ufe0f Needs a helper for performance',
-        shots: [
-          { num: '2.1', title: 'Soundcheck snippets',
-            setup: '\ud83d\udcf1 Prop the phone on an amp, monitor, or chair. Hit record. Walk into frame and do your thing for ~30 sec, then grab the phone.',
-            notes: ['\ud83c\udfa4 If your tech or a band mate is free, ask them to do a 20-sec handheld pass instead \u2014 looks better.'] },
-          { num: '2.2', title: 'Venue & town details', broll: true,
-            setup: '\ud83c\udfa5 Walk through and grab a handful of passive shots. 5 sec each, no people, no scripts.',
-            brolls: ['Venue exterior wide', 'Street party setup', 'Food trucks, stalls, signage', 'The stage from a distance', 'Anything that says "country town energy"'] },
-          { num: '2.3', title: 'Walking the street party',
-            setup: '\ud83d\udcf1 Selfie style. Walk through the crowd or past the stalls for 15\u201320 sec. Talk to camera as you go.',
-            scripts: ['"Country towns do street parties properly. Look at this."', '"We\'re on in about an hour \u2014 vibe\'s already pumping."'] },
-          { num: '2.4', title: 'Crowd shot before the set',
-            setup: '\ud83d\udcf1 From side of stage or behind the desk. Horizontal. 10\u201315 sec. Look for hands up, kids on shoulders, anything with energy.' },
-          { num: '2.5', title: '\ud83c\udfac Performance \u2014 ASK SOMEONE TO FILM',
-            setup: '\ud83d\udcf1 Hand your phone to a band mate, venue contact, or another videographer at the event. Ask: "Can you film me for one song? Landscape. Just hold it steady."',
-            notes: ['\ud83d\udca1 One song is all we need. Two angles (wide + close) if they\'re keen.', '\u26a0\ufe0f Shaky is fine \u2014 the energy is what matters.'] },
-          { num: '2.6', title: 'Backstage details', broll: true,
-            setup: '\ud83c\udfa5 5\u201310 sec of quick close-ups. No people, no scripts.',
-            brolls: ['Setlist on the floor', 'Your boots', 'Guitar leaning against an amp', 'Water bottle / drink', 'In-ears in your hand', 'Mic stand'] },
-          { num: '2.7', title: 'Post-gig piece to camera',
-            setup: '\ud83d\udcf1 Selfie, somewhere the venue or crowd is visible behind you. Just after walking off, while you\'re still buzzing. 20\u201330 sec.',
-            scripts: ['"That was insane. Nebo, you absolute legends."', '"Now we fly south for the racecourse tomorrow."'] }
-        ]
-      },
-      {
-        title: '3. Travel south to NSW',
-        warn: null,
-        shots: [
-          { num: '3.1', title: 'One travel moment',
-            setup: '\ud83d\udcf1 Your pick \u2014 hotel checkout, airport coffee, boarding, plane window, arrival drive. Best 10\u201315 sec you can grab. Doesn\'t need to be polished.',
-            scripts: ['(optional voiceover) "From outback Queensland to a racecourse in New South Wales. Tour life."'] },
-          { num: '3.2', title: 'Hotel & airport details', broll: true,
-            setup: '\ud83c\udfa5 Passive grabs throughout the travel day.',
-            brolls: ['Hotel keycard', 'Suitcase wheels rolling', 'Lobby / view from the room', 'Departures board', 'Coffee in your hand', 'Boarding pass close-up'] }
-        ]
-      },
-      {
-        title: '4. Kembla Grange Racecourse',
-        warn: '\u26a0\ufe0f Needs a helper for performance',
-        shots: [
-          { num: '4.1', title: 'Arrival at the racecourse',
-            setup: '\ud83d\udcf1 Selfie as you walk in. Look for race day vibe \u2014 fascinators, dressed-up crowd, the grandstand.',
-            scripts: ['"Totally different world today. Welcome to Kembla Grange."'] },
-          { num: '4.2', title: 'Race day details', broll: true,
-            setup: '\ud83c\udfa5 The visual contrast with Nebo. Grab dressed-up details.',
-            brolls: ['Grandstand exterior', 'Race day signage / branding', 'Fascinators, suits, champagne details (no faces if you can help it)', 'Horses if they\'re visible', 'Your race day outfit / boots close-up'] },
-          { num: '4.3', title: 'Getting ready BTS',
-            setup: '\ud83d\udcf1 Prop the phone on the bench. Hair touch-ups, outfit, guitar prep. 30 sec total \u2014 doesn\'t need to be one continuous take.',
-            scripts: ['(optional voiceover) "Same country, different crowd."'] },
-          { num: '4.4', title: 'Soundcheck snippets',
-            setup: '\ud83d\udcf1 Same as Nebo \u2014 prop the phone, hit record, walk into frame.' },
-          { num: '4.5', title: '\ud83c\udfac Performance \u2014 ASK SOMEONE TO FILM',
-            setup: '\ud83d\udcf1 Same ask as Nebo. One song. Landscape. Steady-ish.',
-            notes: ['\ud83d\udca1 Get the dressed-up crowd in frame if you can \u2014 it\'s the visual contrast with Nebo.'] },
-          { num: '4.6', title: 'Post-show reflection',
-            setup: '\ud83d\udcf1 Selfie, somewhere quiet just after the set. 20\u201330 sec.',
-            scripts: ['"Two crowds couldn\'t be more different \u2014 and I loved them both."', '"Sydney tomorrow for a podcast. Last leg."'] }
-        ]
-      },
-      {
-        title: '5. Sydney podcast',
-        warn: null,
-        shots: [
-          { num: '5.1', title: 'Walking into the studio',
-            setup: '\ud83d\udcf1 Selfie outside the studio. Don\'t frame any signage \u2014 keep it vague. Doors, street, you.',
-            scripts: ['"Last stop \u2014 podcast appearance. Can\'t say which one yet."'] },
-          { num: '5.2', title: 'BTS inside the studio',
-            setup: '\ud83d\udcf1 Once you\'ve checked with the host that filming\'s fine, grab 20 sec. Headphones, mic, your set-up. Don\'t film the host\'s face unless they\'re cool with it.',
-            notes: ['\ud83d\udca1 If they say no \u2014 just shoot the exterior and move on. No drama.'] },
-          { num: '5.3', title: 'Studio details (with permission)', broll: true,
-            setup: '\ud83c\udfa5 Quick close-ups only. Keep host gear and notes out of frame unless they OK it.',
-            brolls: ['Headphones resting on the table', 'Your hands on the cans', 'Mic from a tight angle', 'Coffee / water on the desk'] },
-          { num: '5.4', title: 'Studio reflection',
-            setup: '\ud83d\udcf1 Selfie outside afterwards, walking back to the car. 15\u201320 sec.',
-            scripts: ['"These conversations are my favourite part of this job \u2014 getting to actually talk about the songs."'] }
-        ]
-      },
-      {
-        title: '6. Home',
-        warn: null,
-        shots: [
-          { num: '6.1', title: 'Arrival details', broll: true,
-            setup: '\ud83c\udfa5 Quick passive shots just before walking inside. Sets up the closing moment.',
-            brolls: ['Keys in the front door', 'Suitcase wheels at the threshold', 'Dog / cat greeting if you have one', 'Sun setting / front porch detail'] },
-          { num: '6.2', title: '\ud83c\udfe1 Walking through the front door', hero: true,
-            setup: '\ud83d\udcf1 Prop the phone on the entry table, or have someone film you walking in. Bags still on you. Drop the bags, exhale, half-laugh at the camera.',
-            scripts: ['"Three days. Two states. Two gigs. One podcast."', '"I\'ll sleep when I\'m dead."'],
-            notes: ['\u2b50 This is the closing shot of the whole vlog. Give it a moment. Don\'t rush.'] }
-        ]
-      }
-    ]
-  }
-];
-
-let currentRichShoot = null;
-
-function richShootKey(id) { return 'tori_rich_shoot_' + id; }
-function loadRichShootState(id) {
-  try { const raw = localStorage.getItem(richShootKey(id)); return raw ? JSON.parse(raw) : {}; }
-  catch(e) { return {}; }
-}
-function saveRichShootState(id, state) {
-  try { localStorage.setItem(richShootKey(id), JSON.stringify(state)); } catch(e) {}
-}
-function getRichShootProgress(shoot) {
-  const state = loadRichShootState(shoot.id);
-  let total = 0, done = 0;
-  shoot.sections.forEach(s => s.shots.forEach(sh => { total++; if (state[sh.num]) done++; }));
-  return { total, done };
-}
-
-function renderRichShoots(container) {
-  if (!RICH_SHOOTS.length) return;
-  const group = document.createElement('div');
-  group.className = 'shoot-day-group';
-  group.innerHTML = '<div class="shoot-day-label from-claude">Shot lists \u2014 from Claude</div>';
-  RICH_SHOOTS.forEach(shoot => {
-    const { total, done } = getRichShootProgress(shoot);
-    const pct = total === 0 ? 0 : (done / total) * 100;
-    const card = document.createElement('div');
-    card.className = 'rich-shoot-card';
-    card.onclick = () => openShotDetail(shoot.id);
-    card.innerHTML = `
-      <div class="rich-shoot-card-top">
-        <div class="rich-shoot-icon"><i class="ti ti-list-check"></i></div>
-        <div class="rich-shoot-body">
-          <div class="rich-shoot-title-row">
-            <div class="rich-shoot-title">${shoot.title}</div>
-            <span class="rich-shoot-badge">Shot list</span>
-          </div>
-          <div class="rich-shoot-brief">${shoot.subtitle}</div>
-          <div class="rich-shoot-meta">${shoot.dateRange} \u00b7 ${shoot.locations}</div>
-        </div>
-      </div>
-      <div class="rich-shoot-progress">
-        <div class="rich-shoot-progress-track">
-          <div class="rich-shoot-progress-fill" style="width: ${pct}%"></div>
-        </div>
-        <div class="rich-shoot-progress-text">${done} / ${total} shots</div>
-      </div>
-      <div class="rich-shoot-cta">Open shot list <i class="ti ti-arrow-right"></i></div>
-    `;
-    group.appendChild(card);
-  });
-  container.appendChild(group);
-}
-
-function openShotDetail(shootId) {
-  currentRichShoot = RICH_SHOOTS.find(s => s.id === shootId);
-  if (!currentRichShoot) return;
-  document.getElementById('detail-title').textContent = currentRichShoot.title;
-  const cont = document.getElementById('shot-list-container');
-  cont.innerHTML = currentRichShoot.sections.map(section => {
-    const warn = section.warn ? `<span class="shot-section-warn">${section.warn}</span>` : '';
-    const shotsHtml = section.shots.map(renderShotHtml).join('');
-    return `<section class="shot-section"><div class="shot-section-title">${section.title}${warn}</div>${shotsHtml}</section>`;
-  }).join('');
-  const state = loadRichShootState(currentRichShoot.id);
-  cont.querySelectorAll('.shot').forEach(el => {
-    if (state[el.dataset.num]) el.classList.add('done');
-    el.onclick = () => toggleRichShot(el);
-  });
-  updateDetailProgress();
-  const dv = document.getElementById('detail-view');
-  dv.classList.add('open');
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => { dv.scrollTop = 0; }, 50);
-}
-
-function renderShotHtml(shot) {
-  const classes = ['shot'];
-  if (shot.hero) classes.push('hero');
-  if (shot.broll) classes.push('broll');
-  const scripts = (shot.scripts || []).map(s => `<p class="script-pill">${s}</p>`).join('');
-  const notes = (shot.notes || []).map(n => `<p class="note-pill">${n}</p>`).join('');
-  const brolls = (shot.brolls || []).map(b => `<p class="broll-pill">\u25b8 ${b}</p>`).join('');
-  return `
-    <div class="${classes.join(' ')}" data-num="${shot.num}">
-      <div class="shot-header">
-        <span class="shot-num">SHOT ${shot.num}${shot.broll ? ' \u00b7 B-ROLL' : ''}</span>
-        <span class="shot-status"></span>
-      </div>
-      <h3 class="shot-title">${shot.title}</h3>
-      <p class="shot-setup">${shot.setup}</p>
-      ${scripts}${notes}${brolls}
-    </div>
-  `;
-}
-
-function toggleRichShot(el) {
-  if (!currentRichShoot) return;
-  el.classList.toggle('done');
-  const state = loadRichShootState(currentRichShoot.id);
-  state[el.dataset.num] = el.classList.contains('done') ? 1 : 0;
-  saveRichShootState(currentRichShoot.id, state);
-  updateDetailProgress();
-}
-
-function updateDetailProgress() {
-  if (!currentRichShoot) return;
-  const shots = document.querySelectorAll('#shot-list-container .shot');
-  const done = document.querySelectorAll('#shot-list-container .shot.done');
-  const total = shots.length, doneCount = done.length;
-  const pct = total === 0 ? 0 : (doneCount / total) * 100;
-  document.getElementById('detail-progress-fill').style.width = pct + '%';
-  document.getElementById('detail-progress-count').textContent = doneCount + ' / ' + total;
-  const banner = document.getElementById('completion-banner');
-  if (doneCount === total && total > 0) banner.classList.add('visible');
-  else banner.classList.remove('visible');
-}
-
-function closeShotDetail() {
-  document.getElementById('detail-view').classList.remove('open');
-  document.body.style.overflow = '';
-  renderShootList();
-}
-
-function resetShotProgress() {
-  if (!currentRichShoot) return;
-  if (!confirm('Reset all shots for this shoot? Your progress will be cleared.')) return;
-  try { localStorage.removeItem(richShootKey(currentRichShoot.id)); } catch(e) {}
-  document.querySelectorAll('#shot-list-container .shot').forEach(el => el.classList.remove('done'));
-  updateDetailProgress();
-}
-
 </script>
 </body>
 </html>
