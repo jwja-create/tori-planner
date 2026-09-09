@@ -15,6 +15,7 @@
     --text: #1A1714; --text-muted: #6B6560; --text-faint: #A09890;
     --ig: #E8D5F5; --ig-text: #5B2D8E; --tk: #D5EBF5; --tk-text: #0A4F6E;
     --yt: #FDDDD5; --yt-text: #8B2500; --fb: #D5E8FF; --fb-text: #1A3A6E;
+    --sub: #FBE7C6; --sub-text: #7A4E00; --kit: #D9F2E3; --kit-text: #1B6B43;
     --cat-post: #D5E8FF; --cat-post-text: #1A3A6E;
     --cat-shoot: #D5F5E3; --cat-shoot-text: #0A5E2A;
     --cat-edit: #FFF3D5; --cat-edit-text: #7A5000;
@@ -124,6 +125,8 @@
   .chip.tk { background: var(--tk); color: var(--tk-text); }
   .chip.yt { background: var(--yt); color: var(--yt-text); }
   .chip.fb { background: var(--fb); color: var(--fb-text); }
+  .chip.sub { background: var(--sub); color: var(--sub-text); }
+  .chip.kit { background: var(--kit); color: var(--kit-text); }
   .chip.type { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
   .k-card-due { font-size: 10px; color: var(--text-faint); margin-top: 6px; display: flex; align-items: center; gap: 4px; }
   .prio-bar { position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 0 2px 2px 0; }
@@ -194,6 +197,8 @@
   .plat-toggle.sel-tk { background: var(--tk); color: var(--tk-text); border-color: var(--tk); }
   .plat-toggle.sel-yt { background: var(--yt); color: var(--yt-text); border-color: var(--yt); }
   .plat-toggle.sel-fb { background: var(--fb); color: var(--fb-text); border-color: var(--fb); }
+  .plat-toggle.sel-sub { background: var(--sub); color: var(--sub-text); border-color: var(--sub); }
+  .plat-toggle.sel-kit { background: var(--kit); color: var(--kit-text); border-color: var(--kit); }
   .prio-toggles { display: flex; gap: 6px; }
   .prio-toggle { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: var(--surface2); font-size: 12px; cursor: pointer; color: var(--text-muted); font-family: 'DM Sans', sans-serif; }
   .prio-toggle.sel-high { background: #FDDDD5; color: #8B2500; border-color: #FDDDD5; font-weight: 500; }
@@ -317,6 +322,7 @@
             <option value="all">All platforms</option>
             <option value="Instagram">Instagram</option><option value="TikTok">TikTok</option>
             <option value="YouTube">YouTube</option><option value="Facebook">Facebook</option>
+            <option value="Substack">Substack</option><option value="Kit">Kit</option>
           </select>
           <select class="filter-select" id="idea-pr-filter" onchange="renderIdeas()">
             <option value="all">All priorities</option>
@@ -406,6 +412,8 @@
           <button type="button" class="plat-toggle" data-plat="TikTok" onclick="togglePlatChip(this)">TikTok</button>
           <button type="button" class="plat-toggle" data-plat="YouTube" onclick="togglePlatChip(this)">YouTube</button>
           <button type="button" class="plat-toggle" data-plat="Facebook" onclick="togglePlatChip(this)">Facebook</button>
+          <button type="button" class="plat-toggle" data-plat="Substack" onclick="togglePlatChip(this)">Substack</button>
+          <button type="button" class="plat-toggle" data-plat="Kit" onclick="togglePlatChip(this)">Kit</button>
         </div>
       </div>
       <div class="form-row">
@@ -455,6 +463,8 @@
           <button type="button" class="plat-toggle" data-plat="TikTok" onclick="togglePlatChip(this)">TikTok</button>
           <button type="button" class="plat-toggle" data-plat="YouTube" onclick="togglePlatChip(this)">YouTube</button>
           <button type="button" class="plat-toggle" data-plat="Facebook" onclick="togglePlatChip(this)">Facebook</button>
+          <button type="button" class="plat-toggle" data-plat="Substack" onclick="togglePlatChip(this)">Substack</button>
+          <button type="button" class="plat-toggle" data-plat="Kit" onclick="togglePlatChip(this)">Kit</button>
         </div>
       </div>
       <div class="form-field">
@@ -497,8 +507,8 @@ const CONFIG = {
 };
 
 const STAGES = ['Idea','Scripted','Scheduled shoot','Shot','In edit','Scheduled'];
-const PLATFORMS = ['Instagram','TikTok','YouTube','Facebook'];
-const platClass = { Instagram:'ig', TikTok:'tk', YouTube:'yt', Facebook:'fb' };
+const PLATFORMS = ['Instagram','TikTok','YouTube','Facebook','Substack','Kit'];
+const platClass = { Instagram:'ig', TikTok:'tk', YouTube:'yt', Facebook:'fb', Substack:'sub', Kit:'kit' };
 const typeIcon = {
   'Reel / Short':  { cls:'type-icon-reel',     icon:'device-mobile-vibration' },
   'Static post':   { cls:'type-icon-static',   icon:'photo' },

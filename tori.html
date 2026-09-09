@@ -18,6 +18,7 @@
     --text: #1A1714; --text-muted: #6B6560; --text-faint: #A09890;
     --ig: #E8D5F5; --ig-text: #5B2D8E; --tk: #D5EBF5; --tk-text: #0A4F6E;
     --yt: #FDDDD5; --yt-text: #8B2500; --fb: #D5E8FF; --fb-text: #1A3A6E;
+    --sub: #FBE7C6; --sub-text: #7A4E00; --kit: #D9F2E3; --kit-text: #1B6B43;
     --safe-top: env(safe-area-inset-top, 0px);
     --safe-bottom: env(safe-area-inset-bottom, 0px);
   }
@@ -92,6 +93,8 @@
   .chip.tk { background: var(--tk); color: var(--tk-text); }
   .chip.yt { background: var(--yt); color: var(--yt-text); }
   .chip.fb { background: var(--fb); color: var(--fb-text); }
+  .chip.sub { background: var(--sub); color: var(--sub-text); }
+  .chip.kit { background: var(--kit); color: var(--kit-text); }
   .chip.type { background: var(--surface2); color: var(--text-muted); border: 1px solid var(--border); }
   .chip.kind { background: var(--text); color: var(--gold); }
   .upc-action-btn { width: 100%; padding: 9px; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
@@ -109,6 +112,8 @@
   .plat-toggle.sel-tk { background: var(--tk); color: var(--tk-text); border-color: var(--tk); }
   .plat-toggle.sel-yt { background: var(--yt); color: var(--yt-text); border-color: var(--yt); }
   .plat-toggle.sel-fb { background: var(--fb); color: var(--fb-text); border-color: var(--fb); }
+  .plat-toggle.sel-sub { background: var(--sub); color: var(--sub-text); border-color: var(--sub); }
+  .plat-toggle.sel-kit { background: var(--kit); color: var(--kit-text); border-color: var(--kit); }
   .prio-row { display: flex; gap: 6px; margin-bottom: 14px; }
   .prio-toggle { flex: 1; padding: 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); font-size: 13px; cursor: pointer; color: var(--text-muted); font-family: 'DM Sans', sans-serif; text-align: center; }
   .prio-toggle.sel-high { background: #FDDDD5; color: #8B2500; border-color: #FDDDD5; font-weight: 500; }
@@ -215,6 +220,8 @@
           <button type="button" class="plat-toggle" data-plat="TikTok" onclick="togglePlat(this)">TikTok</button>
           <button type="button" class="plat-toggle" data-plat="YouTube" onclick="togglePlat(this)">YouTube</button>
           <button type="button" class="plat-toggle" data-plat="Facebook" onclick="togglePlat(this)">Facebook</button>
+          <button type="button" class="plat-toggle" data-plat="Substack" onclick="togglePlat(this)">Substack</button>
+          <button type="button" class="plat-toggle" data-plat="Kit" onclick="togglePlat(this)">Kit</button>
         </div>
         <div class="prio-row" id="prio-row">
           <button type="button" class="prio-toggle" data-prio="high" onclick="selectPrio(this,'prio-row')">High</button>
@@ -245,6 +252,8 @@
       <button type="button" class="plat-toggle" data-plat="TikTok" onclick="togglePlat(this)">TikTok</button>
       <button type="button" class="plat-toggle" data-plat="YouTube" onclick="togglePlat(this)">YouTube</button>
       <button type="button" class="plat-toggle" data-plat="Facebook" onclick="togglePlat(this)">Facebook</button>
+      <button type="button" class="plat-toggle" data-plat="Substack" onclick="togglePlat(this)">Substack</button>
+      <button type="button" class="plat-toggle" data-plat="Kit" onclick="togglePlat(this)">Kit</button>
     </div>
     <div class="prio-row" id="edit-prio-row">
       <button type="button" class="prio-toggle" data-prio="high" onclick="selectPrio(this,'edit-prio-row')">High</button>
@@ -283,8 +292,8 @@ const CONFIG = {
   SCOPES: 'https://www.googleapis.com/auth/spreadsheets',
   STORAGE_KEY: 'td_tori_token',
 };
-const platClass = { Instagram:'ig', TikTok:'tk', YouTube:'yt', Facebook:'fb' };
-const PLATFORMS = ['Instagram','TikTok','YouTube','Facebook'];
+const platClass = { Instagram:'ig', TikTok:'tk', YouTube:'yt', Facebook:'fb', Substack:'sub', Kit:'kit' };
+const PLATFORMS = ['Instagram','TikTok','YouTube','Facebook','Substack','Kit'];
 
 let accessToken = null, tokenExpiry = 0;
 let items = [], ideas = [], shots = [];
