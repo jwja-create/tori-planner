@@ -100,6 +100,28 @@
   .upc-action-btn { width: 100%; padding: 9px; background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; }
   .upc-action-btn:active { transform: scale(0.97); }
 
+  /* THIS WEEK */
+  .week-overdue { background: #FFF3EE; border: 1px solid #E8C3B0; border-radius: 12px; padding: 12px 14px; margin-bottom: 14px; }
+  .week-overdue-hdr { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: #8B2500; margin-bottom: 6px; }
+  .week-overdue-item { font-size: 12px; color: var(--text-muted); padding: 2px 0; }
+  .week-day { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 12px 14px 14px; margin-bottom: 10px; }
+  .week-day-hdr { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--border); padding-bottom: 8px; margin-bottom: 8px; }
+  .week-day-name { font-family: 'Playfair Display', serif; font-size: 15px; }
+  .week-day-date { font-size: 11px; color: var(--text-faint); }
+  .week-empty { font-size: 13px; color: var(--text-faint); font-style: italic; padding: 2px 0; }
+  .week-item { display: flex; gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--border); cursor: pointer; }
+  .week-item:last-child { border-bottom: none; }
+  .week-item input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--gold-dark); flex-shrink: 0; }
+  .week-item-body { flex: 1; min-width: 0; }
+  .week-item-title { font-size: 13px; font-weight: 500; line-height: 1.35; }
+  .week-item.done .week-item-title { text-decoration: line-through; color: var(--text-faint); }
+  .week-item-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 5px; }
+  .week-item-notes { font-size: 11px; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+  .tag { font-size: 10px; padding: 2px 7px; border-radius: 20px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.02em; background: var(--surface2); color: var(--text-muted); }
+  .tag.prio-high { background: #FDDDD5; color: #8B2500; }
+  .tag.prio-med { background: #FFF3D5; color: #7A5000; }
+  .tag.prio-low { background: #D5F5E3; color: #0A5E2A; }
+
   /* IDEAS */
   .idea-form { background: var(--surface); border-radius: 14px; border: 1px solid var(--border); padding: 16px; margin-bottom: 16px; }
   .idea-form-title { font-size: 13px; font-weight: 500; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.06em; }
@@ -186,6 +208,7 @@
       <button class="sign-out-btn" onclick="signOut()"><i class="ti ti-logout"></i></button>
     </div>
     <div class="tab-bar">
+      <button class="tab-btn" onclick="switchTab('week',this)">This Week</button>
       <button class="tab-btn active" onclick="switchTab('upcoming',this)">Upcoming</button>
       <button class="tab-btn" onclick="switchTab('ideas',this)">Ideas</button>
       <button class="tab-btn" onclick="switchTab('shotlist',this)">Shoot list</button>
@@ -200,6 +223,15 @@
         <div class="section-sub" id="shotlist-count"></div>
       </div>
       <div id="shotlist-container"></div>
+    </div>
+
+    <div id="tab-week" class="tab-section">
+      <div class="section-hdr">
+        <div class="section-title">This week</div>
+        <div class="section-sub">Next 7 days</div>
+      </div>
+      <div class="week-overdue" id="week-overdue" style="display:none;"></div>
+      <div id="week-list"></div>
     </div>
 
     <div id="tab-upcoming" class="tab-section active">
@@ -434,6 +466,7 @@ function switchTab(name, btn) {
   btn.classList.add('active');
   if (name === 'shotlist') { loadShots().then(renderShotList); }
   if (name === 'upcoming') { loadItems().then(renderUpcoming); }
+  if (name === 'week') { loadItems().then(renderWeek); }
 }
 
 // ── SHOT LIST ──
@@ -630,6 +663,83 @@ function markAsPosted(id) {
       } catch(e) { showToast('Save failed'); console.error(e); }
     }
   );
+}
+
+// ── THIS WEEK ──
+function pad2(n) { return String(n).padStart(2, '0'); }
+function fmtLocalDate(d) { return `${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`; }
+
+function renderWeek() {
+  const overdueEl = document.getElementById('week-overdue');
+  const listEl = document.getElementById('week-list');
+
+  const today = new Date(); today.setHours(0,0,0,0);
+  const days = [];
+  for (let i = 0; i < 7; i++) { const d = new Date(today); d.setDate(today.getDate() + i); days.push(d); }
+  const dayStrs = days.map(fmtLocalDate);
+  const windowSet = new Set(dayStrs);
+  const todoByDay = {}; dayStrs.forEach(ds => todoByDay[ds] = []);
+  const overdue = [];
+
+  const dateFields = [['brainstormDate','Brainstorm'],['shootDate','Shoot'],['editDate','Edit'],['postDate','Post']];
+
+  items.filter(it => !it.archived).forEach(it => {
+    dateFields.forEach(([field, verb]) => {
+      const val = it[field];
+      if (!val) return;
+      if (windowSet.has(val)) todoByDay[val].push({ item: it, verb });
+      else if (val < dayStrs[0]) overdue.push({ item: it, verb, date: val });
+    });
+  });
+
+  if (overdue.length) {
+    overdue.sort((a,b) => a.date.localeCompare(b.date));
+    overdueEl.style.display = 'block';
+    overdueEl.innerHTML = '<div class="week-overdue-hdr">⚠ Overdue</div>' +
+      overdue.map(o => `<div class="week-overdue-item">${o.verb}: ${o.item.title}</div>`).join('');
+  } else {
+    overdueEl.style.display = 'none';
+    overdueEl.innerHTML = '';
+  }
+
+  listEl.innerHTML = '';
+  days.forEach((d, idx) => {
+    const ds = dayStrs[idx];
+    const dayName = idx === 0 ? 'Today' : d.toLocaleDateString('en-AU', { weekday: 'long' });
+    const dayLabel = d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short' });
+
+    const dayEl = document.createElement('div');
+    dayEl.className = 'week-day';
+    dayEl.innerHTML = `<div class="week-day-hdr"><span class="week-day-name">${dayName}</span><span class="week-day-date">${dayLabel}</span></div>`;
+
+    const todos = todoByDay[ds];
+    if (!todos.length) {
+      const empty = document.createElement('div');
+      empty.className = 'week-empty';
+      empty.textContent = 'Nothing scheduled';
+      dayEl.appendChild(empty);
+    } else {
+      todos.forEach(t => {
+        const key = `td_week_${ds}_${t.item.id}_${t.verb}`;
+        const checked = localStorage.getItem(key) === '1';
+        const row = document.createElement('label');
+        row.className = 'week-item' + (checked ? ' done' : '');
+        const platChips = t.item.platforms.map(p => `<span class="chip ${platClass[p]||''}">${p}</span>`).join('');
+        row.innerHTML = `<input type="checkbox" ${checked?'checked':''} />
+          <div class="week-item-body">
+            <div class="week-item-title">${t.verb}: ${t.item.title}</div>
+            <div class="week-item-tags"><span class="tag prio-${t.item.priority}">${t.item.priority}</span>${platChips}</div>
+            ${t.item.notes ? `<div class="week-item-notes">${t.item.notes}</div>` : ''}
+          </div>`;
+        row.querySelector('input').addEventListener('change', (e) => {
+          localStorage.setItem(key, e.target.checked ? '1' : '0');
+          row.classList.toggle('done', e.target.checked);
+        });
+        dayEl.appendChild(row);
+      });
+    }
+    listEl.appendChild(dayEl);
+  });
 }
 
 // ── IDEAS ──
