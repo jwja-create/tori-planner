@@ -55,6 +55,14 @@
   .section-sub { font-size: 12px; color: var(--text-muted); }
 
   /* SHOT LIST */
+  .tpl-banner { margin: 12px 16px 6px; padding: 10px 12px; border-radius: 10px; background: var(--surface2); border: 1px solid var(--border); font-size: 12px; color: var(--text-muted); display: flex; gap: 8px; align-items: center; line-height: 1.4; }
+  .tpl-banner i { font-size: 16px; color: var(--gold-dark, var(--gold)); }
+  .loc-hdr { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: var(--surface2); border-bottom: 1px solid var(--border); cursor: pointer; user-select: none; }
+  .loc-chevron { font-size: 14px; color: var(--text-muted); transition: transform 0.2s; transform: rotate(-90deg); }
+  .loc-hdr.open .loc-chevron { transform: rotate(0deg); }
+  .loc-num { background: var(--text); color: var(--gold); font-family: 'Playfair Display', serif; font-size: 12px; min-width: 24px; height: 24px; padding: 0 6px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; }
+  .loc-name { flex: 1; font-size: 14px; font-weight: 500; }
+  .loc-count { font-size: 11px; color: var(--text-muted); }
   .shoot-section { background: var(--surface); border-radius: 14px; border: 1px solid var(--border); margin-bottom: 14px; overflow: hidden; }
   .shoot-section-hdr { padding: 14px 16px; border-bottom: 1px solid var(--border); background: var(--bg); display: flex; align-items: center; gap: 10px; }
   .shoot-name { font-family: 'Playfair Display', serif; font-size: 16px; flex: 1; }
@@ -469,11 +477,47 @@ function switchTab(name, btn) {
   if (name === 'week') { loadItems().then(renderWeek); }
 }
 
+// ── LOCATION SECTIONS + TEMPLATES ──
+// Rows with Type "section" (ShotNumber "1", "2"...) become location headers.
+// A row with Type "template" marks the shoot as a reusable guide: no "Mark as shot" buttons.
+function shotTypeOf(s) { return (s.type || '').toLowerCase().trim(); }
+function isMetaShot(s) { const t = shotTypeOf(s); return t === 'section' || t === 'template'; }
+function shotMajor(n) { return String(n || '').split('.')[0]; }
+function buildShootBody(body, groupShots, rowFn) {
+  const tplRow = groupShots.find(s => shotTypeOf(s) === 'template');
+  const isTemplate = !!tplRow;
+  const sectionRows = {};
+  groupShots.filter(s => shotTypeOf(s) === 'section').forEach(s => { sectionRows[shotMajor(s.shotNumber)] = s; });
+  const real = groupShots.filter(s => !isMetaShot(s));
+  if (isTemplate) {
+    const b = document.createElement('div');
+    b.className = 'tpl-banner';
+    b.innerHTML = '<i class="ti ti-repeat"></i><span>' + (tplRow.description || 'Reusable guide. These shots stay on the list for every shoot.') + '</span>';
+    body.appendChild(b);
+  }
+  if (!Object.keys(sectionRows).length) { real.forEach(s => body.appendChild(rowFn(s, isTemplate))); return; }
+  const order = [], byMajor = {};
+  real.forEach(s => { const m = shotMajor(s.shotNumber); if (!byMajor[m]) { byMajor[m] = []; order.push(m); } byMajor[m].push(s); });
+  order.forEach(m => {
+    const list = byMajor[m], sec = sectionRows[m];
+    const wrap = document.createElement('div'); wrap.className = 'loc-group';
+    const h = document.createElement('div'); h.className = 'loc-hdr';
+    h.innerHTML = '<i class="ti ti-chevron-down loc-chevron"></i><span class="loc-num">' + m + '</span>' +
+      '<span class="loc-name">' + (sec ? sec.description : 'Other shots') + '</span>' +
+      '<span class="loc-count">' + list.length + ' shot' + (list.length !== 1 ? 's' : '') + '</span>';
+    const lb = document.createElement('div'); lb.className = 'loc-body'; lb.style.display = 'none';
+    h.addEventListener('click', () => { const open = lb.style.display === 'none'; lb.style.display = open ? 'block' : 'none'; h.classList.toggle('open', open); });
+    list.forEach(s => lb.appendChild(rowFn(s, isTemplate)));
+    wrap.appendChild(h); wrap.appendChild(lb); body.appendChild(wrap);
+  });
+}
+
 // ── SHOT LIST ──
 function renderShotList() {
   const container = document.getElementById('shotlist-container');
   const active = shots.filter(s => s.status !== 'shot');
-  document.getElementById('shotlist-count').textContent = active.length ? active.length + ' shot' + (active.length!==1?'s':'') : '';
+  const realCount = active.filter(s => !isMetaShot(s)).length;
+  document.getElementById('shotlist-count').textContent = realCount ? realCount + ' shot' + (realCount!==1?'s':'') : '';
 
   if (!active.length) {
     container.innerHTML = '<div class="empty-state"><i class="ti ti-camera"></i><p>No active shots right now.<br>Jeremy will push a new shoot list here after planning.</p></div>';
@@ -495,7 +539,7 @@ function renderShotList() {
     hdr.style.cursor = 'pointer';
     hdr.innerHTML = '<i class="ti ti-chevron-down shoot-chevron" style="font-size:16px;color:var(--text-muted);transition:transform 0.2s;transform:rotate(-90deg);"></i>' +
       '<div class="shoot-name">' + shootName + '</div>' +
-      '<div class="shoot-count">' + groupShots.length + ' shot' + (groupShots.length!==1?'s':'') + '</div>';
+      '<div class="shoot-count">' + groupShots.filter(s => !isMetaShot(s)).length + ' shot' + (groupShots.filter(s => !isMetaShot(s)).length!==1?'s':'') + '</div>';
 
     const body = document.createElement('div');
     body.className = 'shoot-section-body';
@@ -507,20 +551,20 @@ function renderShotList() {
       hdr.querySelector('.shoot-chevron').style.transform = isCollapsed ? 'rotate(0deg)' : 'rotate(-90deg)';
     });
 
-    groupShots.forEach(shot => {
+    buildShootBody(body, groupShots, (shot, isTemplate) => {
       const row = document.createElement('div');
       row.className = 'shot-row';
       row.id = 'shot-' + shot.id;
-      row.innerHTML = '<div class="shot-row-top">' +
+      row.innerHTML = '<div class="shot-row-top"' + (isTemplate ? ' style="margin-bottom:0"' : '') + '>' +
         '<div class="shot-number">' + (shot.shotNumber || '\u2013') + '</div>' +
         '<div class="shot-body">' +
           '<div class="shot-desc">' + shot.description + '</div>' +
           (shot.notes ? '<div class="shot-notes">' + shot.notes + '</div>' : '') +
           (shot.type ? '<span class="shot-type-chip">' + shot.type + '</span>' : '') +
         '</div></div>' +
-        '<button class="shot-btn" onclick="markShotDone(\'' + shot.id + '\')">' +
-          '<i class="ti ti-camera"></i> Mark as shot</button>';
-      body.appendChild(row);
+        (isTemplate ? '' : '<button class="shot-btn" onclick="markShotDone(\'' + shot.id + '\')">' +
+          '<i class="ti ti-camera"></i> Mark as shot</button>');
+      return row;
     });
 
     section.appendChild(hdr);
