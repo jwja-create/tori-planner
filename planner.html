@@ -293,9 +293,9 @@
       <div class="brand-sub">Content Studio</div>
     </div>
     <div class="sidebar-nav">
-      <button class="nav-item active" onclick="switchSection('calendar',this)"><i class="ti ti-calendar"></i> Calendar</button>
-      <button class="nav-item" onclick="switchSection('week',this)"><i class="ti ti-list-check"></i> This Week</button>
       <button class="nav-item" onclick="switchSection('pipeline',this)"><i class="ti ti-layout-kanban"></i> Pipeline</button>
+      <button class="nav-item" onclick="switchSection('week',this)"><i class="ti ti-list-check"></i> This Week</button>
+      <button class="nav-item active" onclick="switchSection('calendar',this)"><i class="ti ti-calendar"></i> Calendar</button>
       <button class="nav-item" onclick="switchSection('shotlist',this)"><i class="ti ti-camera"></i> Shot list</button>
       <button class="nav-item" onclick="switchSection('ideas',this)"><i class="ti ti-bulb"></i> Idea bank</button>
     </div>
@@ -1121,7 +1121,7 @@ async function promoteIdea(id){
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
   document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
   document.getElementById('sec-pipeline').classList.add('active');
-  document.querySelectorAll('.nav-item')[1].classList.add('active');
+  document.querySelectorAll('.nav-item')[0].classList.add('active');
   document.getElementById('page-title').textContent = 'Pipeline';
   renderKanban();
 
