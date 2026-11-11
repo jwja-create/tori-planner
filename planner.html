@@ -293,9 +293,9 @@
       <div class="brand-sub">Content Studio</div>
     </div>
     <div class="sidebar-nav">
-      <button class="nav-item" onclick="switchSection('pipeline',this)"><i class="ti ti-layout-kanban"></i> Pipeline</button>
+      <button class="nav-item active" onclick="switchSection('pipeline',this)"><i class="ti ti-layout-kanban"></i> Pipeline</button>
       <button class="nav-item" onclick="switchSection('week',this)"><i class="ti ti-list-check"></i> This Week</button>
-      <button class="nav-item active" onclick="switchSection('calendar',this)"><i class="ti ti-calendar"></i> Calendar</button>
+      <button class="nav-item" onclick="switchSection('calendar',this)"><i class="ti ti-calendar"></i> Calendar</button>
       <button class="nav-item" onclick="switchSection('shotlist',this)"><i class="ti ti-camera"></i> Shot list</button>
       <button class="nav-item" onclick="switchSection('ideas',this)"><i class="ti ti-bulb"></i> Idea bank</button>
     </div>
@@ -311,12 +311,12 @@
 
   <div class="main">
     <div class="topbar">
-      <div class="page-title" id="page-title">Calendar</div>
+      <div class="page-title" id="page-title">Pipeline</div>
       <div class="sync-status"><div class="sync-dot" id="sync-dot"></div><span id="sync-label">Connected</span></div>
     </div>
     <div class="content">
 
-      <div id="sec-calendar" class="section active">
+      <div id="sec-calendar" class="section">
         <div class="cal-controls">
           <div class="cal-nav-group">
             <button class="cal-nav-btn" onclick="changeMonth(-1)"><i class="ti ti-chevron-left"></i></button>
@@ -346,7 +346,7 @@
         </div>
       </div>
 
-      <div id="sec-pipeline" class="section">
+      <div id="sec-pipeline" class="section active">
         <div class="stats-row" id="pipeline-stats"></div>
         <div class="kanban-wrap" id="kanban-board"></div>
       </div>
