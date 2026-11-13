@@ -46,7 +46,7 @@
   .tab-bar { display: flex; gap: 4px; }
   .tab-btn { flex: 1; padding: 8px 6px; background: rgba(255,255,255,0.08); border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.4); cursor: pointer; text-align: center; }
   .tab-btn.active { background: var(--gold); color: var(--text); }
-  .content-area { flex: 1; padding: 20px 16px; padding-bottom: calc(20px + var(--safe-bottom)); }
+  .content-area { flex: 1; padding: 20px 16px; padding-bottom: calc(92px + var(--safe-bottom)); }
   .tab-section { display: none; }
   .tab-section.active { display: block; }
 
@@ -151,6 +151,12 @@
   .prio-toggle.sel-low { background: #D5F5E3; color: #0A5E2A; border-color: #D5F5E3; font-weight: 500; }
   .save-idea-btn { width: 100%; padding: 14px; background: var(--gold); color: var(--text); border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; }
   .save-idea-btn:active { background: var(--gold-dark); color: #fff; }
+  .fab { position: fixed; right: 18px; bottom: calc(20px + var(--safe-bottom)); width: 56px; height: 56px; border-radius: 50%; background: var(--gold); color: var(--text); border: none; box-shadow: 0 4px 14px rgba(0,0,0,0.25); font-size: 26px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 150; }
+  .fab:active { background: var(--gold-dark); color: #fff; }
+  .add-label { display: block; font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 4px 0 6px; }
+  .add-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .add-more { margin-bottom: 10px; }
+  .add-more summary { font-size: 13px; color: var(--text-muted); cursor: pointer; padding: 6px 0 10px; }
   .saved-ideas { display: flex; flex-direction: column; gap: 8px; }
   .saved-idea-card { background: var(--surface); border-radius: 12px; border: 1px solid var(--border); padding: 14px; cursor: pointer; }
   .saved-idea-card:active { transform: scale(0.99); }
@@ -273,6 +279,53 @@
       <div class="saved-ideas" id="saved-ideas"></div>
     </div>
 
+  </div>
+  <button class="fab" id="fab-add" onclick="openAddSheet()" aria-label="Add content"><i class="ti ti-plus"></i></button>
+</div>
+
+<!-- ADD CONTENT SHEET (bottom sheet) -->
+<div class="sheet-overlay" id="add-overlay" onclick="closeAddSheet()"></div>
+<div class="sheet" id="add-sheet">
+  <div class="sheet-handle"></div>
+  <div class="sheet-hdr">
+    <div class="sheet-title">Add content</div>
+    <button class="sheet-close" onclick="closeAddSheet()"><i class="ti ti-x"></i></button>
+  </div>
+  <div class="sheet-body">
+    <input class="idea-input" id="add-title" type="text" placeholder="What's the content?" />
+    <div class="idea-plat-row" id="add-plat-row">
+      <button type="button" class="plat-toggle" data-plat="Instagram" onclick="togglePlat(this)">Instagram</button>
+      <button type="button" class="plat-toggle" data-plat="TikTok" onclick="togglePlat(this)">TikTok</button>
+      <button type="button" class="plat-toggle" data-plat="YouTube" onclick="togglePlat(this)">YouTube</button>
+      <button type="button" class="plat-toggle" data-plat="Facebook" onclick="togglePlat(this)">Facebook</button>
+      <button type="button" class="plat-toggle" data-plat="YouTube Shorts" onclick="togglePlat(this)">YouTube Shorts</button>
+      <button type="button" class="plat-toggle" data-plat="Kit" onclick="togglePlat(this)">Kit</button>
+    </div>
+    <div class="add-grid">
+      <div><label class="add-label">Type</label>
+        <select class="idea-input" id="add-type"><option>Reel / Short</option><option>Static post</option><option>Story</option><option>Carousel</option><option>YouTube video</option></select></div>
+      <div><label class="add-label">Stage</label>
+        <select class="idea-input" id="add-stage"><option>Idea</option><option>Scripted</option><option>Scheduled shoot</option><option>Shot</option><option>In edit</option><option>Scheduled</option></select></div>
+      <div><label class="add-label">Shoot date</label><input class="idea-input" id="add-shoot-date" type="date" /></div>
+      <div><label class="add-label">Post date</label><input class="idea-input" id="add-post-date" type="date" /></div>
+    </div>
+    <details class="add-more">
+      <summary>More dates</summary>
+      <div class="add-grid">
+        <div><label class="add-label">Brainstorm date</label><input class="idea-input" id="add-brainstorm-date" type="date" /></div>
+        <div><label class="add-label">Edit date</label><input class="idea-input" id="add-edit-date" type="date" /></div>
+      </div>
+    </details>
+    <label class="add-label">Priority</label>
+    <div class="prio-row" id="add-prio-row">
+      <button type="button" class="prio-toggle" data-prio="high" onclick="selectPrio(this,'add-prio-row')">High</button>
+      <button type="button" class="prio-toggle sel-med" data-prio="med" onclick="selectPrio(this,'add-prio-row')">Medium</button>
+      <button type="button" class="prio-toggle" data-prio="low" onclick="selectPrio(this,'add-prio-row')">Low</button>
+    </div>
+    <textarea class="idea-input textarea" id="add-notes" placeholder="Notes / brief (hook, key scenes, CTA...)"></textarea>
+  </div>
+  <div class="sheet-actions">
+    <button class="btn-primary" onclick="saveNewItem()">Add</button>
   </div>
 </div>
 
@@ -472,6 +525,7 @@ function switchTab(name, btn) {
   document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
   btn.classList.add('active');
+  document.getElementById('fab-add').style.display = (name === 'shotlist') ? 'none' : 'flex';
   if (name === 'shotlist') { loadShots().then(renderShotList); }
   if (name === 'upcoming') { loadItems().then(renderUpcoming); }
   if (name === 'week') { loadItems().then(renderWeek); }
@@ -888,6 +942,46 @@ function showConfirm(title, msg, callback, isDanger) {
 function closeConfirm() { document.getElementById('confirm-overlay').classList.remove('open'); confirmCallback = null; }
 
 // ── HELPERS ──
+// ── ADD CONTENT (pipeline / calendar item) ──
+function openAddSheet() {
+  ['add-title','add-notes','add-shoot-date','add-post-date','add-brainstorm-date','add-edit-date'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('add-type').selectedIndex = 0;
+  document.getElementById('add-stage').value = 'Idea';
+  document.querySelectorAll('#add-plat-row .plat-toggle').forEach(b => b.className = 'plat-toggle');
+  document.querySelectorAll('#add-prio-row .prio-toggle').forEach(b => { b.className = 'prio-toggle' + (b.dataset.prio === 'med' ? ' sel-med' : ''); });
+  document.getElementById('add-overlay').classList.add('open');
+  document.getElementById('add-sheet').classList.add('open');
+}
+function closeAddSheet() {
+  document.getElementById('add-overlay').classList.remove('open');
+  document.getElementById('add-sheet').classList.remove('open');
+}
+async function saveNewItem() {
+  const title = document.getElementById('add-title').value.trim();
+  if (!title) { showToast('Add a title first'); return; }
+  const platforms = [...document.querySelectorAll('#add-plat-row .plat-toggle')].filter(b => b.className.includes('sel-')).map(b => b.dataset.plat);
+  const selPrio = document.querySelector('#add-prio-row .prio-toggle[class*="sel-"]');
+  const item = {
+    id: generateId(), title, platforms,
+    type: document.getElementById('add-type').value,
+    stage: document.getElementById('add-stage').value,
+    priority: selPrio ? selPrio.dataset.prio : 'med',
+    brainstormDate: document.getElementById('add-brainstorm-date').value,
+    shootDate: document.getElementById('add-shoot-date').value,
+    editDate: document.getElementById('add-edit-date').value,
+    postDate: document.getElementById('add-post-date').value,
+    notes: document.getElementById('add-notes').value.trim(), archived: false
+  };
+  closeAddSheet();
+  showToast('Adding...');
+  try {
+    await sheetsAppend(CONFIG.CONTENT_RANGE, [[item.id, item.title, item.platforms.join(', '), item.type, item.stage, item.priority,
+      item.brainstormDate, item.shootDate, item.editDate, item.postDate, item.notes, 'false']]);
+    await loadItems(); renderWeek(); renderUpcoming();
+    showToast('Added ✓');
+  } catch(e) { showToast('Save failed'); console.error(e); }
+}
+
 function togglePlat(btn) {
   const cls = platClass[btn.dataset.plat];
   btn.className = btn.className.includes('sel-') ? 'plat-toggle' : 'plat-toggle sel-' + cls;
